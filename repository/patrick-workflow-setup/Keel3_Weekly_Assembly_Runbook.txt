@@ -1,0 +1,504 @@
+================================================================================
+KEEL3 WEEKLY INTELLIGENCE BRIEF
+WEEKLY ASSEMBLY RUNBOOK
+================================================================================
+
+PURPOSE
+This document describes the recurring weekly process for producing Keel3's
+"Heads Down to Heads Up" weekly intelligence brief. It assumes the underlying
+system (Notion database, Grok scheduled task, Claude scheduled task, the
+keel3-weekly-brief-pipeline skill, and the seven client profiles) is already
+set up. If you are setting up the system from scratch, use the companion
+document "Full System Rebuild Guide" first, then return here for the recurring
+operation.
+
+AUDIENCE
+The Keel3 operator running the brief each week, working inside a Claude Code
+environment with the skill installed and the Notion + scheduled-tasks
+infrastructure already configured.
+
+AUTOMATION LEGEND
+Each step is labeled with one of three tags:
+
+  [AUTOMATED]    The step runs without human intervention.
+  [HUMAN REQUIRED] A person must perform this step today.
+  [AUTOMATABLE]  Currently human; could be automated with the work noted.
+
+================================================================================
+WEEK-AT-A-GLANCE
+================================================================================
+
+Monday morning:        Daily Scan + Grok scan land in inbox / Notion
+Monday through Thursday: Triage daily scans, file new rows, verify claims
+Friday morning:        Ground-truth pull from Notion, build briefs, render PDFs
+Friday afternoon:      Partner review, email distribution to clients
+Friday end of day:     Mark used rows in Notion, log lessons learned
+
+================================================================================
+PHASE 1: DAILY SCAN INTAKE AND TRIAGE (MONDAY THROUGH THURSDAY)
+================================================================================
+
+This phase runs four times per week, once per business day Monday through
+Thursday. Friday's intake is folded into the assembly phase to avoid a
+duplicate triage on the same day the briefs ship.
+
+--------------------------------------------------------------------------------
+STEP 1: AUTOMATED DAILY SCAN RUNS
+--------------------------------------------------------------------------------
+[AUTOMATED]
+
+The scheduled Claude task fires each morning at a configured time (typically
+6:00 a.m. ET). It reads Gmail newsletters in a labeled folder, web-searches
+trending AI news, reviews primary sources, and writes Candidate rows directly
+to the Notion Story Pool with the Capture Source field set to "Daily Scan."
+
+The scheduled Grok task fires in parallel each morning. It pulls from six
+curated X (Twitter) lists, summarizes the day's signal, and emails the result
+to Gmail.
+
+No human action is required during this step. By the time the operator opens
+the workflow each morning, the Daily Scan rows are already in Notion and the
+Grok email is in the inbox.
+
+--------------------------------------------------------------------------------
+STEP 2: HUMAN COPY-PASTE OF THE GROK EMAIL INTO CLAUDE
+--------------------------------------------------------------------------------
+[HUMAN REQUIRED]
+
+Open the Grok daily scan email in Gmail. Copy the full body of the email.
+Paste it into the Claude Code session with a short framing line such as:
+
+    "here is grok's from Monday" (or the appropriate day)
+
+Claude will recognize the format and begin triage automatically.
+
+[AUTOMATABLE] This step could be eliminated by configuring Grok to write
+directly to a Gmail label that the scheduled Claude task already monitors,
+OR by giving Claude direct access to read the Grok email via the Gmail tool.
+The work involved: update the Claude scheduled task prompt to include "read
+the most recent email from the Grok scan label" as an input, and confirm
+Gmail OAuth is configured for the Claude task account. Estimated effort:
+one hour.
+
+--------------------------------------------------------------------------------
+STEP 3: CLAUDE TRIAGES THE GROK SCAN AGAINST THE EXISTING POOL
+--------------------------------------------------------------------------------
+[AUTOMATED, run inside the Claude Code session]
+
+Claude performs the following work without further prompting:
+
+  3a. Searches the Notion Story Pool for similar titles to identify duplicates
+      between the Grok items and rows already filed by the Daily Scan or by
+      the operator in prior days.
+
+  3b. Identifies items that need verification (specific dollar figures,
+      regulatory actions, FDA clearances, named lawsuits, IPO filings).
+
+  3c. Web-searches the questionable claims to verify or correct them. Catches
+      common Grok errors: wrong dollar figures (e.g. Anthropic $30B/$900B
+      versus the verified $65B/$965B), wrong framings (e.g. Microsoft Claude
+      Code "outrun budgets" versus the actual platform-strategy story),
+      conflated stories.
+
+  3d. Triages each item into one of three buckets: file as a new Notion row,
+      skip (duplicate or out of scope), or flag for human review.
+
+  3e. Writes the shared layer for each item being filed (headline, source,
+      announcement summary, "what it means", analogy), keeping each component
+      tight (3-4 sentences for the announcement, 3-4 for the means, 1-2 for
+      the analogy).
+
+  3f. Tags each row with Relevance (per-client multi-select), Lens (Risk &
+      Regulatory, Cyber, Vendor & Platform, Workforce, Capital & Deals,
+      Clinical & Trials, Engineering Velocity), Resonance (Headline,
+      Research, or Niche), Capture Source (Grok Email), and Week (W##).
+
+  3g. Files the rows in batch via the Notion create-pages API.
+
+  3h. Reports back to the operator in the chat: what was filed (with one-line
+      rationale each), what was skipped (with reason), and any verification
+      results worth noting.
+
+--------------------------------------------------------------------------------
+STEP 4: HUMAN REVIEWS THE TRIAGE AND DECIDES ON FLAGGED ITEMS
+--------------------------------------------------------------------------------
+[HUMAN REQUIRED]
+
+Read Claude's triage report. For most items, no action is needed. For
+flagged items (single-source rumors, contested numbers, items needing
+editorial judgment on whether they belong), the operator decides yes or no
+and tells Claude to file or skip.
+
+Typical operator response on a normal Monday:
+
+    "all good, proceed"
+
+Or for items needing override:
+
+    "skip the Microsoft item, it's already in the pool from W22"
+    "file the OpenAI Codex one for Luna only, not Incserv"
+
+--------------------------------------------------------------------------------
+STEP 5: REPEAT FOR THE DAILY SCAN
+--------------------------------------------------------------------------------
+[HUMAN REQUIRED, OPTIONAL ON MOST DAYS]
+
+The automated Daily Scan rows are already in Notion from Step 1. On most
+days, no further action is needed. On days where the operator wants to
+spot-check the Daily Scan output (recommended at least once a week),
+prompt Claude:
+
+    "summarize what the Daily Scan added today and flag anything
+     that needs verification or might be a duplicate"
+
+Claude pulls the rows added since the last review and surfaces any concerns.
+
+[AUTOMATABLE] This spot-check could be automated by adding a verification
+step to the Daily Scan task itself: have the task search for similar rows
+before filing, and surface any near-duplicates to a Slack channel or email
+for human review. Estimated effort: half day to modify the scan prompt and
+configure the notification channel.
+
+--------------------------------------------------------------------------------
+STEP 6: REPEAT TUESDAY, WEDNESDAY, THURSDAY
+--------------------------------------------------------------------------------
+[MIXED]
+
+Steps 1 through 5 repeat each business day Monday through Thursday. Across
+those four days, the pool fills with roughly 30 to 50 rows depending on the
+news week.
+
+================================================================================
+PHASE 2: FRIDAY BRIEF ASSEMBLY
+================================================================================
+
+This phase runs once per week, typically Friday morning. The goal is to
+produce seven client-specific PDF briefs, each one page, brand-locked,
+ready for partner review and client distribution by mid-afternoon.
+
+--------------------------------------------------------------------------------
+STEP 7: OPERATOR OPENS A FRIDAY CLAUDE CODE SESSION
+--------------------------------------------------------------------------------
+[HUMAN REQUIRED]
+
+Open a fresh Claude Code session. Confirm the keel3-weekly-brief-pipeline
+skill is installed and active. The simplest verification is to ask Claude
+something like:
+
+    "verify the keel3-weekly-brief-pipeline skill is installed and
+     ready for this week's brief build"
+
+Claude will check the skill location at
+/mnt/skills/user/keel3-weekly-brief-pipeline/ and confirm.
+
+--------------------------------------------------------------------------------
+STEP 8: OPERATOR INITIATES THE FRIDAY BUILD
+--------------------------------------------------------------------------------
+[HUMAN REQUIRED]
+
+The operator prompts Claude with the simple phrase that triggers the skill:
+
+    "build this week's briefs"
+
+OR, for a single client:
+
+    "build this week's brief for KPS Life"
+
+OR, with a specific week reference:
+
+    "build the W## briefs"
+
+The skill's "ground-truth-first" protocol immediately fires. Claude will not
+proceed to selection from memory. Instead it will respond with the standing
+ask defined in the skill:
+
+    "Before I build the briefs, can you paste the row titles from the
+     per-client views in Notion? I want to make sure we are working from
+     the actual current state of the pool, not my memory of what was
+     filed."
+
+--------------------------------------------------------------------------------
+STEP 9: HUMAN PASTES NOTION VIEW CONTENTS
+--------------------------------------------------------------------------------
+[HUMAN REQUIRED]
+
+Open the Notion Story Pool database. Navigate to the "By Week" grouped view,
+or alternatively to each of the seven per-client filtered views. Filter or
+scroll to the current week (W##). Select and copy the row titles. Paste
+them into Claude.
+
+The simplest acceptable paste format is a flat list of titles, one per line,
+optionally grouped or labeled by client. Example:
+
+    Anthropic Files Confidential S-1 for IPO
+    Florida Attorney General Sues OpenAI and Sam Altman
+    Trump Signs AI Executive Order
+    Microsoft Replaces OpenAI Inside GitHub Copilot With Project Polaris
+    Alphabet Announces $80 Billion Equity Raise
+    [and so on for every W## row, all clients combined]
+
+Claude does not need the row body content; titles alone are sufficient
+because the row bodies are already in the database and Claude can search for
+them by title to retrieve full content during assembly.
+
+[AUTOMATABLE] This step exists because Claude cannot enumerate Notion rows
+by tag filter (the available Notion tools do semantic search by content
+match, not structured database query). To eliminate this step, either:
+(a) install the `query_data_sources` tool from the Notion MCP server, which
+allows direct filter queries, OR
+(b) build a small daemon that exports the current week's row titles from
+Notion to a file or Slack channel each morning, which Claude reads
+automatically.
+Estimated effort: half day for option (a) once tool availability is
+confirmed; one day for option (b).
+
+--------------------------------------------------------------------------------
+STEP 10: CLAUDE PERFORMS PER-CLIENT SELECTION
+--------------------------------------------------------------------------------
+[AUTOMATED]
+
+Working from the pasted list as ground truth, Claude:
+
+  10a. Cross-references each title against the seven client Relevance tags
+       to identify which stories are candidates for each client's brief.
+
+  10b. Triages and deduplicates the pool (consolidates near-duplicates,
+       archives wrong-number or wrong-framing rows that should not be
+       used).
+
+  10c. For each of the seven clients, selects 4 to 5 stories per the
+       selection rules in the skill:
+       - Lead with a universal headline if one exists this week
+       - Prefer concrete in-the-tape items over abstract think pieces
+       - Mix lenses within a brief (avoid 5 items on the same lens)
+       - Match items to the actual reader (e.g. M&T's reader is C-suite,
+         not a regional president)
+       - Drop research-direction items in favor of operational items when
+         both compete for the same slot
+       - Apply hard sensitivities strictly (KPS no-displacement framing,
+         Luna no-headcount specifics)
+
+  10d. Reports the selections back to the operator with one-line rationale
+       per item per client, so the operator can adjust before write-up
+       begins.
+
+--------------------------------------------------------------------------------
+STEP 11: HUMAN APPROVES OR ADJUSTS SELECTIONS
+--------------------------------------------------------------------------------
+[HUMAN REQUIRED]
+
+The operator reviews the seven selection lists. Most weeks the lists are
+approved as is. Common adjustments:
+
+    "swap the Goldman item for the FDA RFI extension in KPS Life"
+    "add the OCC item to M&T, drop the Robinhood item"
+    "use the C-suite altitude framing for M&T per the standing thesis"
+
+Claude updates the selections.
+
+--------------------------------------------------------------------------------
+STEP 12: CLAUDE WRITES THE BESPOKE COLUMNS AND WEEK_LINES
+--------------------------------------------------------------------------------
+[AUTOMATED]
+
+For each of the seven briefs, Claude writes:
+
+  12a. The "what it means for [client]" heading and paragraph for each of
+       the 4-5 selected items. Each paragraph is roughly 4 sentences,
+       translating the general "what it means" into something specific to
+       that client's reader, lens, and sensitivity.
+
+  12b. The closing "Week in One Line" paragraph for each brief, tying the
+       items together into a single throughline for that client.
+
+  12c. The applicable client-specific framing rules from the skill:
+       - M&T C-suite altitude, "trust moat" standing thesis
+       - KPS Life embedded-experts framing, no displacement language
+       - Luna Diabetes lean-team framing, no specific headcount
+       - ChristianaCare patient-safety framing, Quality & Safety
+         Committee voice
+       - Brown Advisory portfolio-and-relationship framing
+       - Alpine Associates deal-calendar-and-numbers framing
+       - Incserv platform-decision-and-operating-model framing
+
+--------------------------------------------------------------------------------
+STEP 13: CLAUDE ASSEMBLES THE JSON SPECS AND RENDERS THE PDFS
+--------------------------------------------------------------------------------
+[AUTOMATED]
+
+Claude writes a Python build script (modeled on build_template.py in the
+skill) that:
+
+  13a. Defines the shared layer once for each unique story used across
+       the seven briefs.
+
+  13b. Defines the per-client BRIEFS dict with selections and bespoke
+       content.
+
+  13c. Iterates through the BRIEFS dict, assembles a JSON spec per client,
+       and calls render() from render_brief.py for each.
+
+  13d. Reports the auto-fit scale for each brief (the renderer scales
+       body text from 1.0 down to fit one page; values below 0.85 indicate
+       content is too dense and need trimming).
+
+  13e. If any brief auto-fits below 0.85, Claude trims the longest shared
+       layer paragraphs or the longest bespoke paragraphs and re-renders.
+
+  13f. Copies the final PDFs from the working directory to
+       /mnt/user-data/outputs/ with the standard naming convention:
+       Keel3_AI_Brief_<Client>_W<NN>_<YYYY>.pdf
+
+--------------------------------------------------------------------------------
+STEP 14: CLAUDE PRESENTS THE PDFS TO THE OPERATOR
+--------------------------------------------------------------------------------
+[AUTOMATED]
+
+Claude calls present_files with the seven PDFs, providing inline thumbnails
+in the chat. Claude follows with a short summary noting:
+
+  - Any items that warrant pre-send verification (specific dollar figures,
+    FDA actions, named-deployment claims that came from the Daily Scan
+    without independent verification)
+  - Any briefs that scaled tighter than usual (below 0.88)
+  - Any sensitivity considerations the operator should double-check
+
+--------------------------------------------------------------------------------
+STEP 15: HUMAN REVIEWS EACH PDF
+--------------------------------------------------------------------------------
+[HUMAN REQUIRED]
+
+The operator opens each of the seven PDFs and reviews:
+
+  - Brand standards (Navy #0F1E2E masthead, Orange #F25C2A accents, Cream
+    #F0EFE9 callouts, Inter typeface, descriptor and reader correct)
+  - No em dashes anywhere (Patrick's standing preference)
+  - No consultant-speak (leverage as verb, synergy, disrupt, AI-powered,
+    seamless, unlock, game-changer)
+  - Client sensitivities respected (no displacement framing for KPS, no
+    specific headcount for Luna, patient-safety framing for ChristianaCare)
+  - Numbers and named claims feel right; flag anything that needs a
+    primary-source verification before send
+  - Length and density feel right; flag any brief that looks too dense
+
+For most weeks, all seven briefs pass review. When an item needs to change,
+the operator prompts:
+
+    "tighten the OCC item in M&T, drop a sentence"
+    "verify the ArteraAI clearance against FDA database"
+    "the Luna brief reads thin, can we add the Anthropic sandboxing item"
+
+Claude executes the changes and re-renders.
+
+--------------------------------------------------------------------------------
+STEP 16: CLAUDE MARKS USED ROWS IN NOTION
+--------------------------------------------------------------------------------
+[AUTOMATED, prompted by human]
+
+After the operator approves the final PDFs, prompt Claude:
+
+    "mark everything as Used in Notion that we used in this week's briefs"
+
+Claude searches Notion for each story used (typically 15 to 20 unique
+stories across the seven briefs, including the universal headline that
+appears in all seven and the per-client supporting items), retrieves the
+page ID for each, and updates the Status field to "Used."
+
+Claude also archives any duplicate or wrong-numbers rows discovered during
+the week that should not stay in active rotation.
+
+[AUTOMATABLE] This step could be automated by having the assembly script
+in Step 13 capture the page IDs of all selected rows during build, then
+batch-update Status at render time. Estimated effort: half day to extend
+the build template.
+
+--------------------------------------------------------------------------------
+STEP 17: HUMAN DOWNLOADS PDFS AND PREPARES EMAIL
+--------------------------------------------------------------------------------
+[HUMAN REQUIRED]
+
+The operator downloads the seven PDFs from the Claude session outputs.
+For each client, the operator:
+
+  17a. Opens their mail client (typically Gmail).
+
+  17b. Composes a new message to the client contact (the named recipient
+       at the client organization, plus any CCs the relationship calls
+       for).
+
+  17c. Attaches the client's PDF.
+
+  17d. Writes a short email body. The standard body is two to four
+       sentences highlighting what the operator wants the client to notice
+       first, often referencing the universal headline or the one item
+       most directly material to that client this week. Claude can draft
+       this email body if prompted:
+
+       "draft the cover email for the M&T brief, three sentences,
+        Patrick's voice, lead with the OCC item"
+
+  17e. Reviews subject line, body, attachment, and recipient one final
+       time, then sends.
+
+[AUTOMATABLE] The email composition and send could be automated through a
+Gmail or Outlook integration: after Step 16 marks rows as Used, a small
+script could draft seven emails with PDFs attached as drafts in the
+operator's mailbox, ready for one-click send after final review. Going
+all the way to automated send is technically possible but inadvisable; the
+human-in-the-loop review at this final step is what gives the brief its
+credibility. Estimated effort: one day to build the drafts-in-mailbox
+flow.
+
+--------------------------------------------------------------------------------
+STEP 18: OPERATOR LOGS LESSONS LEARNED
+--------------------------------------------------------------------------------
+[HUMAN REQUIRED, OPTIONAL BUT RECOMMENDED]
+
+Quick end-of-week note in a running log: anything that worked unusually
+well, anything that broke, any sensitivity that should be tightened in
+the skill, any new client feedback worth folding in. Claude can update
+the skill in place at /mnt/skills/user/keel3-weekly-brief-pipeline/ as
+client feedback comes in.
+
+================================================================================
+TROUBLESHOOTING
+================================================================================
+
+PROBLEM: A brief auto-fits below 0.85 scale.
+SOLUTION: Tell Claude "the [client] brief is too dense, trim the longest
+shared layer and re-render." Typically the Anthropic funding story or
+the OCC item is the longest in any given week. Trim secondary clauses
+and qualifiers, not substance.
+
+PROBLEM: A story's specific number cannot be verified.
+SOLUTION: Tell Claude "soften the language on the [story] item, don't
+assert the number." The fix is to use "approximately," "as reported," or
+just drop the figure entirely if it cannot be sourced from a primary.
+
+PROBLEM: Claude tries to build a brief without asking for the Notion
+paste first.
+SOLUTION: Stop Claude and remind it of the ground-truth-first protocol.
+Then re-run from Step 8. The skill's SKILL.md should prevent this, but
+in a long session the instruction can drift.
+
+PROBLEM: A client view in Notion looks empty when it should not.
+SOLUTION: Check the view's filter rules. The standard filter is
+"Relevance contains [Client Name] AND Status != Archived." If the filter
+got changed, restore it.
+
+PROBLEM: The Daily Scan stopped filing rows.
+SOLUTION: Check the scheduled-task run log at claude.ai/tasks. Common
+causes: Notion OAuth token expired, Gmail OAuth token expired, scheduled
+task suspended due to inactivity. Re-authorize and re-enable.
+
+PROBLEM: A story showed up duplicated in the pool (Daily Scan + Grok both
+filed the same item under different titles).
+SOLUTION: Tell Claude "find duplicates in W## and consolidate." Claude
+searches for similar titles, identifies the consolidated version to keep,
+and archives the others. The "before creating a row, search for existing
+similar titles" instruction in the Daily Scan and Grok prompts is meant
+to prevent this; if it keeps happening, tighten those prompts.
+
+================================================================================
+END OF WEEKLY ASSEMBLY RUNBOOK
+================================================================================
