@@ -16,3 +16,4 @@
 {"ts":"2026-06-11T15:11:33.078Z","actor":"frontend","action":"link_added","linkId":"4bb9a77b-a139-4fd0-bb51-e246c0b80793","url":"https://www.notion.so/33bf7118384a8256a86c01c08c40b991?v=5a2f7118384a83b2aad408f3065f74ca&source=copy_link","folder":"story-notion-database"}
 {"ts":"2026-06-11T16:45:45.132Z","actor":"frontend","action":"file_added","fileId":"1900fda1-12e7-424d-89b5-45cbabe00abe","path":"shadows/daily-brief-gather/run.json","shaBefore":"d7ff088028c4e211835e1972465ec14eeff4d9f4"}
 {"ts":"2026-06-11T16:46:46.455Z","actor":"frontend","action":"file_added","fileId":"68473ce5-1ca7-4586-be58-66c90eab92c4","path":"shadows/friday-brief-assembly/run.json","shaBefore":"d60f38b95ddedb2fd9d3c9e178fd236611aed274"}
+{"ts":"2026-06-11T16:48:37.410Z","actor":"plugin","action":"file_added","fileId":"bd0da232-7eeb-43d1-ab9e-2ebc9fb63470","path":"repository/patrick-workflow-setup/Shadow_Workflow_Reference.md","shaBefore":"20f920b9e4c555ab418864f9fe4733580c32a033"}

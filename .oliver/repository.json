@@ -2,7 +2,7 @@
   "version": "1.1",
   "projectId": "999319d3-5993-40ad-84a1-ccce30abc072",
   "createdAt": "2026-06-11T15:02:56.695Z",
-  "updatedAt": "2026-06-11T16:46:46.455Z",
+  "updatedAt": "2026-06-11T16:48:37.410Z",
   "files": [
     {
       "id": "44581b2b-5e12-49e4-8481-b7d1e2b54f6a",
@@ -176,6 +176,19 @@
       "updatedAt": "2026-06-11T16:46:46.455Z",
       "tags": [],
       "actor": "frontend"
+    },
+    {
+      "id": "bd0da232-7eeb-43d1-ab9e-2ebc9fb63470",
+      "name": "Shadow_Workflow_Reference.md",
+      "path": "repository/patrick-workflow-setup/Shadow_Workflow_Reference.md",
+      "folder": "patrick-workflow-setup",
+      "mimeType": "text/markdown",
+      "size": 5969,
+      "sha": "",
+      "createdAt": "2026-06-11T16:48:37.410Z",
+      "updatedAt": "2026-06-11T16:48:37.410Z",
+      "tags": [],
+      "actor": "plugin"
     }
   ],
   "externalLinks": [
@@ -189,7 +202,7 @@
       "updatedAt": "2026-06-11T15:11:33.078Z"
     }
   ],
-  "storageUsed": 427300,
+  "storageUsed": 433269,
   "folders": [
     {
       "name": "previous-briefs",
