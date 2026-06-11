@@ -1,0 +1,30 @@
+{
+  "run_id": "58a5238f-abb9-494b-9b24-28a9e8c110c3",
+  "shadow_id": "friday-brief-assembly",
+  "status": "failed",
+  "dry_run": false,
+  "summary": "Failed at select-and-tailor: pinned model openrouter/google/gemini-3-flash-preview is not in allowedModels (allowed: deepseek-v4-pro, claude-sonnet-4-6). Notion pull succeeded — 47 Candidate stories staged.",
+  "completed_at": "2026-06-11T17:44:22.959Z",
+  "steps": [
+    {
+      "step_id": "pull-from-notion",
+      "type": "connector",
+      "model": null,
+      "status": "succeeded",
+      "sub_agent_session": null,
+      "output_ref": "workspace/run/brief-assembly/notion-pool.json + client-profiles.md",
+      "started_at": "2026-06-11T17:35:00.000Z",
+      "ended_at": "2026-06-11T17:38:00.000Z"
+    },
+    {
+      "step_id": "select-and-tailor",
+      "type": "oliver_step",
+      "model": "openrouter/google/gemini-3-flash-preview",
+      "status": "failed",
+      "sub_agent_session": null,
+      "output_ref": "model_not_allowed: not in allowedModels. Allowed: openrouter/deepseek/deepseek-v4-pro, openrouter/anthropic/claude-sonnet-4-6, anthropic/claude-sonnet-4-6",
+      "started_at": "2026-06-11T17:38:00.000Z",
+      "ended_at": null
+    }
+  ]
+}
