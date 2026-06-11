@@ -2,8 +2,16 @@
   "version": "1.1",
   "projectId": "999319d3-5993-40ad-84a1-ccce30abc072",
   "createdAt": "2026-06-11T15:02:56.695Z",
-  "updatedAt": "2026-06-11T15:02:56.695Z",
+  "updatedAt": "2026-06-11T15:06:30.346Z",
   "files": [],
   "externalLinks": [],
-  "storageUsed": 0
+  "storageUsed": 0,
+  "folders": [
+    {
+      "name": "previous-briefs",
+      "displayName": "Previous Briefs",
+      "type": "files",
+      "createdAt": "2026-06-11T15:06:30.346Z"
+    }
+  ]
 }
