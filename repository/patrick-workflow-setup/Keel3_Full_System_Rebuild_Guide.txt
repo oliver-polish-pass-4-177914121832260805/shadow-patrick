@@ -1,0 +1,1321 @@
+================================================================================
+KEEL3 WEEKLY INTELLIGENCE BRIEF
+FULL SYSTEM REBUILD GUIDE
+================================================================================
+
+PURPOSE
+This document describes how to build the Keel3 "Heads Down to Heads Up"
+weekly intelligence brief system from scratch, in a new environment, with no
+existing infrastructure. It produces the complete set of accounts, databases,
+scheduled tasks, skills, and prompts required to run the system. Once setup
+is complete, switch to the companion document "Weekly Assembly Runbook" for
+the recurring operation.
+
+AUDIENCE
+A developer or operator setting up the system in a new Claude Code
+environment. Assumes basic familiarity with Python, Notion, Gmail, and
+Anthropic's Claude products.
+
+ESTIMATED TIME
+Roughly one full work day for an experienced operator. Two days if Notion
+schema, OAuth flows, or the renderer Python environment need debugging.
+
+AUTOMATION LEGEND
+Each step is labeled with one of three tags:
+
+  [AUTOMATED]    The step runs without human intervention once configured.
+  [HUMAN REQUIRED] A person must perform this step.
+  [AUTOMATABLE]  Currently human; could be automated with the work noted.
+
+================================================================================
+TABLE OF CONTENTS
+================================================================================
+
+PHASE A: PREREQUISITES AND ACCOUNTS
+  Steps 1-4: Account creation, paid plans, Python environment
+
+PHASE B: NOTION STORY POOL CONSTRUCTION
+  Steps 5-9: Workspace, database, 12 properties, 8 views, retrieve IDs
+
+PHASE C: GROK SCHEDULED TASK
+  Steps 10-12: Create grok.com/tasks scan, configure delivery, test first run
+
+PHASE D: CLAUDE DAILY SCAN SCHEDULED TASK
+  Steps 13-16: OAuth Notion, OAuth Gmail, configure standing prompt, test
+
+PHASE E: BRIEF PIPELINE SKILL INSTALLATION
+  Steps 17-20: Package skill files, install, verify, test render
+
+PHASE F: SUPPORTING DOCUMENTATION
+  Steps 21-23: Operating Kit, brand standards, hand-off
+
+PHASE G: FIRST-RUN END-TO-END TEST
+  Steps 24-27: Manual scan trigger, brief assembly dry run, sign-off
+
+PHASE H: SWITCH TO WEEKLY OPERATION
+  Step 28: Hand-off to the Weekly Assembly Runbook
+
+APPENDIX A: NOTION DATABASE SCHEMA (verbatim)
+APPENDIX B: GROK SCHEDULED TASK PROMPT (verbatim)
+APPENDIX C: CLAUDE DAILY SCAN PROMPT (verbatim)
+APPENDIX D: SKILL FILE INVENTORY (with file headers)
+APPENDIX E: BRAND STANDARDS REFERENCE
+APPENDIX F: CLIENT PROFILES REFERENCE
+
+================================================================================
+PHASE A: PREREQUISITES AND ACCOUNTS
+================================================================================
+
+--------------------------------------------------------------------------------
+STEP 1: ANTHROPIC CLAUDE ACCOUNT WITH SCHEDULED TASKS ACCESS
+--------------------------------------------------------------------------------
+[HUMAN REQUIRED]
+
+Sign up at claude.ai. Subscribe to a plan that includes:
+- Claude Code access (terminal-based session)
+- Scheduled Tasks (cloud-side recurring task runner)
+- User skill installation
+
+At the time of writing, Claude Pro or Claude Max plans include these. Verify
+in account settings that "Scheduled Tasks" is visible in the left-hand
+sidebar of claude.ai. If not visible, upgrade the plan.
+
+--------------------------------------------------------------------------------
+STEP 2: GROK ACCOUNT WITH SCHEDULED TASKS ACCESS
+--------------------------------------------------------------------------------
+[HUMAN REQUIRED]
+
+Sign up at grok.com (X / Twitter Premium login). Verify access to
+grok.com/tasks. This is the scheduling interface for recurring Grok queries.
+At the time of writing, this feature is available on the higher X Premium
+tiers (Premium+ or SuperGrok). Verify by visiting grok.com/tasks; if the
+page loads with a "Create Task" button, access is good.
+
+--------------------------------------------------------------------------------
+STEP 3: NOTION WORKSPACE
+--------------------------------------------------------------------------------
+[HUMAN REQUIRED]
+
+Create or use an existing Notion workspace. The workspace must be paid
+(Plus tier or above) to support the database row count expected (50 to 200
+new rows per month across all weeks). Verify that the workspace allows API
+integrations and OAuth connections.
+
+If using an existing workspace, create a top-level page called "Keel3" to
+serve as the parent for the brief infrastructure. Note its URL for later.
+
+--------------------------------------------------------------------------------
+STEP 4: GMAIL OR EQUIVALENT EMAIL
+--------------------------------------------------------------------------------
+[HUMAN REQUIRED]
+
+Use a Gmail account (personal or Google Workspace) for two purposes:
+(a) receiving Grok scheduled task emails, and
+(b) sending the final client briefs.
+
+If newsletter-style AI emails are intended to also feed the Daily Scan,
+configure a Gmail label called "AI" or "AI Newsletters" and apply it to
+relevant subscriptions (The Information, Stratechery, Ben's Bites, etc.).
+
+OAuth between Gmail and Claude scheduled tasks will be set up later in
+Step 14.
+
+================================================================================
+PHASE B: NOTION STORY POOL CONSTRUCTION
+================================================================================
+
+--------------------------------------------------------------------------------
+STEP 5: CREATE THE STORY POOL DATABASE
+--------------------------------------------------------------------------------
+[HUMAN REQUIRED, with Claude assist]
+
+Inside the Notion "Keel3" page, create a new full-page database. Name it:
+
+    AI Brief Story Pool
+
+The database holds one row per AI news story being tracked. Schema is fixed
+and detailed in Appendix A. The fastest way to create it correctly is to
+have Claude do it via the Notion API. From a Claude Code session connected
+to Notion via OAuth (see Step 14 for OAuth setup; you may want to swap
+Step 5 and Step 14 if not already connected), prompt:
+
+    "Inside the Keel3 page at [your Notion page URL], create a database
+     called 'AI Brief Story Pool' with the schema specified in Appendix A
+     of the Keel3 Full System Rebuild Guide. Use the exact property names,
+     types, and select options listed there."
+
+Verify the database appears in Notion with all 12 properties.
+
+[AUTOMATABLE] Already largely automated through Claude's Notion create-
+database tool. The human step is providing the parent page URL and
+confirming the result.
+
+--------------------------------------------------------------------------------
+STEP 6: ADD SELECT OPTIONS TO MULTI-SELECT AND SELECT PROPERTIES
+--------------------------------------------------------------------------------
+[HUMAN REQUIRED, with Claude assist]
+
+Several properties (Resonance, Relevance, Lens, Status, Capture Source,
+Week) are select or multi-select fields with predefined options. The exact
+option lists and recommended colors are in Appendix A.
+
+If Claude created the database in Step 5, the options should already exist.
+If not, manually add them in Notion's database settings, or prompt Claude:
+
+    "On the AI Brief Story Pool database, add the select options for
+     Relevance, Lens, Status, Capture Source, Resonance, and Week as
+     specified in Appendix A."
+
+Notion API does not allow programmatic recoloring of select options after
+creation. If the colors do not match the brand palette, manually adjust
+them in the Notion UI by clicking each select option's three-dot menu
+and choosing a color. The recommended mapping:
+
+  Capture Source - Daily Scan: Blue
+  Capture Source - Grok Email: Orange (must be set manually; default may
+                                 be a different color)
+  Capture Source - Newsletter: Green
+  Capture Source - Manual: Gray
+
+--------------------------------------------------------------------------------
+STEP 7: CREATE THE EIGHT VIEWS ON THE DATABASE
+--------------------------------------------------------------------------------
+[HUMAN REQUIRED, with Claude assist]
+
+The database needs eight views, each with specific filter and sort rules:
+
+  1. Default (table view, no filter, sort by Date Added desc)
+  2. This Week (filter Date Added in last 7 days, sort by Resonance)
+  3. By Week (grouped by Week field, manual sort within groups)
+  4. KPS Life (filter Relevance contains KPS Life AND Status != Archived,
+              sort by Resonance)
+  5. M&T Bank (filter Relevance contains M&T Bank AND Status != Archived,
+              sort by Resonance)
+  6. Brown Advisory (same pattern for Brown Advisory)
+  7. Alpine Associates (same pattern)
+  8. Incserv (same pattern)
+  9. ChristianaCare (same pattern)
+ 10. Luna Diabetes (same pattern)
+
+(That is actually ten views once the per-client views are listed individually
+but the core structural views are eight: Default, This Week, By Week, and
+the seven client views.)
+
+Have Claude create them:
+
+    "On the AI Brief Story Pool database, create the views specified in
+     Appendix A of the Full System Rebuild Guide. Apply the exact filter
+     rules and sort orders listed."
+
+Verify each view in the Notion UI by opening it and confirming the filter
+is correct.
+
+--------------------------------------------------------------------------------
+STEP 8: RETRIEVE AND RECORD THE DATABASE ID AND DATA SOURCE ID
+--------------------------------------------------------------------------------
+[HUMAN REQUIRED]
+
+The database has two key identifiers:
+
+  - Database ID: the page-level identifier visible in the URL when the
+    database is open as a full page. Format:
+    https://www.notion.so/<workspace>/<DATABASE_ID>
+    The DATABASE_ID is the 32-character hex string.
+
+  - Data Source ID: the underlying data source identifier, formatted as a
+    UUID with hyphens. This is needed for the Notion API search tool.
+    Obtain it via: ask Claude to call notion-fetch on the database URL.
+    Claude will return both IDs in the schema response.
+
+Record both IDs in a secure note. They will be referenced in:
+- The Daily Scan task prompt (Step 16)
+- The skill's build_template.py (if hardcoding rather than searching)
+- Any direct API tooling built around the database
+
+For the reference deployment, these were:
+
+  Database ID:    c02c8d084c4348e09483b0f31e5606ef
+  Data Source ID: 2127ca62-01e2-432e-af43-c19579a8d014
+
+These will be different in any new deployment.
+
+--------------------------------------------------------------------------------
+STEP 9: CREATE A NOTION INTEGRATION FOR API ACCESS
+--------------------------------------------------------------------------------
+[HUMAN REQUIRED]
+
+Visit www.notion.so/profile/integrations and create a new internal
+integration named "Keel3 Brief Pipeline." Grant it read and write access
+to the workspace. Copy the integration's secret token. Then go to the
+Keel3 parent page in Notion and add the integration via Settings > Connections.
+
+This token will be referenced by the Claude scheduled task in Step 14 if
+the task is configured to talk directly to Notion via API key rather than
+via the OAuth MCP connector. In most cases the OAuth MCP connector is
+preferable; the API key approach is a fallback.
+
+================================================================================
+PHASE C: GROK SCHEDULED TASK
+================================================================================
+
+--------------------------------------------------------------------------------
+STEP 10: CREATE THE GROK SCHEDULED TASK
+--------------------------------------------------------------------------------
+[HUMAN REQUIRED]
+
+Visit grok.com/tasks. Click "Create Task." Configure:
+
+  Name:        Keel3 Daily AI Scan
+  Frequency:  Daily
+  Time:       6:00 a.m. ET (or preferred morning slot, before Daily Scan)
+  Output:     Email to <operator email>
+
+Paste the prompt from Appendix B into the task body. The prompt covers six
+curated X lists chosen specifically for high-signal AI coverage:
+- AI Newsmakers
+- AI Founders
+- AI Investors
+- AI Policy
+- Healthcare/Science
+- AI Researchers/Developers
+
+The prompt also includes flagging rules (de-emphasize crypto and token
+framing, flag single-post claims for verification, deliver full output
+not truncated digest).
+
+Save the task.
+
+--------------------------------------------------------------------------------
+STEP 11: VERIFY GROK EMAIL DELIVERY
+--------------------------------------------------------------------------------
+[HUMAN REQUIRED]
+
+Either wait for the next scheduled run or trigger the task manually via
+the "Run Now" button. Check the operator's email inbox for the delivered
+scan. Verify:
+
+  - Subject line is clear
+  - Body contains the structured output with story titles, sources,
+    summaries, and a "noise" section at the bottom
+  - No truncation midway through the output
+  - Sources include X post URLs where applicable
+
+If the delivery fails or the output is truncated, common fixes:
+- Check Grok task configuration for "deliver full output" toggle
+- Verify the email address in the task settings matches the operator's
+  inbox
+- Try a smaller scan scope first (fewer lists) and add back gradually
+
+--------------------------------------------------------------------------------
+STEP 12: SET UP A GMAIL LABEL OR FILTER FOR THE GROK EMAILS
+--------------------------------------------------------------------------------
+[HUMAN REQUIRED]
+
+In Gmail, create a label "Grok Scan" and a filter that automatically
+applies the label to emails from the Grok scheduled task. This makes the
+emails easy to find each morning and easy to script against later.
+
+[AUTOMATABLE] When the Claude Daily Scan task is configured in Phase D,
+have it read directly from this Gmail label rather than requiring the
+human to copy-paste each morning. This is the Step 2 automation noted in
+the Weekly Assembly Runbook.
+
+================================================================================
+PHASE D: CLAUDE DAILY SCAN SCHEDULED TASK
+================================================================================
+
+--------------------------------------------------------------------------------
+STEP 13: OPEN THE SCHEDULED TASKS INTERFACE IN CLAUDE.AI
+--------------------------------------------------------------------------------
+[HUMAN REQUIRED]
+
+In claude.ai (web), navigate to Settings > Scheduled Tasks (the exact menu
+location varies by interface version; look for "Tasks" or "Automations" in
+the sidebar). Click "Create Task" or equivalent.
+
+--------------------------------------------------------------------------------
+STEP 14: CONNECT NOTION AND GMAIL VIA OAUTH
+--------------------------------------------------------------------------------
+[HUMAN REQUIRED]
+
+Before configuring the Daily Scan task, connect the required tools:
+
+  14a. Notion: in claude.ai Settings > Connectors, add Notion. Authorize
+       OAuth and select the Keel3 workspace. Confirm Claude can read and
+       write to the AI Brief Story Pool database (try a quick test prompt
+       like "fetch the schema of the AI Brief Story Pool" in a Claude
+       session).
+
+  14b. Gmail: in claude.ai Settings > Connectors, add Gmail. Authorize
+       OAuth and grant read access to the inbox. If only the "Grok Scan"
+       and "AI" labels should be readable, configure read-only scoped
+       access if available.
+
+  14c. Web Search: Claude's built-in web search should be enabled by
+       default. Verify by asking a fresh session "search the web for the
+       latest AI news today" and confirming it returns results.
+
+--------------------------------------------------------------------------------
+STEP 15: CONFIGURE THE DAILY SCAN TASK SCHEDULE
+--------------------------------------------------------------------------------
+[HUMAN REQUIRED]
+
+Configure the task with:
+
+  Name:       Keel3 Daily AI News Scan
+  Frequency: Daily
+  Time:      6:30 a.m. ET (30 minutes after Grok runs, so its output is
+              available)
+  Tools:     Notion (write), Gmail (read), Web Search
+
+--------------------------------------------------------------------------------
+STEP 16: PASTE THE STANDING DAILY SCAN PROMPT
+--------------------------------------------------------------------------------
+[HUMAN REQUIRED]
+
+Paste the prompt from Appendix C into the task body. This is the standing
+instruction set that the scheduled task runs each morning. It tells Claude:
+
+  - The seven client profiles and lenses to track
+  - How to read newsletter emails and web-search trending AI news
+  - How to triage stories into Notion rows
+  - How to write the shared layer for each row
+  - How to tag each row with Relevance, Lens, Resonance, Capture Source
+    (Daily Scan), and Week
+  - How to check for existing similar rows before creating duplicates
+  - How to flag stories that need human verification
+
+The prompt also includes the Notion database ID and data source ID from
+Step 8.
+
+Save the task.
+
+[AUTOMATABLE NOTE] Two improvements to the standing prompt that close
+known gaps in early deployments:
+  - Add: "Check the Federal Register and the news pages of FDA.gov,
+    OCC.gov, federalreserve.gov, FDIC.gov, CISA.gov, and SEC.gov each
+    day for new notices in the prior 24 hours." This catches the kind of
+    procedural regulatory updates that do not travel through X.
+  - Add: "When filing a new row, first search the Story Pool for similar
+    titles. If a row exists for the same announcement, update or skip
+    rather than creating a duplicate."
+These are already in the Appendix C version of the prompt.
+
+================================================================================
+PHASE E: BRIEF PIPELINE SKILL INSTALLATION
+================================================================================
+
+--------------------------------------------------------------------------------
+STEP 17: OBTAIN THE SKILL PACKAGE
+--------------------------------------------------------------------------------
+[HUMAN REQUIRED]
+
+The skill is packaged as keel3-weekly-brief-pipeline.zip and contains
+six files described in Appendix D. The zip is built and delivered through
+the Claude Code session that created the skill (the original deployment
+delivered it via the present_files mechanism). For a new deployment,
+either re-build the skill from the source content in this guide (Appendices
+D and F together provide enough to reconstruct) or obtain the existing zip
+from a prior deployment.
+
+If re-building from scratch in Claude Code:
+
+  "Build the keel3-weekly-brief-pipeline skill folder, packaged as a zip.
+   Use the content in Appendix D of the Full System Rebuild Guide for the
+   SKILL.md and client_profiles.md, and the rendering pattern in build_template.py
+   as the assembly entry point. Include the Inter font set (Fontsource v5.2.8,
+   files: Inter-Regular.woff2, Inter-Bold.woff2, Inter-SemiBold.woff2,
+   Inter-Italic.woff2) in a fonts/ subfolder. Include an example_brief.json
+   that demonstrates a complete client brief JSON spec."
+
+Claude will assemble the folder, create the zip, and present it for
+download.
+
+--------------------------------------------------------------------------------
+STEP 18: INSTALL THE SKILL
+--------------------------------------------------------------------------------
+[HUMAN REQUIRED]
+
+Install user skills through Anthropic's user-skills mechanism. As of the
+time of writing, the exact installation method varies. Two known paths:
+
+  Path A: claude.ai Settings > Skills > Upload Skill. Drag the zip file.
+          Wait for Anthropic to validate the SKILL.md frontmatter and
+          activate the skill.
+
+  Path B: For Claude Code environments where user skills are filesystem-
+          managed, extract the zip into /mnt/skills/user/ (or the
+          equivalent skills path for the environment). The folder
+          structure should be:
+          /mnt/skills/user/keel3-weekly-brief-pipeline/SKILL.md
+          /mnt/skills/user/keel3-weekly-brief-pipeline/client_profiles.md
+          /mnt/skills/user/keel3-weekly-brief-pipeline/render_brief.py
+          /mnt/skills/user/keel3-weekly-brief-pipeline/build_template.py
+          /mnt/skills/user/keel3-weekly-brief-pipeline/example_brief.json
+          /mnt/skills/user/keel3-weekly-brief-pipeline/fonts/<Inter files>
+
+If installation fails with "SKILL.md must start with YAML frontmatter (---)"
+or a similar error, verify the SKILL.md file begins with the three dashes
+on line 1 and contains a properly closed frontmatter block before any other
+content.
+
+--------------------------------------------------------------------------------
+STEP 19: VERIFY THE SKILL LOADS
+--------------------------------------------------------------------------------
+[HUMAN REQUIRED]
+
+Open a new Claude Code session. Verify the skill is listed in
+<available_skills> if visible in your interface, or test by prompting:
+
+    "verify the keel3-weekly-brief-pipeline skill is installed and ready"
+
+Claude should respond by viewing the SKILL.md and confirming. If the skill
+is not loading, check:
+- The SKILL.md frontmatter is valid (open the file directly to confirm)
+- The skill folder name matches the name field in the frontmatter
+- The folder is in the correct path for the environment
+
+--------------------------------------------------------------------------------
+STEP 20: TEST RENDER WITH THE EXAMPLE BRIEF
+--------------------------------------------------------------------------------
+[HUMAN REQUIRED]
+
+Confirm the renderer works end-to-end by prompting Claude:
+
+    "render a test KPS Life brief using example_brief.json from the
+     skill, then present the PDF"
+
+Claude should:
+  - Locate example_brief.json in the installed skill folder
+  - Call render_brief.py via Python (with sys.path pointing to the skill)
+  - Produce a one-page PDF in Keel3 brand standards
+  - Copy the PDF to /mnt/user-data/outputs/ (or the equivalent)
+  - Present the PDF via present_files
+
+Verify the rendered PDF matches expectations:
+  - Navy masthead with white "K3 KEEL3" wordmark
+  - Three columns labeled Announcements / What It Means / What It Means
+    For [Client]
+  - Orange item numbers
+  - Cream-background "In plain terms" analogy callouts
+  - Navy "Week in One Line" footer
+  - Inter typeface throughout
+  - No em dashes
+  - Single page (no overflow)
+
+If the render fails or the styling is off, debug:
+- Python environment has WeasyPrint installed
+- The fonts/ folder is intact and contains the four Inter weights
+- The CSS variables in render_brief.py match the brand palette in
+  Appendix E
+
+================================================================================
+PHASE F: SUPPORTING DOCUMENTATION
+================================================================================
+
+--------------------------------------------------------------------------------
+STEP 21: CREATE THE OPERATING KIT REFERENCE
+--------------------------------------------------------------------------------
+[HUMAN REQUIRED]
+
+The Operating Kit is a markdown document that captures the methodology,
+weekly rhythm, client profiles, scan prompt references, and any standing
+client feedback (e.g. M&T's "C-suite altitude" thesis, KPS sensitivity
+rules). It is the institutional memory of the brief practice.
+
+Save the Operating Kit as Keel3_Weekly_Brief_Operating_Kit.md inside a
+Keel3 Notion page or a shared Google Drive folder accessible to the
+operator. Reference it during weekly assembly when a client-specific
+question arises that the skill does not answer.
+
+This document does not need to live inside the skill; it is operator-
+facing reference material. The skill is Claude-facing.
+
+--------------------------------------------------------------------------------
+STEP 22: CONFIRM BRAND STANDARDS WITH PATRICK (OR EQUIVALENT)
+--------------------------------------------------------------------------------
+[HUMAN REQUIRED]
+
+Verify the brand palette and typeface settings with the Keel3 partner who
+owns the brand. The current standard is in Appendix E. If anything has
+changed, update render_brief.py's CSS variables and any references in
+SKILL.md.
+
+--------------------------------------------------------------------------------
+STEP 23: HAND-OFF THE NEW DEPLOYMENT TO THE OPERATOR
+--------------------------------------------------------------------------------
+[HUMAN REQUIRED]
+
+Confirm with the weekly operator that they have:
+  - Access to claude.ai (the same account that owns the scheduled task)
+  - Access to grok.com/tasks (the same account)
+  - Access to the Notion workspace and the Story Pool database
+  - Access to the Gmail account receiving Grok emails
+  - The Weekly Assembly Runbook in hand
+  - A backup of the Notion database ID, data source ID, and Notion
+    integration token, stored in a password manager or secure note
+
+================================================================================
+PHASE G: FIRST-RUN END-TO-END TEST
+================================================================================
+
+--------------------------------------------------------------------------------
+STEP 24: TRIGGER A MANUAL DAILY SCAN RUN
+--------------------------------------------------------------------------------
+[HUMAN REQUIRED]
+
+In claude.ai > Scheduled Tasks, open the Daily Scan task and trigger a
+manual run. Wait for completion (typically a few minutes). Then check the
+Notion Story Pool to verify new rows appeared with Capture Source = Daily
+Scan.
+
+If no rows appeared:
+- Check the task's run log for errors
+- Verify Notion OAuth is still valid
+- Verify the prompt has the correct database ID
+
+--------------------------------------------------------------------------------
+STEP 25: TRIGGER A MANUAL GROK RUN AND PASTE THE OUTPUT
+--------------------------------------------------------------------------------
+[HUMAN REQUIRED]
+
+Trigger the Grok scheduled task manually via grok.com/tasks. When the
+email arrives, copy its body and paste it into a Claude Code session with
+the framing:
+
+    "triage this Grok scan against the existing pool and file what is
+     worth filing"
+
+Claude should perform Steps 3a through 3g from the Weekly Assembly Runbook:
+search for duplicates, verify any contested claims, file new rows, report
+back what was filed and skipped.
+
+Verify the filed rows appear in Notion under Capture Source = Grok Email.
+
+--------------------------------------------------------------------------------
+STEP 26: DRY-RUN BRIEF ASSEMBLY
+--------------------------------------------------------------------------------
+[HUMAN REQUIRED]
+
+With a populated Notion pool (even if only a few rows from the Daily Scan
+and Grok scan above), perform a dry-run brief build for one client:
+
+    "build this week's brief for KPS Life"
+
+Claude should respond with the ground-truth-first ask. Paste a short list
+of titles from the KPS Life view. Claude should then make a selection,
+write the bespoke columns, render the PDF, and present it.
+
+Confirm the PDF looks correct.
+
+--------------------------------------------------------------------------------
+STEP 27: PARTNER REVIEW AND SIGN-OFF
+--------------------------------------------------------------------------------
+[HUMAN REQUIRED]
+
+The Keel3 partner reviews the dry-run PDF for editorial quality, brand
+standards, and sensitivity compliance. Sign-off here confirms the system
+is ready for production.
+
+================================================================================
+PHASE H: SWITCH TO WEEKLY OPERATION
+================================================================================
+
+--------------------------------------------------------------------------------
+STEP 28: HAND-OFF TO THE WEEKLY ASSEMBLY RUNBOOK
+--------------------------------------------------------------------------------
+[HUMAN REQUIRED]
+
+Setup is complete. From this point forward, use the companion document
+"Keel3 Weekly Assembly Runbook" for the recurring Monday-through-Friday
+process. The full system rebuild guide is retained as reference for:
+- Onboarding new operators
+- Troubleshooting major infrastructure issues
+- Setting up a parallel deployment in a different environment
+- Disaster recovery if the Notion database is lost
+
+================================================================================
+APPENDIX A: NOTION DATABASE SCHEMA
+================================================================================
+
+Database name: AI Brief Story Pool
+
+PROPERTIES (12 total)
+
+  1. Story Title
+     Type: title (required, primary key)
+     Description: Headline of the story, as it will appear in the brief
+
+  2. Date Added
+     Type: date
+     Description: When the row was filed to the pool (typically today)
+
+  3. Source
+     Type: text
+     Description: Publication or attribution string, e.g. "Anthropic,
+     Reuters, CNBC, May 28, 2026"
+
+  4. Source Link
+     Type: url
+     Description: Primary source URL if available
+
+  5. Source Date
+     Type: date
+     Description: When the source published the news (often different
+     from Date Added)
+
+  6. Announcement Summary
+     Type: text
+     Description: 3-4 sentence factual summary. Shared layer.
+
+  7. What It Means
+     Type: text
+     Description: 3-4 sentence general implication for organizations.
+     Shared layer.
+
+  8. Analogy
+     Type: text
+     Description: 1-2 sentence "in plain terms" analogy. Shared layer.
+
+  9. Resonance
+     Type: select
+     Options:
+       - Headline (red)
+       - Research (blue)
+       - Niche (gray)
+
+ 10. Relevance
+     Type: multi-select
+     Options:
+       - M&T Bank
+       - Brown Advisory
+       - Alpine Associates
+       - Incserv
+       - ChristianaCare
+       - KPS Life
+       - Luna Diabetes
+
+ 11. Lens
+     Type: multi-select
+     Options:
+       - Risk & Regulatory
+       - Vendor & Platform
+       - Workforce & Operating Model
+       - Capital & Deals
+       - Cyber
+       - Engineering Velocity
+       - Clinical & Trials
+
+ 12. Status
+     Type: select
+     Options:
+       - Candidate (default for new rows)
+       - Drafted
+       - Used
+       - Archived
+
+ 13. Capture Source
+     Type: select
+     Options:
+       - Daily Scan (blue)
+       - Grok Email (orange)
+       - Newsletter (green)
+       - Manual (gray)
+
+ 14. Week
+     Type: select
+     Options:
+       - W21, W22, W23, W24... (one per ISO calendar week)
+       - Colors rotate for visual distinction
+
+VIEWS (8 functional, 10 total including all per-client views)
+
+  Default
+    Type: Table
+    Filter: none
+    Sort: Date Added, descending
+
+  This Week
+    Type: Table
+    Filter: Date Added is within last 7 days
+    Sort: Resonance (Headline > Research > Niche), then Date Added desc
+
+  By Week
+    Type: Table, grouped
+    Group by: Week
+    Sort within group: Resonance, then Date Added desc
+    Order of groups: manual (most recent week on top)
+
+  KPS Life
+    Type: Table
+    Filter: Relevance contains KPS Life AND Status is not Archived
+    Sort: Resonance, then Date Added desc
+
+  M&T Bank, Brown Advisory, Alpine Associates, Incserv,
+  ChristianaCare, Luna Diabetes
+    Each: same filter pattern as KPS Life, scoped to that client's
+    Relevance value
+
+================================================================================
+APPENDIX B: GROK SCHEDULED TASK PROMPT
+================================================================================
+
+Paste this prompt into the body of the grok.com/tasks scheduled task.
+Update the date references and email address as needed.
+
+--- BEGIN GROK PROMPT ---
+
+You are running a daily scan for Keel3's weekly intelligence brief. Pull
+posts and threads from the following six X lists in the prior 24 hours:
+
+  1. AI Newsmakers: https://x.com/i/lists/<your_list_id_1>
+  2. AI Founders: https://x.com/i/lists/<your_list_id_2>
+  3. AI Investors: https://x.com/i/lists/<your_list_id_3>
+  4. AI Policy: https://x.com/i/lists/<your_list_id_4>
+  5. Healthcare/Science: https://x.com/i/lists/<your_list_id_5>
+  6. AI Researchers/Developers: https://x.com/i/lists/<your_list_id_6>
+
+For each high-signal item in those lists, produce a structured entry with:
+
+  - Headline (one line)
+  - Source (account, publication, or X URL)
+  - 3-4 sentence summary of what was announced or reported
+  - 2-3 sentence read on why it matters
+
+Pin the date you are scanning to the calendar day this task runs. Format
+all dates as "Month Day, Year" (e.g., June 3, 2026).
+
+CRITICAL RULES:
+
+- Deliver the FULL output, not a truncated digest. Do not summarize away
+  detail. The Keel3 operator needs to see the structured items.
+
+- Flag single-post claims explicitly: if a story comes from only one X
+  post or one source, note "(single-post reporting noted)" so the operator
+  knows to verify before filing.
+
+- De-emphasize crypto and token-coin framing unless the item has direct
+  enterprise relevance.
+
+- Verify numbers and named figures. If you cannot verify, do not assert.
+  Use phrasing like "reported to be" or skip the number.
+
+- At the end of the scan, include a "Noise" section listing items that
+  were loud but low substance (hot takes without new data, talent gossip,
+  speculative AGI claims). The operator will skip these.
+
+Deliver via email to <operator email address>.
+
+--- END GROK PROMPT ---
+
+Replace the six list IDs with the actual X list IDs for the curated
+sources. To create lists in X: log in, create a new list, add accounts,
+and grab the list ID from the URL when viewing the list.
+
+================================================================================
+APPENDIX C: CLAUDE DAILY SCAN PROMPT
+================================================================================
+
+Paste this prompt into the body of the Claude scheduled task in claude.ai.
+Update the database ID and data source ID to the values recorded in Step 8.
+
+--- BEGIN CLAUDE DAILY SCAN PROMPT ---
+
+You are the automated Daily Scan for Keel3's weekly intelligence brief.
+You run once per day, in the morning, and your job is to add new AI news
+stories to a Notion Story Pool, ready for Friday brief assembly.
+
+INPUTS YOU READ:
+
+  1. Gmail label "AI" and "Grok Scan": newsletter and scan emails received
+     in the prior 24 hours. Read full content, not just subject lines.
+
+  2. Web search for trending AI news in the prior 24 hours. Cover:
+     - Major company announcements (foundation labs: Anthropic, OpenAI,
+       Google DeepMind, Meta, Microsoft, NVIDIA)
+     - Regulatory action (Federal Register, FDA.gov, OCC.gov,
+       federalreserve.gov, FDIC.gov, CISA.gov, SEC.gov)
+     - Capital markets news (IPO filings, major fundings, M&A, earnings)
+     - Healthcare AI (FDA clearances, clinical AI deployments)
+     - Cybersecurity (CISA advisories, agent security)
+
+  3. Primary sources for verification of any claim before filing
+     (company press releases, SEC filings, agency notices).
+
+OUTPUTS YOU WRITE:
+
+For each story worth tracking, create a row in the Notion database at:
+
+  Database ID: <DATABASE_ID_FROM_STEP_8>
+  Data Source ID: <DATA_SOURCE_ID_FROM_STEP_8>
+
+Fill all 12 properties:
+
+  - Story Title: clear headline
+  - Date Added: today
+  - Source: publication and date (e.g., "Anthropic, Reuters, June 1, 2026")
+  - Source Link: primary URL if available
+  - Source Date: when the story was published
+  - Announcement Summary: 3-4 factual sentences
+  - What It Means: 3-4 sentences on general implication
+  - Analogy: 1-2 sentences
+  - Resonance: Headline / Research / Niche
+  - Relevance: multi-select across the seven clients (apply lens below)
+  - Lens: multi-select from the seven lenses
+  - Status: Candidate (default)
+  - Capture Source: Daily Scan
+  - Week: current ISO calendar week as W##
+
+CLIENT ROSTER AND LENSES:
+
+  M&T Bank — Bank holding company. Lens: Risk & Regulatory (OCC, Fed,
+  FDIC), Cyber, Vendor & Platform, Workforce. Trust moat thesis: AI
+  assistants integrating into customer financial lives is contested
+  territory. C-suite altitude.
+
+  Brown Advisory — Wealth management. Lens: Vendor & Platform, Workforce,
+  Risk & Regulatory, Capital & Deals. Wealth and portfolio framing.
+
+  Alpine Associates — Merger arbitrage. Lens: Capital & Deals, Risk &
+  Regulatory. Deal calendar, peer industry signals.
+
+  Incserv — Corporate services. Lens: Vendor & Platform, Workforce, Risk &
+  Regulatory. Operating model, platform consolidation, legacy system
+  context.
+
+  ChristianaCare — Health system. Lens: Risk & Regulatory, Clinical &
+  Trials, Workforce. Patient-safety framing.
+
+  KPS Life — Clinical-trials FSP. Lens: Clinical & Trials, Risk &
+  Regulatory, Workforce, Cyber. HARD SENSITIVITY: never frame as
+  headcount displacement; always frame as leverage for embedded experts.
+
+  Luna Diabetes — Pre-FDA medtech. Lens: (a) FDA, device cyber, capital;
+  (b) Engineering Velocity. SENSITIVITY: no specific headcount or
+  financial figures.
+
+DEDUP DISCIPLINE:
+
+Before creating a new row, search the database for similar titles. If a
+row exists for the same announcement:
+  - If your new content is more accurate, update the existing row.
+  - If equivalent, skip and do not create a duplicate.
+  - If the existing row has wrong numbers or wrong framing (common with
+    auto-scan errors), update the existing row with corrections.
+
+VERIFICATION DISCIPLINE:
+
+For any specific claim:
+  - Funding round, valuation, ARR, revenue: verify against a primary
+    source (company press release, SEC filing) before asserting.
+  - FDA action: verify against FDA.gov or Federal Register.
+  - Regulatory guidance: verify against the issuing agency's site.
+  - Named deployment ("X went live at Y on date Z"): verify against
+    company press release.
+
+If you cannot verify, either soften the language (use "reported to be",
+"approximately", or drop the number entirely) or do not file the story.
+
+LENS APPLICATION:
+
+Apply Relevance tags based on the lens that fits, not on whether the story
+"sounds like" it is about that client. Examples:
+  - OCC/Fed/FDIC guidance → M&T Bank
+  - FDA RFI deadline → KPS Life, ChristianaCare, Luna Diabetes
+  - AI capex stories → Alpine Associates, Brown Advisory, M&T Bank
+  - Foundation-model vendor news → potentially all seven, depending on
+    materiality
+  - Workforce/labor framing → handle KPS sensitivity with care, only
+    file if it can be framed as leverage, not displacement
+
+NOISE TO SKIP:
+
+  - Hot takes on AGI timelines without new data
+  - Talent move rumors without confirmed business impact
+  - Generic "AI is changing everything" threads
+  - Viral but unverified compute or leak claims
+  - Crypto/token-coin framing unless direct enterprise relevance
+  - Single-source rumors without secondary verification
+
+--- END CLAUDE DAILY SCAN PROMPT ---
+
+================================================================================
+APPENDIX D: SKILL FILE INVENTORY
+================================================================================
+
+The keel3-weekly-brief-pipeline skill folder contains:
+
+  SKILL.md
+  Purpose: Main skill protocol. Contains YAML frontmatter (name and
+  description for the skill router), the ground-truth-first protocol, the
+  two-layer editorial model, client profile summaries, selection rules,
+  shared-layer writing discipline, triage and dedup discipline, verification
+  discipline, build flow, file naming, JSON spec structure, renderer
+  technical notes, common pitfalls, and editorial standards (no em dashes,
+  no consultant-speak).
+  Length: roughly 200 lines.
+  Critical: Must start with YAML frontmatter (--- on line 1).
+
+  client_profiles.md
+  Purpose: Detailed reference for the seven brief clients. Covers business,
+  reader, lens (priority-ordered), what lands hard, what does not land,
+  translation lens, and standing thesis where applicable (e.g., M&T trust
+  moat).
+  Length: roughly 150 lines, one section per client.
+
+  render_brief.py
+  Purpose: The PDF renderer. Takes a JSON spec, generates HTML with
+  embedded CSS in Keel3 brand standards, and produces a one-page PDF via
+  WeasyPrint with auto-fit scaling (1.0 down to 0.85 if content is dense).
+  Imports: weasyprint, json, pathlib, re.
+  Exports: render(json_path, output_dir) function returning the output
+  PDF path.
+  Length: roughly 250 lines including the embedded CSS.
+  Brand variables (CSS root variables): navy #0F1E2E, orange #F25C2A,
+  cream #F0EFE9, slate #3A4A5C.
+
+  build_template.py
+  Purpose: Canonical Python template for assembling one week of briefs.
+  Defines S (shared layer dict, one entry per story) and BRIEFS (per-client
+  selections dict). Iterates and renders. Copy this template at the start
+  of each Friday assembly, fill in the current week's content, and run.
+  Length: roughly 100 lines.
+
+  example_brief.json
+  Purpose: Reference JSON spec for a single client brief. Used for testing
+  the renderer (Step 20) and as a structural reference when writing new
+  briefs.
+  Schema: client_name, client_descriptor, week_of, issue, prepared_by,
+  mast_right, sources_line, items[] (each with n, headline, source,
+  announce, means, analogy, client_h, client_p), week_line.
+  Length: roughly 80 lines of JSON.
+
+  fonts/
+  Purpose: Inter typeface files (Fontsource v5.2.8) embedded by the
+  renderer. Four files required: Inter-Regular.woff2, Inter-Bold.woff2,
+  Inter-SemiBold.woff2, Inter-Italic.woff2. Total size: roughly 180KB.
+
+================================================================================
+APPENDIX E: BRAND STANDARDS REFERENCE
+================================================================================
+
+COLORS
+
+  Navy:    #0F1E2E   (masthead, third-column headers, week-in-one-line
+                     panel, primary text on white)
+  Orange:  #F25C2A   (item numbers, accent rule under "Heads Down to
+                     Heads Up" label, K3 logo background)
+  Cream:   #F0EFE9   (analogy callout background, prepared-for panel
+                     background)
+  Slate:   #3A4A5C   (secondary text, labels, sources line at bottom)
+  White:   #FFFFFF   (page background, masthead text)
+  Light gray border: #E0E0E0 (column separators if used)
+
+TYPEFACE
+
+  Inter (Fontsource v5.2.8)
+  Weights used: 400 (Regular), 600 (SemiBold), 700 (Bold), 400 italic
+  All other weights or styles should not be used in the brief.
+
+  Sizing (at scale 1.0):
+    Masthead "K3 KEEL3":  14pt SemiBold, white on navy
+    "STRATEGY · DESIGN · EXECUTION" sublabel:  6pt Regular, white, tracked
+    "CONFIDENTIAL CLIENT BRIEFING" top right:  6.5pt Regular, navy, tracked
+    "HEADS DOWN TO HEADS UP" eyebrow:  8pt Bold, slate, tracked
+    "Weekly Intelligence Brief" headline:  32pt SemiBold, navy
+    Subtitle:  9pt Regular, slate
+    "ISSUE" label and "PREPARED FOR / WEEK OF" labels:  6pt Bold, navy
+    Item headline:  10pt Bold, navy
+    Item source line:  7.5pt Italic, slate
+    Item body paragraphs:  7.85pt Regular, navy
+    "In plain terms" callout label:  6pt Bold, slate, tracked
+    Analogy text:  7pt Italic, slate
+    Third column header (e.g., "AI BECOMES A SECTOR..."):  7.5pt Bold,
+                                                            navy, tracked
+    Third column body:  7.85pt Regular, navy
+    "THE WEEK IN ONE LINE" label:  7pt Bold, white, tracked
+    Week-in-one-line body:  8pt Regular, white
+    Sources line bottom:  6pt Regular, slate
+    Page footer ".keel3.ai" wordmark:  7pt Bold, navy
+
+  Auto-fit reduces all body sizes proportionally (down to scale 0.85)
+  while preserving the masthead and footer at full size.
+
+EDITORIAL STANDARDS
+
+  No em dashes anywhere in any deliverable. Use colons, commas, hyphens,
+  or rewording instead. This is Patrick Callahan's standing preference and
+  applies to all Keel3 deliverables (briefs, emails, internal docs).
+
+  No consultant-speak. Avoid: leverage (as verb), synergy, disrupt,
+  AI-powered, next-gen, seamless, unlock, game-changer, revolutionary,
+  paradigm shift, holistic, robust (overused), best-in-class, world-class.
+
+  Paraphrase over quote in shared-layer announcements. Direct quotes only
+  when the exact wording carries legal or strategic weight (e.g., a CEO
+  testifying under oath).
+
+  Use one quote per source maximum, under 15 words.
+
+  Never reproduce song lyrics, full poems, or substantial passages from
+  any copyrighted source.
+
+================================================================================
+APPENDIX F: CLIENT PROFILES REFERENCE
+================================================================================
+
+This appendix is the source content for client_profiles.md inside the
+skill. Refer to that file in the installed skill for the canonical version.
+This appendix is included for rebuild-from-scratch purposes.
+
+--------------------------------------------------------------------------------
+M&T BANK
+--------------------------------------------------------------------------------
+
+Business: Bank holding company. Headquartered in Buffalo NY with
+significant footprint across the Northeast and Mid-Atlantic. Read at the
+enterprise level, not as a regional operator.
+
+Client descriptor for brief masthead: "Bank Holding Company" (do NOT use
+"Mid-Atlantic" or "Commercial and Retail Banking, Mid-Atlantic Region").
+
+Reader: C-suite and board level. The brief is shared internally with the
+executive committee and peers, including circulation at C-suite altitude.
+Write at enterprise elevation, not regional or business-unit altitude.
+
+Standing thesis: The trust moat banks have relied on is becoming more
+contested as AI assistants integrate further into customers' financial
+lives. The brief should track this thesis explicitly. This is the client's
+own framing, surfaced in W22 feedback, and it should be reflected in
+week_line and item reads when relevant.
+
+Lens (in priority order):
+  1. Risk & Regulatory (OCC, Fed, FDIC, CFPB; model risk; supervisory
+     and board-level AI governance)
+  2. Cyber (agent security as enterprise cyber posture, vendor cyber
+     risk at audit-committee level)
+  3. Vendor & Platform (AI procurement as strategic relationships,
+     foundation-model partner decisions, fintech competition for the
+     customer relationship)
+  4. Workforce & Operating Model (AI's impact on banking roles framed
+     at the institutional level)
+
+What lands hard: Bank-regulator items always lead, framed at supervisory
+and board altitude. Items framed around the customer-trust moat and around
+AI assistants positioning between banks and customers. Items that reframe
+what gets repriced as financial execution commoditizes. AI vendor and
+platform decisions framed as enterprise commitments. Agent security at the
+CISO and audit-committee level.
+
+What does not land: Local or regional framing. Operational implementation
+detail at branch or business-unit level. Items framed around a regional
+president's specific concerns. Pure capital-markets stories without
+banking implications. Research-paper items. Consumer tech without trust-
+or-relationship implications for the bank.
+
+Translation lens: Translate every story into "what this means for M&T as a
+bank holding company competing for customer trust in an AI-integrated
+financial landscape, with AI governance, AI customer strategy, and AI-
+vendor platform choice as enterprise-level commitments."
+
+--------------------------------------------------------------------------------
+BROWN ADVISORY
+--------------------------------------------------------------------------------
+
+Business: Investment and wealth management, headquartered in Baltimore.
+Independent firm with high-net-worth and institutional clients.
+
+Reader: Senior wealth manager or firm leader. Client-facing, portfolio-
+construction context.
+
+Lens (in priority order):
+  1. Capital & Deals (AI exposure in public markets, IPO pipeline,
+     valuations)
+  2. Vendor & Platform (AI tools the firm uses internally for research,
+     advisor productivity, client service)
+  3. Workforce & Operating Model (how AI changes the advisor-client
+     relationship)
+  4. Risk & Regulatory (SEC, FINRA, fiduciary implications of AI in
+     advice)
+
+What lands hard: Portfolio-exposure framing on major AI companies.
+Wealth-management implications of consumer AI (ChatGPT financial features,
+agentic trading). Peer-research items from Goldman, Morgan Stanley,
+blue-chip houses. Concrete enterprise AI revenue figures (Salesforce,
+Snowflake, hyperscalers).
+
+What does not land: Pure operational stories without portfolio or wealth-
+management angle. Deeply technical AI research.
+
+Translation lens: "what this means for how Brown Advisory advises clients
+and constructs portfolios."
+
+--------------------------------------------------------------------------------
+ALPINE ASSOCIATES
+--------------------------------------------------------------------------------
+
+Business: Merger arbitrage hedge fund.
+
+Reader: Portfolio manager or trader on the arb desk. Deal-focused,
+numbers-focused, peer-industry aware.
+
+Lens (in priority order):
+  1. Capital & Deals (IPO pipeline, M&A activity, deal-thesis-relevant
+     signals)
+  2. Risk & Regulatory (antitrust, deal-breaker regulatory shifts, AI
+     in deal review)
+
+What lands hard: Concrete dollar figures and specific deals. AI IPO
+pipeline news. Peer hedge fund signals. Enterprise AI revenue benchmarks.
+Capex stories that flow through to specific public-market beneficiaries.
+M&A involving AI labs or AI services firms.
+
+What does not land: Abstract think pieces. Healthcare or clinical items
+unless they touch a public deal. Consumer AI features.
+
+Translation lens: "what this means for the deal calendar and for the
+AI-transformation theses we underwrite in targets."
+
+--------------------------------------------------------------------------------
+INCSERV
+--------------------------------------------------------------------------------
+
+Business: Registered agent and corporate services, Delaware-based.
+Operates on a BILL legacy system that constrains modernization velocity.
+
+Reader: Firm leader or operations lead. Cares about competitive
+positioning and how the firm scales.
+
+Lens (in priority order):
+  1. Vendor & Platform (foundation-model partner choice, AI procurement,
+     marketplace consolidation)
+  2. Workforce & Operating Model (how AI scales to a people-intensive
+     firm without displacing skilled staff)
+  3. Risk & Regulatory (compliance implications of AI in corporate
+     filings)
+
+What lands hard: Enterprise AI deployment stories at scale (KPMG/PwC,
+professional services AI rollouts). Concrete enterprise AI revenue
+figures. Realistic adoption-curve research (Goldman, McKinsey).
+Marketplace and platform consolidation among the foundation-model labs.
+Agent-as-operating-layer reframings for knowledge work.
+
+What does not land: Consumer AI. Capital-markets-only items. Healthcare.
+Pure research.
+
+Translation lens: "what this means for how Incserv scales AI to its
+people, modernizes deliberately off legacy systems, and stays competitive
+in corporate services."
+
+--------------------------------------------------------------------------------
+CHRISTIANACARE
+--------------------------------------------------------------------------------
+
+Business: Health system, Delaware. Major regional employer and care
+provider.
+
+Reader: Senior leader, frequently on the Quality & Safety Committee.
+Patrick Callahan personally sits on this committee.
+
+Lens (in priority order):
+  1. Risk & Regulatory (FDA, state healthcare AI laws, CMS, joint
+     commission, accreditation)
+  2. Clinical & Trials (clinical AI deployments, research direction,
+     ambient AI for clinicians)
+  3. Workforce & Operating Model (AI impact on nursing, physicians,
+     admin staff)
+
+SENSITIVITY: Frame AI in care around patient safety and governance. Any
+story about AI affecting clinical decisions should be framed in terms of
+human oversight, accountability, and patient safety, never around pure
+efficiency or workforce displacement.
+
+What lands hard: FDA actions (Elsa, HALO, RFI updates, clearances,
+real-time trial pilots). Ambient AI clinical deployments. State-level
+AI healthcare regulation. Biomedical foundation-model research. Patient-
+safety governance items.
+
+What does not land: Capital-markets-only items. Consumer AI without
+health implications.
+
+Translation lens: "what this means for safe, effective AI adoption inside
+a health system, with patient safety and clinical accountability as the
+organizing principles."
+
+--------------------------------------------------------------------------------
+KPS LIFE
+--------------------------------------------------------------------------------
+
+Business: Functional Service Provider (FSP) for clinical trials,
+headquartered in Malvern PA. Embeds clinical professionals (CRAs,
+monitors, scientists, regulatory) inside pharma and biotech sponsor
+environments.
+
+Reader: Firm leader who sees the world through what sponsors need and
+what embedded teams deliver.
+
+Lens (in priority order):
+  1. Clinical & Trials (FDA actions on trials, sponsor science direction,
+     real-time trial pilots, clinical AI tooling)
+  2. Risk & Regulatory (FDA, state healthcare AI, clinical data
+     governance)
+  3. Workforce & Operating Model (how AI changes embedded clinical work)
+  4. Cyber (clinical data, sponsor environment security)
+
+HARD SENSITIVITY: KPS sells embedded people. Never frame AI-and-labor
+stories as headcount obsolescence. Always frame as leverage for embedded
+experts. If an item cannot be framed that way for KPS, drop it from KPS's
+brief rather than soften it.
+
+Examples of correct framing:
+  - "AI in trial monitoring makes embedded monitors more effective by
+    handling data volume." (good)
+  - "AI replaces clinical monitors in trials." (NEVER write this)
+
+What lands hard: FDA RFI deadlines, real-time clinical trial pilots, FDA
+infrastructure announcements, sponsor-science direction items, state-level
+healthcare AI regulation. Anything that helps KPS position embedded
+clinical expertise as essential.
+
+What does not land: Pure capital-markets items. Consumer AI. Workforce-
+replacement framings (forbidden).
+
+Translation lens: "what this means for sponsor environments, and for how
+embedded clinical expertise stays at the center of trustworthy AI in
+trials."
+
+--------------------------------------------------------------------------------
+LUNA DIABETES
+--------------------------------------------------------------------------------
+
+Business: Early-stage medtech building closed-loop insulin delivery for
+insulin pen users. Pre-FDA submission.
+
+Reader: Founder or senior leader. Strategy-and-engineering audience,
+capital-aware.
+
+Two-lens model:
+  1. Risk and capital: FDA, device cybersecurity, capital signals,
+     regulatory environment for AI medical devices.
+  2. Engineering velocity: agentic coding, engineering tooling, AI in
+     development workflows.
+
+SENSITIVITY: Do not include specific headcount or financial figures for
+Luna. Frame the company as a "lean team scaling toward commercialization"
+or a "small engineering team." Do not assert revenue, runway, or employee
+counts.
+
+What lands hard: FDA actions on AI medical devices, device cybersecurity
+guidance, AI capability as priced investor asset framing, agentic coding
+tooling, Anthropic engineering practices applied to device-AI containment.
+
+What does not land: Capital-markets-only items without medtech
+implications. Hospital-system operational stories. Pure research without
+device-AI relevance.
+
+Translation lens: "what this means for Luna as a lean, pre-commercial
+medtech building a safe and credible connected device."
+
+================================================================================
+END OF FULL SYSTEM REBUILD GUIDE
+================================================================================
