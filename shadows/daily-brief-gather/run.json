@@ -1,7 +1,7 @@
 {
   "shadow_id": "daily-brief-gather",
   "name": "Daily AI Brief Gather",
-  "version": 1,
+  "version": 2,
   "trigger": {
     "type": "schedule",
     "cron": "0 6 * * 1-4",
@@ -23,6 +23,7 @@
       "step_after": "triage",
       "prompt": "Read the most recent AI newsletter emails from Gmail inbox since the last sweep (look for AI newsletters, Ben's Bites, The Information, Every, Turing Post, DealBook, Stratechery, and any other AI-focused subscriptions). For each newsletter, extract candidate AI stories not already captured by the web sweep: headline, source, URL, and publication date. Stage alongside the web sweep results.",
       "connector": "google_workspace",
+      "capability": "manage_inbox",
       "folders": [
         "workspace/run/candidates"
       ]
@@ -31,7 +32,8 @@
       "type": "oliver_step",
       "step_after": "file-to-notion",
       "prompt": "You are an editor for the Keel3 'Heads Down to Heads Up' weekly AI intelligence brief. Process the staged candidate stories from the web sweep and newsletter sources.\n\nTRIAGE WORKFLOW:\n\n1. Deduplicate. Search for similar stories across the web sweep and newsletter sources. Consolidate near-duplicates into a single entry, keeping the most detailed version.\n\n2. Verify. Spot-check specific claims against primary sources via web search: dollar figures, company valuations, revenue numbers, regulatory actions, FDA clearances, named lawsuits, IPO filings, named product deployments. Correct any wrong numbers or framings. Common verification offenders: AI-company valuations, enterprise AI ARR figures. Common framing offenders: stories that conflate what a platform itself does with what third parties do on the platform.\n\n3. Write the shared layer for each accepted story. For each story that passes triage, produce:\n- Story Title: concise, factual headline (max 12 words)\n- Announcement Summary: 3-4 factual sentences on what happened. No editorializing.\n- What It Means: 3-4 sentences on the universal industry significance.\n- Analogy: 1-2 sentence concrete analogy. Format: 'It is like...'\n- Source: the original source name(s)\n- Source Link: the URL of the primary source\n- Source Date: the publication date (ISO format)\n- Capture Source: 'Newsletter' if from email newsletters, 'Daily Scan' otherwise\n\n4. Tag each story.\n- Lens (multi-select, pick all that apply): Risk & Regulatory, Cyber, Vendor & Platform, Workforce & Operating Model, Capital & Deals, Clinical & Trials, Engineering Velocity\n- Relevance (multi-select, tag which clients this matters to): KPS Life, M&T Bank, Brown Advisory, Alpine Associates, Incserv, ChristianaCare, Luna Diabetes\n- Resonance: 'Headline' for major market-moving news, 'Research' for studies/trends, 'Niche' for narrow-audience items\n- Week: determine the current ISO week (e.g., W25) and tag accordingly\n- Status: 'Candidate'\n\n5. Skip and flag. Mark items for skip when: duplicate, out of scope, too speculative without a credible source. For each skipped item, note the reason.\n\n6. Flag for human review. Flag items when: single-source rumor, contested numbers, needs editorial judgment on relevance.\n\nOUTPUT: For each accepted story, output a JSON array of story objects with all fields set (title, announcement_summary, what_it_means, analogy, source, source_link, source_date, capture_source, lens, relevance, resonance, week, status). Also output a summary object with counts (stories_filed, stories_skipped, stories_flagged) and a list of skipped items with reasons.",
-      "model": "openrouter/anthropic/claude-sonnet-4-6",
+      "intended_goal": "Triage all the sources found",
+      "model": "openrouter/deepseek/deepseek-v4-pro",
       "folders": [
         "workspace/run/candidates"
       ]
@@ -51,10 +53,14 @@
     "email-digest": {
       "type": "deliver",
       "step_after": "finish",
-      "prompt": "Send a daily digest email summarizing today's AI news sweep. From the triage output, compose a short email body (plain text) with: total stories filed today, breakdown by Lens category, top 3 stories (headline + one-line why it matters), flagged items needing human review (if any), skipped items and reasons (if any). Subject line: 'Daily AI Brief Gather — [Day], [Date]'. Send to the project owner.",
+      "prompt": "Send a daily digest email summarizing today's AI news sweep. From the triage output, compose a short email body (plain text) with: total stories filed today, breakdown by Lens category, top 3 stories (headline + one-line why it matters), flagged items needing human review (if any), skipped items and reasons (if any). Subject line: 'Daily AI Brief Gather — [Day], [Date]'. Send to connor@acellushealth.com.",
       "connector": "google_workspace",
+      "capability": "send_email",
       "folders": [
         "workspace/run/candidates"
+      ],
+      "context": [
+        "Notion database"
       ]
     }
   },
@@ -63,7 +69,8 @@
       "write": "auto"
     },
     "google_workspace": {
-      "send_email": "auto"
+      "send_email": "auto",
+      "manage_inbox": "auto"
     }
   }
 }
