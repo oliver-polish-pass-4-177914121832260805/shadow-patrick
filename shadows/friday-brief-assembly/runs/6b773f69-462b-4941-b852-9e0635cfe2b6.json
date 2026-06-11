@@ -1,10 +1,10 @@
 {
   "run_id": "6b773f69-462b-4941-b852-9e0635cfe2b6",
   "shadow_id": "friday-brief-assembly",
-  "status": "running",
+  "status": "failed",
   "dry_run": false,
-  "summary": null,
-  "completed_at": null,
+  "summary": "pull-from-notion succeeded (56 Candidate stories across W22/W23 staged to workspace). select-and-tailor failed: shadow_run_step returned model_override_unavailable for pinned model openrouter/deepseek/deepseek-v4-pro — sub-agent runtime could not honor the model pin. 7 per-client pool files staged for next run.",
+  "completed_at": "2026-06-11T20:40:13.105Z",
   "steps": [
     {
       "step_id": "pull-from-notion",
