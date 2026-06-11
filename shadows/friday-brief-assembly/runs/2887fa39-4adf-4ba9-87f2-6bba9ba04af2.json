@@ -1,0 +1,30 @@
+{
+  "run_id": "2887fa39-4adf-4ba9-87f2-6bba9ba04af2",
+  "shadow_id": "friday-brief-assembly",
+  "status": "failed",
+  "dry_run": false,
+  "summary": "Failed at select-and-tailor: pinned model openrouter/deepseek/deepseek-v4-pro returned model_override_unavailable (LLM request timed out). The Notion pull succeeded — 47 Candidate stories were fetched and staged.",
+  "completed_at": "2026-06-11T17:15:25.314Z",
+  "steps": [
+    {
+      "step_id": "pull-from-notion",
+      "type": "connector",
+      "model": null,
+      "status": "succeeded",
+      "sub_agent_session": null,
+      "output_ref": "workspace/run/brief-assembly/notion-pool.json + client-profiles.md",
+      "started_at": "2026-06-11T16:56:00.000Z",
+      "ended_at": null
+    },
+    {
+      "step_id": "select-and-tailor",
+      "type": "oliver_step",
+      "model": "openrouter/deepseek/deepseek-v4-pro",
+      "status": "failed",
+      "sub_agent_session": null,
+      "output_ref": "model_override_unavailable: LLM request timed out",
+      "started_at": "2026-06-11T17:02:00.000Z",
+      "ended_at": null
+    }
+  ]
+}
