@@ -1,0 +1,68 @@
+{
+  "run_id": "59410038-cec1-4abb-8538-8c84744e684b",
+  "shadow_id": "friday-brief-assembly",
+  "status": "running",
+  "dry_run": false,
+  "summary": null,
+  "completed_at": null,
+  "steps": [
+    {
+      "step_id": "pull-from-notion",
+      "type": "connector",
+      "model": null,
+      "status": "succeeded",
+      "sub_agent_session": null,
+      "output_ref": "workspace/run/brief-assembly/candidate-pool.json",
+      "started_at": "2026-06-11T21:28:16.763Z",
+      "ended_at": "2026-06-11T21:32:50.253Z",
+      "notes": "Queried Notion AI Brief Story Pool (data_source: b56f7118-384a-82c2-82da-072d4aace5ed) for Status=Candidate stories in current week. No W24 option exists yet; pulled all 42 W23 Candidate stories with full data. Grouped by client relevance. Client profiles and hard sensitivities staged alongside in candidate-pool.json.",
+      "actions": [
+        "notion_exec: GET /databases for data_source_id",
+        "notion_exec: POST /data_sources query for W23 Candidate stories",
+        "write: staged candidate-pool.json with 42 stories + 7 client profiles"
+      ],
+      "context_created": [
+        "workspace/run/brief-assembly/candidate-pool.json"
+      ]
+    },
+    {
+      "step_id": "save-and-mark",
+      "type": "deliver",
+      "model": null,
+      "status": "pending",
+      "sub_agent_session": null,
+      "output_ref": null,
+      "started_at": null,
+      "ended_at": null,
+      "notes": null,
+      "actions": null,
+      "context_created": null
+    },
+    {
+      "step_id": "select-and-tailor",
+      "type": "oliver_step",
+      "model": null,
+      "status": "pending",
+      "sub_agent_session": null,
+      "output_ref": null,
+      "started_at": null,
+      "ended_at": null,
+      "notes": null,
+      "actions": null,
+      "context_created": null
+    },
+    {
+      "step_id": "render-pdfs",
+      "type": "connector",
+      "model": null,
+      "status": "pending",
+      "sub_agent_session": null,
+      "output_ref": null,
+      "started_at": null,
+      "ended_at": null,
+      "notes": null,
+      "actions": null,
+      "context_created": null
+    }
+  ]
+}
