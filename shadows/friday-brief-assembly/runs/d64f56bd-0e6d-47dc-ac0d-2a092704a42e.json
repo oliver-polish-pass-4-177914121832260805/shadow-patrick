@@ -27,6 +27,19 @@
       ]
     },
     {
+      "step_id": "select-and-tailor",
+      "type": "oliver_step",
+      "model": "openrouter/deepseek/deepseek-v4-pro",
+      "status": "succeeded",
+      "sub_agent_session": "agent:project-999319d3-5993-40ad-84a1-ccce30abc072:subagent:be957565-3718-4afd-803f-217794ac11d4",
+      "output_ref": "workspace/run/brief-assembly/brief-{client}.json",
+      "started_at": "2026-06-11T22:14:45.033Z",
+      "ended_at": "2026-06-11T22:21:59.517Z",
+      "notes": "All 7 clients completed with 5 tailored stories each: Incserv (compliance focus), M&T Bank (banking-regulatory focus), Brown Advisory (investment-strategy focus), Alpine Associates (activist-dislocation focus), KPS Life (embedded-expert leverage), ChristianaCare (patient-safety focus), Luna Diabetes (engineering-velocity + regulatory). All hard sensitivities respected.",
+      "actions": null,
+      "context_created": null
+    },
+    {
       "step_id": "save-and-mark",
       "type": "deliver",
       "model": null,
@@ -42,19 +55,6 @@
     {
       "step_id": "render-pdfs",
       "type": "connector",
-      "model": null,
-      "status": "pending",
-      "sub_agent_session": null,
-      "output_ref": null,
-      "started_at": null,
-      "ended_at": null,
-      "notes": null,
-      "actions": null,
-      "context_created": null
-    },
-    {
-      "step_id": "select-and-tailor",
-      "type": "oliver_step",
       "model": null,
       "status": "pending",
       "sub_agent_session": null,
