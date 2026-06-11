@@ -2,7 +2,7 @@
   "version": "1.1",
   "projectId": "999319d3-5993-40ad-84a1-ccce30abc072",
   "createdAt": "2026-06-11T15:02:56.695Z",
-  "updatedAt": "2026-06-11T22:25:11.349Z",
+  "updatedAt": "2026-06-11T22:26:48.475Z",
   "files": [
     {
       "id": "44581b2b-5e12-49e4-8481-b7d1e2b54f6a",
@@ -338,6 +338,97 @@
       },
       "actor": "plugin",
       "deleted": false
+    },
+    {
+      "id": "3c4c7842-a85c-4f9b-8a5d-28ab66a048c7",
+      "name": "Keel3_AI_Brief_Incserv_W23_2026.pdf",
+      "path": "repository/weekly-briefs/Keel3_AI_Brief_Incserv_W23_2026.pdf",
+      "folder": "weekly-briefs",
+      "mimeType": "application/pdf",
+      "size": 71424,
+      "sha": "",
+      "createdAt": "2026-06-11T22:26:48.475Z",
+      "updatedAt": "2026-06-11T22:26:48.475Z",
+      "tags": [],
+      "actor": "agent"
+    },
+    {
+      "id": "a16c8ff6-f745-45d2-961c-c65f29c11353",
+      "name": "Keel3_AI_Brief_MTBank_W23_2026.pdf",
+      "path": "repository/weekly-briefs/Keel3_AI_Brief_MTBank_W23_2026.pdf",
+      "folder": "weekly-briefs",
+      "mimeType": "application/pdf",
+      "size": 73208,
+      "sha": "",
+      "createdAt": "2026-06-11T22:26:48.475Z",
+      "updatedAt": "2026-06-11T22:26:48.475Z",
+      "tags": [],
+      "actor": "agent"
+    },
+    {
+      "id": "958ec210-db6f-4471-b129-feacd639a7e8",
+      "name": "Keel3_AI_Brief_BrownAdvisory_W23_2026.pdf",
+      "path": "repository/weekly-briefs/Keel3_AI_Brief_BrownAdvisory_W23_2026.pdf",
+      "folder": "weekly-briefs",
+      "mimeType": "application/pdf",
+      "size": 74333,
+      "sha": "",
+      "createdAt": "2026-06-11T22:26:48.475Z",
+      "updatedAt": "2026-06-11T22:26:48.475Z",
+      "tags": [],
+      "actor": "agent"
+    },
+    {
+      "id": "f45d3366-76cb-43f9-8163-511ce5d3ac81",
+      "name": "Keel3_AI_Brief_AlpineAssociates_W23_2026.pdf",
+      "path": "repository/weekly-briefs/Keel3_AI_Brief_AlpineAssociates_W23_2026.pdf",
+      "folder": "weekly-briefs",
+      "mimeType": "application/pdf",
+      "size": 73388,
+      "sha": "",
+      "createdAt": "2026-06-11T22:26:48.475Z",
+      "updatedAt": "2026-06-11T22:26:48.475Z",
+      "tags": [],
+      "actor": "agent"
+    },
+    {
+      "id": "42ec41ae-3cb7-473e-8e95-25d1ee64821b",
+      "name": "Keel3_AI_Brief_KPSLife_W23_2026.pdf",
+      "path": "repository/weekly-briefs/Keel3_AI_Brief_KPSLife_W23_2026.pdf",
+      "folder": "weekly-briefs",
+      "mimeType": "application/pdf",
+      "size": 72931,
+      "sha": "",
+      "createdAt": "2026-06-11T22:26:48.475Z",
+      "updatedAt": "2026-06-11T22:26:48.475Z",
+      "tags": [],
+      "actor": "agent"
+    },
+    {
+      "id": "1b3f645d-d605-4362-91da-84eddc6e99af",
+      "name": "Keel3_AI_Brief_ChristianaCare_W23_2026.pdf",
+      "path": "repository/weekly-briefs/Keel3_AI_Brief_ChristianaCare_W23_2026.pdf",
+      "folder": "weekly-briefs",
+      "mimeType": "application/pdf",
+      "size": 71716,
+      "sha": "",
+      "createdAt": "2026-06-11T22:26:48.475Z",
+      "updatedAt": "2026-06-11T22:26:48.475Z",
+      "tags": [],
+      "actor": "agent"
+    },
+    {
+      "id": "ad17496d-2c60-4b9e-bcc0-97a9557c3800",
+      "name": "Keel3_AI_Brief_LunaDiabetes_W23_2026.pdf",
+      "path": "repository/weekly-briefs/Keel3_AI_Brief_LunaDiabetes_W23_2026.pdf",
+      "folder": "weekly-briefs",
+      "mimeType": "application/pdf",
+      "size": 72477,
+      "sha": "",
+      "createdAt": "2026-06-11T22:26:48.475Z",
+      "updatedAt": "2026-06-11T22:26:48.475Z",
+      "tags": [],
+      "actor": "agent"
     }
   ],
   "externalLinks": [
@@ -351,7 +442,7 @@
       "updatedAt": "2026-06-11T15:11:33.078Z"
     }
   ],
-  "storageUsed": 453166,
+  "storageUsed": 962643,
   "folders": [
     {
       "name": "previous-briefs",
@@ -370,6 +461,12 @@
       "displayName": "Patrick Workflow Setup",
       "type": "files",
       "createdAt": "2026-06-11T15:07:37.667Z"
+    },
+    {
+      "name": "weekly-briefs",
+      "displayName": "weekly-briefs",
+      "type": "files",
+      "createdAt": "2026-06-11T22:26:48.475Z"
     }
   ]
 }
