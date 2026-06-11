@@ -24,3 +24,4 @@
 {"ts":"2026-06-11T17:38:38.400Z","actor":"frontend","action":"file_updated","fileId":"68473ce5-1ca7-4586-be58-66c90eab92c4","path":"shadows/friday-brief-assembly/run.json","shaBefore":"a8557770d96185f924753a0d7d7d870862d2d836"}
 {"ts":"2026-06-11T17:39:01.158Z","actor":"frontend","action":"file_updated","fileId":"68473ce5-1ca7-4586-be58-66c90eab92c4","path":"shadows/friday-brief-assembly/run.json","shaBefore":"c8aa02fe7cb6295df2dab8424ff7fd597c89d1f2"}
 {"ts":"2026-06-11T17:44:23.469Z","actor":"plugin","action":"file_added","fileId":"8a7f14e5-cf2a-471a-8668-c35c0921a712","path":"shadows/friday-brief-assembly/runs/58a5238f-abb9-494b-9b24-28a9e8c110c3.json","shaBefore":"95ff73cd43b0d35b7c28ebe01cbe5af63666038b"}
+{"ts":"2026-06-11T17:46:29.935Z","actor":"frontend","action":"file_updated","fileId":"68473ce5-1ca7-4586-be58-66c90eab92c4","path":"shadows/friday-brief-assembly/run.json","shaBefore":"c048e6f0a4dff5a9870606c46f471d4aedb1fd15"}
