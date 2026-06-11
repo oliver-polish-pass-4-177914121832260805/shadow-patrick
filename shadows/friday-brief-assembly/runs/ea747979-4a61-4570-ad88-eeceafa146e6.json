@@ -1,0 +1,62 @@
+{
+  "run_id": "ea747979-4a61-4570-ad88-eeceafa146e6",
+  "shadow_id": "friday-brief-assembly",
+  "status": "failed",
+  "dry_run": false,
+  "summary": "Failed at select-and-tailor: the pinned model openrouter/deepseek/deepseek-v4-pro timed out. The Notion candidate pool was successfully pulled (33 stories across 7 clients). Same failure as prior run — the model cannot be reached.",
+  "completed_at": "2026-06-11T19:26:34.279Z",
+  "steps": [
+    {
+      "step_id": "pull-from-notion",
+      "type": "connector",
+      "model": null,
+      "status": "succeeded",
+      "sub_agent_session": null,
+      "output_ref": "workspace/run/brief-assembly/candidate-data.json",
+      "started_at": "2026-06-11T19:15:56.430Z",
+      "ended_at": "2026-06-11T19:19:33.998Z",
+      "notes": null,
+      "actions": null,
+      "context_created": null
+    },
+    {
+      "step_id": "select-and-tailor",
+      "type": "oliver_step",
+      "model": "openrouter/deepseek/deepseek-v4-pro",
+      "status": "failed",
+      "sub_agent_session": null,
+      "output_ref": "model_override_unavailable",
+      "started_at": "2026-06-11T19:19:50.460Z",
+      "ended_at": "2026-06-11T19:26:15.834Z",
+      "notes": null,
+      "actions": null,
+      "context_created": null
+    },
+    {
+      "step_id": "save-and-mark",
+      "type": "deliver",
+      "model": null,
+      "status": "pending",
+      "sub_agent_session": null,
+      "output_ref": null,
+      "started_at": null,
+      "ended_at": null,
+      "notes": null,
+      "actions": null,
+      "context_created": null
+    },
+    {
+      "step_id": "render-pdfs",
+      "type": "connector",
+      "model": null,
+      "status": "pending",
+      "sub_agent_session": null,
+      "output_ref": null,
+      "started_at": null,
+      "ended_at": null,
+      "notes": null,
+      "actions": null,
+      "context_created": null
+    }
+  ]
+}

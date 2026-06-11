@@ -2,7 +2,7 @@
   "version": "1.1",
   "projectId": "999319d3-5993-40ad-84a1-ccce30abc072",
   "createdAt": "2026-06-11T15:02:56.695Z",
-  "updatedAt": "2026-06-11T19:06:29.598Z",
+  "updatedAt": "2026-06-11T19:26:34.702Z",
   "files": [
     {
       "id": "44581b2b-5e12-49e4-8481-b7d1e2b54f6a",
@@ -255,6 +255,22 @@
         "description": "{\"kind\":\"shadow\",\"shadow_id\":\"friday-brief-assembly\",\"run_id\":\"00d1e991-1b07-4a3d-a35b-b175c085a01a\"}"
       },
       "actor": "plugin"
+    },
+    {
+      "id": "7866f0c9-88b7-4760-b093-fd56e18903bf",
+      "name": "ea747979-4a61-4570-ad88-eeceafa146e6.json",
+      "path": "shadows/friday-brief-assembly/runs/ea747979-4a61-4570-ad88-eeceafa146e6.json",
+      "folder": "shadows",
+      "mimeType": "application/json",
+      "size": 1865,
+      "sha": "",
+      "createdAt": "2026-06-11T19:26:34.702Z",
+      "updatedAt": "2026-06-11T19:26:34.702Z",
+      "tags": [],
+      "generationContext": {
+        "description": "{\"kind\":\"shadow\",\"shadow_id\":\"friday-brief-assembly\",\"run_id\":\"ea747979-4a61-4570-ad88-eeceafa146e6\"}"
+      },
+      "actor": "plugin"
     }
   ],
   "externalLinks": [
@@ -268,7 +284,7 @@
       "updatedAt": "2026-06-11T15:11:33.078Z"
     }
   ],
-  "storageUsed": 439626,
+  "storageUsed": 441491,
   "folders": [
     {
       "name": "previous-briefs",
