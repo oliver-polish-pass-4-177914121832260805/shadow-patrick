@@ -1,0 +1,66 @@
+{
+  "run_id": "cdcd3f8b-0e57-4840-93e2-5ce02e1dbc99",
+  "shadow_id": "friday-brief-assembly",
+  "status": "running",
+  "dry_run": false,
+  "summary": null,
+  "completed_at": null,
+  "steps": [
+    {
+      "step_id": "pull-from-notion",
+      "type": "connector",
+      "model": null,
+      "status": "succeeded",
+      "sub_agent_session": null,
+      "output_ref": "workspace/run/brief-assembly/notion-pull.json",
+      "started_at": "2026-06-12T15:40:35.573Z",
+      "ended_at": "2026-06-12T15:44:20.078Z",
+      "notes": "Pulled all Candidate rows from AI Brief Story Pool (Notion). Found 36 Candidate rows across W22 and W23. Mapped all 7 client profiles. Grouped by client relevance. W23 stories (June 1-7) are the fresh batch; W22 stories remain as supplementary candidates from prior weeks not yet used.",
+      "actions": [
+        "notion_exec: GET /databases/33bf7118-384a-8256-a86c-01c08c40b991",
+        "notion_exec: POST query data source for Status=Candidate",
+        "wrote notion-pull.json with all candididate story data"
+      ],
+      "context_created": null
+    },
+    {
+      "step_id": "save-and-mark",
+      "type": "deliver",
+      "model": null,
+      "status": "pending",
+      "sub_agent_session": null,
+      "output_ref": null,
+      "started_at": null,
+      "ended_at": null,
+      "notes": null,
+      "actions": null,
+      "context_created": null
+    },
+    {
+      "step_id": "render-pdfs",
+      "type": "connector",
+      "model": null,
+      "status": "pending",
+      "sub_agent_session": null,
+      "output_ref": null,
+      "started_at": null,
+      "ended_at": null,
+      "notes": null,
+      "actions": null,
+      "context_created": null
+    },
+    {
+      "step_id": "select-and-tailor",
+      "type": "oliver_step",
+      "model": null,
+      "status": "pending",
+      "sub_agent_session": null,
+      "output_ref": null,
+      "started_at": null,
+      "ended_at": null,
+      "notes": null,
+      "actions": null,
+      "context_created": null
+    }
+  ]
+}
