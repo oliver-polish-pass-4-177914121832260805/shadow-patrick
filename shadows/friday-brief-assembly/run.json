@@ -1,7 +1,7 @@
 {
   "shadow_id": "friday-brief-assembly",
   "name": "Friday Brief Assembly",
-  "version": 8,
+  "version": 9,
   "trigger": {
     "type": "schedule",
     "cron": "0 9 * * 5",
@@ -51,7 +51,11 @@
       "step_after": "finish",
       "prompt": "Two-part final step:\n\nPART 1 — Upload to Google Drive: Upload all 7 rendered PDF briefs from workspace/run/brief-assembly to Google Drive. Place them in a folder called 'Keel3 Briefs' (create it if it doesn't exist). Use the naming convention: Keel3_AI_Brief_[ClientName]_[Week]_2026.pdf.\n\nPART 2 — Mark rows as Used in Notion: For every story that was selected and used in any client's brief this week, update its row in the AI Brief Story Pool database (connected as notion:33bf7118-384a-8256-a86c-01c08c40b991). Set Status = 'Used' (select option). Also populate the 'If Used, Why?' field (rich_text) with the rationale produced during the select-and-tailor step. Only update rows that were selected — leave unselected Candidate rows as-is.",
       "connector": "google_workspace",
+      "capability": "drive",
       "model": "openrouter/deepseek/deepseek-v4-pro",
+      "bindings": {
+        "folder_id": "1GVOCO4YuW9UxtiAr9lEx2rKB9ieX9VWo"
+      },
       "folders": [
         "workspace/run/brief-assembly"
       ],
