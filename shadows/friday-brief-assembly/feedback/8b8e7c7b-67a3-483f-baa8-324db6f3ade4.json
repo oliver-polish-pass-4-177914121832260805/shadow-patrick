@@ -1,0 +1,8 @@
+{
+  "run_id": "2066a455-f3a6-45ce-b0ba-64ff0ebc0e66",
+  "step_id": "render-pdfs",
+  "date": "2026-06-12",
+  "observed": "The PDFs had the footer that overlaid the text in the bottom row.",
+  "correction": "All of the text should render cleanly and there shouldn't be any overlap.",
+  "applied": true
+}
