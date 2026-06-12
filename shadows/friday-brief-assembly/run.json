@@ -1,7 +1,7 @@
 {
   "shadow_id": "friday-brief-assembly",
   "name": "Friday Brief Assembly",
-  "version": 9,
+  "version": 10,
   "trigger": {
     "type": "schedule",
     "cron": "0 9 * * 5",
@@ -42,6 +42,7 @@
       "step_after": "save-and-mark",
       "prompt": "Render 7 branded one-page PDF briefs from the tailored client content staged in workspace/run/brief-assembly.\n\nFor each client, produce a single-page Letter-portrait PDF using this exact brand-locked format:\n\nBRAND SPECS:\n- Navy #0F1E2E — header/footer bands, story section headings\n- Orange #F25C2A — accent rules, numbered item circles, category-label pill\n- Cream #F0EFE9 — analogy background box\n- Slate #3A4A5C — secondary text, source attribution\n- Inter font — throughout\n- White body background\n\nLAYOUT (top to bottom):\n1. HEADER BAND (Navy background): Keel3 logo/wordmark left, centered title 'Happenings in AI Last Week', 'WEEKLY INTELLIGENCE BRIEF' overline, 'PREPARED FOR [Client Name]' top-right, 'WEEK OF [date range]' below\n2. COLUMN HEADERS: ANNOUNCEMENTS | WHAT IT MEANS | WHAT IT MEANS FOR: [CLIENT]\n3. Exactly 3-5 ITEM ROWS, each three columns:\n   - LEFT (Announcements): numbered circle (Orange), bold headline, italic source + date, 2-3 sentence factual recap. Source hyperlinked.\n   - MIDDLE (What It Means): 2-3 sentence universal interpretation. Cream-background analogy box: 'Like...' one sentence.\n   - RIGHT (What It Means For Client): Orange category-label pill at top (derived from client's business — e.g. 'FILING THROUGHPUT', 'PATIENT SAFETY GOVERNANCE', 'EMBEDDED EXPERT LEVERAGE'), 3-5 sentences tying to the client's operational reality, ending with a concrete recommended action.\n4. FOOTER BAND (Navy background): 'THE WEEK IN ONE LINE' — one sentence synthesis. Source attribution line, Keel3 URL.\n5. Disclaimer: 'This brief is for informational purposes only and does not constitute legal, regulatory, or financial advice.'\n\nCONSTRAINTS:\n- ONE PAGE ONLY — content must fit a single Letter portrait page.\n- No em dashes anywhere. Use colons, commas, or reword.\n- No hype vocabulary (disrupt, synergy, game-changer, seamless).\n- Confident, neutral, professional tone — written for a busy executive.\n- Every specific number must be sourced and verified.\n\nOUTPUT: Save each PDF as Keel3_AI_Brief_[ClientName]_[Week]_2026.pdf to workspace/run/brief-assembly.",
       "connector": "skill",
+      "skill": "weekly-brief-pdf",
       "folders": [
         "workspace/run/brief-assembly"
       ]
