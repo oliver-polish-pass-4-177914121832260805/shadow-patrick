@@ -2,7 +2,7 @@
   "version": "1.1",
   "projectId": "999319d3-5993-40ad-84a1-ccce30abc072",
   "createdAt": "2026-06-11T15:02:56.695Z",
-  "updatedAt": "2026-06-12T16:10:16.119Z",
+  "updatedAt": "2026-06-12T16:15:58.619Z",
   "files": [
     {
       "id": "44581b2b-5e12-49e4-8481-b7d1e2b54f6a",
@@ -489,10 +489,10 @@
       "path": "shadows/friday-brief-assembly/runs/cdcd3f8b-0e57-4840-93e2-5ce02e1dbc99.json",
       "folder": "shadows",
       "mimeType": "application/json",
-      "size": 2769,
+      "size": 3113,
       "sha": "",
       "createdAt": "2026-06-12T15:44:20.887Z",
-      "updatedAt": "2026-06-12T16:10:16.119Z",
+      "updatedAt": "2026-06-12T16:15:58.619Z",
       "tags": [],
       "generationContext": {
         "description": "{\"kind\":\"shadow\",\"shadow_id\":\"friday-brief-assembly\",\"run_id\":\"cdcd3f8b-0e57-4840-93e2-5ce02e1dbc99\"}"
@@ -512,7 +512,7 @@
       "updatedAt": "2026-06-11T15:11:33.078Z"
     }
   ],
-  "storageUsed": 955900,
+  "storageUsed": 956244,
   "folders": [
     {
       "name": "previous-briefs",
