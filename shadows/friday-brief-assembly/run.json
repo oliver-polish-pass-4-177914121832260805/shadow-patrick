@@ -1,7 +1,7 @@
 {
   "shadow_id": "friday-brief-assembly",
   "name": "Friday Brief Assembly",
-  "version": 12,
+  "version": 13,
   "trigger": {
     "type": "schedule",
     "cron": "0 9 * * 5",
@@ -51,6 +51,12 @@
       "skill": "weekly-brief-pdf",
       "folders": [
         "workspace/run/brief-assembly"
+      ],
+      "feedback": [
+        {
+          "date": "2026-06-12",
+          "note": "All of the text should render cleanly and there shouldn't be any overlap."
+        }
       ]
     },
     "save-and-mark": {

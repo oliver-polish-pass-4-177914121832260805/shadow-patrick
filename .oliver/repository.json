@@ -2,7 +2,7 @@
   "version": "1.1",
   "projectId": "999319d3-5993-40ad-84a1-ccce30abc072",
   "createdAt": "2026-06-11T15:02:56.695Z",
-  "updatedAt": "2026-06-12T20:18:49.895Z",
+  "updatedAt": "2026-06-12T20:18:53.503Z",
   "files": [
     {
       "id": "44581b2b-5e12-49e4-8481-b7d1e2b54f6a",
@@ -171,15 +171,15 @@
       "path": "shadows/friday-brief-assembly/run.json",
       "folder": "shadows",
       "mimeType": "application/json",
-      "size": 15812,
+      "size": 15986,
       "sha": "",
       "createdAt": "2026-06-11T16:46:46.455Z",
-      "updatedAt": "2026-06-12T18:55:15.339Z",
+      "updatedAt": "2026-06-12T20:18:53.503Z",
       "tags": [],
-      "actor": "frontend",
+      "actor": "plugin",
       "deleted": false,
       "generationContext": {
-        "description": "{\"kind\":\"shadow\",\"shadow_id\":\"friday-brief-assembly\"}"
+        "description": "{\"kind\":\"shadow\",\"shadow_id\":\"friday-brief-assembly\",\"distilled_feedback_id\":\"0ec3c785-e525-4b6e-8e00-995fe4813c03\"}"
       }
     },
     {
@@ -647,7 +647,7 @@
       "updatedAt": "2026-06-11T15:11:33.078Z"
     }
   ],
-  "storageUsed": 1082616,
+  "storageUsed": 1082790,
   "folders": [
     {
       "name": "previous-briefs",
