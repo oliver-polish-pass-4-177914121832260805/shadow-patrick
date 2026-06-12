@@ -24,6 +24,19 @@
       "context_created": null
     },
     {
+      "step_id": "select-and-tailor",
+      "type": "oliver_step",
+      "model": "openrouter/deepseek/deepseek-v4-pro",
+      "status": "succeeded",
+      "sub_agent_session": "agent:project-999319d3-5993-40ad-84a1-ccce30abc072:subagent:1333166c-0f75-48c0-b793-c43060ac70da",
+      "output_ref": "workspace/run/brief-assembly/{Incserv,MTBank,BrownAdvisory,AlpineAssociates,KPSLife,ChristianaCare,LunaDiabetes}.json",
+      "started_at": "2026-06-12T15:45:05.832Z",
+      "ended_at": "2026-06-12T16:10:15.233Z",
+      "notes": "All 7 client briefs tailored and staged. 4-5 stories per client. Each brief opens with 'why this matters now' lede. All client sensitivities honored: KPS framed as expert leverage, ChristianaCare framed through patient safety, Luna avoids headcount/financial specifics, M&T Bank excludes pure investment banking, Alpine framed through activist dislocation lens. Stories were processed in 3 sequential batches due to provider timeouts but all 7 clients completed successfully.",
+      "actions": null,
+      "context_created": null
+    },
+    {
       "step_id": "save-and-mark",
       "type": "deliver",
       "model": null,
@@ -39,19 +52,6 @@
     {
       "step_id": "render-pdfs",
       "type": "connector",
-      "model": null,
-      "status": "pending",
-      "sub_agent_session": null,
-      "output_ref": null,
-      "started_at": null,
-      "ended_at": null,
-      "notes": null,
-      "actions": null,
-      "context_created": null
-    },
-    {
-      "step_id": "select-and-tailor",
-      "type": "oliver_step",
       "model": null,
       "status": "pending",
       "sub_agent_session": null,
