@@ -53,12 +53,12 @@
       "step_id": "save-and-mark",
       "type": "deliver",
       "model": null,
-      "status": "pending",
+      "status": "succeeded",
       "sub_agent_session": null,
-      "output_ref": null,
-      "started_at": null,
-      "ended_at": null,
-      "notes": null,
+      "output_ref": "Drive: 7 PDFs uploaded; Notion: 13 rows marked Used",
+      "started_at": "2026-06-12T16:16:19.822Z",
+      "ended_at": "2026-06-12T16:20:18.777Z",
+      "notes": "Part 1 - Drive: All 7 Keel3_AI_Brief_*_W23_2026.pdf files uploaded to Google Drive. Part 2 - Notion: 13 unique Candidate stories marked Status=Used with If Used Why rationale populated. Stories that appeared across multiple clients were updated once with consolidated attribution.",
       "actions": null,
       "context_created": null
     }
