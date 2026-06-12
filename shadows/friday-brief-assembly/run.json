@@ -1,7 +1,7 @@
 {
   "shadow_id": "friday-brief-assembly",
   "name": "Friday Brief Assembly",
-  "version": 7,
+  "version": 8,
   "trigger": {
     "type": "schedule",
     "cron": "0 9 * * 5",
@@ -19,6 +19,12 @@
       ],
       "context": [
         "notion:33bf7118-384a-8256-a86c-01c08c40b991"
+      ],
+      "feedback": [
+        {
+          "date": "2026-06-12",
+          "note": "Oliver should look at the \"Date Added\" column from the database and only pull news that was added from the last 7 days."
+        }
       ]
     },
     "select-and-tailor": {
