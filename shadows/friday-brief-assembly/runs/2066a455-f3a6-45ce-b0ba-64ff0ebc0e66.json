@@ -25,6 +25,19 @@
       ]
     },
     {
+      "step_id": "select-and-tailor",
+      "type": "oliver_step",
+      "model": "openrouter/deepseek/deepseek-v4-pro",
+      "status": "succeeded",
+      "sub_agent_session": null,
+      "output_ref": "workspace/run/brief-assembly/{client}_brief.json",
+      "started_at": "2026-06-12T19:03:04.945Z",
+      "ended_at": "2026-06-12T19:17:36.469Z",
+      "notes": "All 7 client briefs tailored successfully via sequential one-client-per-sub-agent spawns. Incserv (5 stories), M&T Bank (5), Brown Advisory (5), Alpine Associates (5), KPS Life (4), ChristianaCare (5), Luna Diabetes (5). Each opens with 'why this matters now' per QARC-PROOF feedback. All hard sensitivities honored: KPS framed as embedded-expert leverage, ChristianaCare through patient safety, Luna as lean team no specific figures, Alpine through activist dislocation lens, M&T no pure capital markets. Total 34 stories selected across 7 briefs from 18 candidates.",
+      "actions": null,
+      "context_created": null
+    },
+    {
       "step_id": "render-pdfs",
       "type": "connector",
       "model": null,
@@ -40,19 +53,6 @@
     {
       "step_id": "save-and-mark",
       "type": "deliver",
-      "model": null,
-      "status": "pending",
-      "sub_agent_session": null,
-      "output_ref": null,
-      "started_at": null,
-      "ended_at": null,
-      "notes": null,
-      "actions": null,
-      "context_created": null
-    },
-    {
-      "step_id": "select-and-tailor",
-      "type": "oliver_step",
       "model": null,
       "status": "pending",
       "sub_agent_session": null,
