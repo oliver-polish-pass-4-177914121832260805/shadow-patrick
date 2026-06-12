@@ -1,0 +1,8 @@
+{
+  "run_id": "9564215e-6777-4e11-9109-75df62bf5345",
+  "step_id": "pull-from-notion",
+  "date": "2026-06-12",
+  "observed": "Oliver pulled from the wrong week.",
+  "correction": "Oliver should look at the \"Date Added\" column from the database and only pull news that was added from the last 7 days.",
+  "applied": true
+}
