@@ -26,21 +26,24 @@
       ]
     },
     {
-      "step_id": "save-and-mark",
-      "type": "deliver",
-      "model": null,
-      "status": "pending",
-      "sub_agent_session": null,
-      "output_ref": null,
-      "started_at": null,
-      "ended_at": null,
-      "notes": null,
-      "actions": null,
+      "step_id": "select-and-tailor",
+      "type": "oliver_step",
+      "model": "openrouter/deepseek/deepseek-v4-pro",
+      "status": "succeeded",
+      "sub_agent_session": "agent:project-999319d3-5993-40ad-84a1-ccce30abc072:subagent:c6d9e87a-f827-49a0-8612-49153d2d258f",
+      "output_ref": "workspace/run/brief-assembly/{Incserv,MTBank,BrownAdvisory,AlpineAssociates,KPSLife,ChristianaCare,LunaDiabetes}.json",
+      "started_at": "2026-06-12T00:47:00.740Z",
+      "ended_at": "2026-06-12T00:56:51.754Z",
+      "notes": "Tailored 4-5 stories per client across all 7 clients. Processed sequentially (one at a time). All client sensitivities honored: KPS Life framed as embedded expert leverage (no headcount replacement), ChristianaCare framed through patient safety (no cost-cutting), Luna Diabetes uses 'lean team' language (no specific financials/headcount), M&T Bank excludes pure capital-markets items, Alpine framed through activist lens. Each brief includes Week in One Line, tailored What It Means, bespoke What It Means For Client with concrete action, and If Used Why rationale.",
+      "actions": [
+        "sessions_spawn select-and-tailor sub-agent with model openrouter/deepseek/deepseek-v4-pro",
+        "sub-agent processed 7 clients sequentially, wrote 7 JSON files to workspace"
+      ],
       "context_created": null
     },
     {
-      "step_id": "select-and-tailor",
-      "type": "oliver_step",
+      "step_id": "save-and-mark",
+      "type": "deliver",
       "model": null,
       "status": "pending",
       "sub_agent_session": null,
