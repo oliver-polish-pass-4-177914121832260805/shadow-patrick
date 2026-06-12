@@ -1,0 +1,30 @@
+{
+  "run_id": "9564215e-6777-4e11-9109-75df62bf5345",
+  "shadow_id": "friday-brief-assembly",
+  "status": "running",
+  "dry_run": false,
+  "summary": null,
+  "completed_at": null,
+  "steps": [
+    {
+      "step_id": "pull-from-notion",
+      "type": "connector",
+      "model": null,
+      "status": "succeeded",
+      "sub_agent_session": null,
+      "output_ref": "workspace/run/brief-assembly/notion-candidates.json",
+      "started_at": "2026-06-12T16:24:09.850Z",
+      "ended_at": "2026-06-12T16:27:14.871Z",
+      "notes": "Queried the AI Brief Story Pool Notion database (data_source: b56f7118-384a-82c2-82da-072d4aace5ed) filtered by Status=Candidate. Pulled 22 Candidate stories tagged W22 and W23 across all 7 clients (Incserv, M&T Bank, Brown Advisory, Alpine Associates, KPS Life, ChristianaCare, Luna Diabetes). No stories tagged W24 (current ISO week). Full row data extracted: Story Title, Announcement Summary, What It Means, Analogy, Source, Source Link, Source Date, Capture Source, Lens, Relevance, Resonance. Results grouped by client and week, staged as notion-candidates.json. Note: the shadow_load_context call for notion:33bf7118-384a-8256-a86c-01c08c40b991 returned an error about missing method — worked around it by querying the database directly via notion_exec.",
+      "actions": [
+        "notion_exec: GET /databases/33bf7118-384a-8256-a86c-01c08c40b991 (database schema discovery)",
+        "notion_exec: POST /data_sources/b56f7118-384a-82c2-82da-072d4aace5ed/query (filter Status=Candidate)",
+        "shadow_load_context: notion:33bf7118-384a-8256-a86c-01c08c40b991 (attempted, errored — fell back to direct notion_exec)",
+        "wrote notion-candidates.json with 22 stories grouped by 7 clients"
+      ],
+      "context_created": [
+        "workspace/run/brief-assembly/notion-candidates.json"
+      ]
+    }
+  ]
+}
