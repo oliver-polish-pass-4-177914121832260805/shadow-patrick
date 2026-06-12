@@ -1,10 +1,10 @@
 {
   "run_id": "cdcd3f8b-0e57-4840-93e2-5ce02e1dbc99",
   "shadow_id": "friday-brief-assembly",
-  "status": "running",
+  "status": "succeeded",
   "dry_run": false,
-  "summary": null,
-  "completed_at": null,
+  "summary": "Friday Brief Assembly complete: 7 weekly AI intelligence briefs rendered and delivered for W23 2026. 13 Candidate stories selected across all 7 clients (Incserv, M&T Bank, Brown Advisory, Alpine Associates, KPS Life, ChristianaCare, Luna Diabetes). All PDFs are single-page, branded, and uploaded to Google Drive. Notion Story Pool updated with Used status and rationale for each selected story.",
+  "completed_at": "2026-06-12T16:20:35.736Z",
   "steps": [
     {
       "step_id": "pull-from-notion",
@@ -15,12 +15,8 @@
       "output_ref": "workspace/run/brief-assembly/notion-pull.json",
       "started_at": "2026-06-12T15:40:35.573Z",
       "ended_at": "2026-06-12T15:44:20.078Z",
-      "notes": "Pulled all Candidate rows from AI Brief Story Pool (Notion). Found 36 Candidate rows across W22 and W23. Mapped all 7 client profiles. Grouped by client relevance. W23 stories (June 1-7) are the fresh batch; W22 stories remain as supplementary candidates from prior weeks not yet used.",
-      "actions": [
-        "notion_exec: GET /databases/33bf7118-384a-8256-a86c-01c08c40b991",
-        "notion_exec: POST query data source for Status=Candidate",
-        "wrote notion-pull.json with all candididate story data"
-      ],
+      "notes": null,
+      "actions": null,
       "context_created": null
     },
     {
@@ -32,7 +28,7 @@
       "output_ref": "workspace/run/brief-assembly/{Incserv,MTBank,BrownAdvisory,AlpineAssociates,KPSLife,ChristianaCare,LunaDiabetes}.json",
       "started_at": "2026-06-12T15:45:05.832Z",
       "ended_at": "2026-06-12T16:10:15.233Z",
-      "notes": "All 7 client briefs tailored and staged. 4-5 stories per client. Each brief opens with 'why this matters now' lede. All client sensitivities honored: KPS framed as expert leverage, ChristianaCare framed through patient safety, Luna avoids headcount/financial specifics, M&T Bank excludes pure investment banking, Alpine framed through activist dislocation lens. Stories were processed in 3 sequential batches due to provider timeouts but all 7 clients completed successfully.",
+      "notes": null,
       "actions": null,
       "context_created": null
     },
@@ -45,7 +41,7 @@
       "output_ref": "workspace/run/brief-assembly/pdfs/Keel3_AI_Brief_*.pdf",
       "started_at": "2026-06-12T16:10:29.216Z",
       "ended_at": "2026-06-12T16:15:57.793Z",
-      "notes": "All 7 branded single-page PDFs rendered successfully. Each brief: 3 items, ONE page, opens with lede, Keel3 brand colors (Navy #0F1E2E, Orange #F25C2A, Cream #F0EFE9, Slate #3A4A5C), Inter font, three-column layout, category-label pills per client.",
+      "notes": null,
       "actions": null,
       "context_created": null
     },
@@ -58,7 +54,7 @@
       "output_ref": "Drive: 7 PDFs uploaded; Notion: 13 rows marked Used",
       "started_at": "2026-06-12T16:16:19.822Z",
       "ended_at": "2026-06-12T16:20:18.777Z",
-      "notes": "Part 1 - Drive: All 7 Keel3_AI_Brief_*_W23_2026.pdf files uploaded to Google Drive. Part 2 - Notion: 13 unique Candidate stories marked Status=Used with If Used Why rationale populated. Stories that appeared across multiple clients were updated once with consolidated attribution.",
+      "notes": null,
       "actions": null,
       "context_created": null
     }
