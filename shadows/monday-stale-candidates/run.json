@@ -1,0 +1,56 @@
+{
+  "shadow_id": "monday-stale-candidates",
+  "name": "Monday Stale Candidates Digest",
+  "version": 1,
+  "trigger": {
+    "type": "schedule",
+    "cron": "0 9 * * 1",
+    "tz": "America/New_York"
+  },
+  "entry": "fetch-stories",
+  "steps": {
+    "fetch-stories": {
+      "type": "connector",
+      "step_after": "build-digest",
+      "prompt": "Read the Story Pool database. Filter for stories where Status is 'Candidate' and the entry was created more than two weeks ago. Stage each stale candidate with its headline, source, date created, topic tags, and summary.",
+      "intended_goal": "Pull all stale Candidate stories from the Story Pool for the digest.",
+      "expected_output": "A list of stale Candidate stories staged under workspace/run/stale-candidates, each with headline, source, date, tags, and summary.",
+      "connector": "notion",
+      "capability": "read",
+      "folders": [
+        "workspace/run/stale-candidates"
+      ],
+      "context": [
+        "notion:33bf7118384a8256a86c01c08c40b991"
+      ]
+    },
+    "build-digest": {
+      "type": "oliver_step",
+      "step_after": "email-digest",
+      "prompt": "Review the staged stale candidates. Build a short digest email: group candidates by topic or theme, note how stale each is, and flag any that seem especially time-sensitive. Keep the digest concise — one or two lines per candidate. Format as plain-text email body ready to send.",
+      "intended_goal": "Compose a concise, scannable stale-candidates digest from the staged data.",
+      "expected_output": "A short email-ready digest listing stale Candidate stories, grouped by theme, with staleness noted.",
+      "model": "openrouter/anthropic/claude-sonnet-4-6",
+      "folders": [
+        "workspace/run/stale-candidates"
+      ]
+    },
+    "email-digest": {
+      "type": "deliver",
+      "step_after": "finish",
+      "prompt": "Email the stale-candidates digest to the owner. Subject: 'Stale Candidates Digest — [Date]'. Body is the digest text staged by build-digest.",
+      "intended_goal": "Deliver the stale-candidates digest to the owner's inbox for review.",
+      "expected_output": "One digest email sent to the owner listing stale Candidate stories.",
+      "connector": "google_workspace",
+      "capability": "send_email",
+      "folders": [
+        "workspace/run/stale-candidates"
+      ]
+    }
+  },
+  "connector_capabilities": {
+    "google_workspace": {
+      "send_email": "approve"
+    }
+  }
+}
