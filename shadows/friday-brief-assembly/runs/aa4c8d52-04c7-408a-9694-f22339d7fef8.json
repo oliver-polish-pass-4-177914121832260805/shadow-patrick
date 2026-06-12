@@ -1,0 +1,42 @@
+{
+  "run_id": "aa4c8d52-04c7-408a-9694-f22339d7fef8",
+  "shadow_id": "friday-brief-assembly",
+  "status": "running",
+  "dry_run": false,
+  "summary": null,
+  "completed_at": null,
+  "steps": [
+    {
+      "step_id": "render-pdfs",
+      "type": "connector",
+      "model": "openrouter/deepseek/deepseek-v4-pro",
+      "status": "succeeded",
+      "sub_agent_session": null,
+      "output_ref": null,
+      "started_at": "2026-06-12T17:41:13.853Z",
+      "ended_at": "2026-06-12T17:47:51.089Z",
+      "notes": "Rendered all 7 one-page Keel3-branded AI brief PDFs using the user-weekly-brief-pdf skill. Source content came from staged client JSON files (wired from a prior run's select-and-tailor step — no fresh connector load ran this dispatch). Three briefs (Incserv, KPSLife, ChristianaCare) needed content trimming to fit the one-page constraint; auto-shrink handled the rest. All 7 verified single-page via page-count check before commit.",
+      "actions": [
+        "built 7 brief.json files from staged client JSON",
+        "rendered Incserv PDF — needed content trim",
+        "rendered MTBank PDF — OK at zoom 0.82",
+        "rendered BrownAdvisory PDF — OK at zoom 0.82",
+        "rendered AlpineAssociates PDF — OK at zoom 0.78",
+        "rendered KPSLife PDF — needed content trim",
+        "rendered ChristianaCare PDF — needed content trim",
+        "rendered LunaDiabetes PDF — OK at zoom 0.82",
+        "verified all 7 PDFs are single-page",
+        "committed 7 PDFs to repository/weekly-briefs/"
+      ],
+      "context_created": [
+        "repository/weekly-briefs/Keel3_AI_Brief_Incserv_W23_2026.pdf",
+        "repository/weekly-briefs/Keel3_AI_Brief_MTBank_W23_2026.pdf",
+        "repository/weekly-briefs/Keel3_AI_Brief_BrownAdvisory_W23_2026.pdf",
+        "repository/weekly-briefs/Keel3_AI_Brief_AlpineAssociates_W23_2026.pdf",
+        "repository/weekly-briefs/Keel3_AI_Brief_KPSLife_W23_2026.pdf",
+        "repository/weekly-briefs/Keel3_AI_Brief_ChristianaCare_W23_2026.pdf",
+        "repository/weekly-briefs/Keel3_AI_Brief_LunaDiabetes_W23_2026.pdf"
+      ]
+    }
+  ]
+}
