@@ -1,0 +1,31 @@
+{
+  "run_id": "fd712805-05a1-4f25-bd49-d1d5e5b74fc2",
+  "shadow_id": "friday-brief-assembly",
+  "status": "running",
+  "dry_run": false,
+  "summary": null,
+  "completed_at": null,
+  "steps": [
+    {
+      "step_id": "pull-from-notion",
+      "type": "connector",
+      "model": null,
+      "status": "succeeded",
+      "sub_agent_session": null,
+      "output_ref": "workspace/run/brief-assembly/notion-candidates.json",
+      "started_at": "2026-06-12T16:55:08.786Z",
+      "ended_at": "2026-06-12T16:57:49.730Z",
+      "notes": "Queried Notion AI Brief Story Pool (data_source: b56f7118-384a-82c2-82da-072d4aace5ed) for Status=Candidate rows. Applied Date Added >= 2026-06-05 filter (last 7 days) per user feedback from previous run. 23 total Candidate rows in pool; only 2 passed the date filter: (1) OpenAI Dreaming memory system (Date Added: June 5, W23, relevant to M&T Bank and Brown Advisory), (2) Meta Business Agent for WhatsApp/Messenger (Date Added: June 7, W23, relevant to all 7 clients). Alpine Associates has zero candidates after filtering. The remaining 21 rows had Date Added from May 25 to June 4 and were excluded. This is a thin candidate pool for a Friday assembly — the Date Added window may need calibration since most W23 stories were added earlier in the week. Staged to workspace/run/brief-assembly/notion-candidates.json grouped by client.",
+      "actions": [
+        "notion_exec: GET /databases/33bf7118-384a-8256-a86c-01c08c40b991 (schema)",
+        "notion_exec: POST /data_sources/b56f7118-384a-82c2-82da-072d4aace5ed/query (Status=Candidate, 23 rows)",
+        "notion_exec: POST /data_sources/367f7118-384a-8263-85ec-075c6e932383/query (empty)",
+        "Applied Date Added >= 2026-06-05 filter per feedback correction",
+        "wrote notion-candidates.json to workspace"
+      ],
+      "context_created": [
+        "workspace/run/brief-assembly/notion-candidates.json"
+      ]
+    }
+  ]
+}

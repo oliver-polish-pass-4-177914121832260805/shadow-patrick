@@ -2,7 +2,7 @@
   "version": "1.1",
   "projectId": "999319d3-5993-40ad-84a1-ccce30abc072",
   "createdAt": "2026-06-11T15:02:56.695Z",
-  "updatedAt": "2026-06-12T16:53:28.545Z",
+  "updatedAt": "2026-06-12T16:57:50.587Z",
   "files": [
     {
       "id": "44581b2b-5e12-49e4-8481-b7d1e2b54f6a",
@@ -535,6 +535,22 @@
         "description": "{\"kind\":\"shadow\",\"shadow_id\":\"friday-brief-assembly\",\"run_id\":\"9564215e-6777-4e11-9109-75df62bf5345\",\"step_id\":\"pull-from-notion\"}"
       },
       "actor": "frontend"
+    },
+    {
+      "id": "e1c71939-00a1-433b-b304-0280be80cec6",
+      "name": "fd712805-05a1-4f25-bd49-d1d5e5b74fc2.json",
+      "path": "shadows/friday-brief-assembly/runs/fd712805-05a1-4f25-bd49-d1d5e5b74fc2.json",
+      "folder": "shadows",
+      "mimeType": "application/json",
+      "size": 1929,
+      "sha": "",
+      "createdAt": "2026-06-12T16:57:50.587Z",
+      "updatedAt": "2026-06-12T16:57:50.587Z",
+      "tags": [],
+      "generationContext": {
+        "description": "{\"kind\":\"shadow\",\"shadow_id\":\"friday-brief-assembly\",\"run_id\":\"fd712805-05a1-4f25-bd49-d1d5e5b74fc2\"}"
+      },
+      "actor": "plugin"
     }
   ],
   "externalLinks": [
@@ -548,7 +564,7 @@
       "updatedAt": "2026-06-11T15:11:33.078Z"
     }
   ],
-  "storageUsed": 916760,
+  "storageUsed": 918689,
   "folders": [
     {
       "name": "previous-briefs",
