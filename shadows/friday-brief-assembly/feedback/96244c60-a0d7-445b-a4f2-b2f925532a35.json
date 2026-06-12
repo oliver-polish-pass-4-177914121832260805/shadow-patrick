@@ -1,0 +1,8 @@
+{
+  "run_id": "aa4c8d52-04c7-408a-9694-f22339d7fef8",
+  "step_id": "pull-from-notion",
+  "date": "2026-06-12",
+  "observed": "The run wasted several failed Notion calls trying database id 33bf7118-384a-8256-a86c-01c08c40b991 remembered from old notes before finding the right one.",
+  "correction": "The AI Brief Story Pool was REPLACED on 2026-06-12. The only valid binding is data source fd2f7118-384a-8316-b6ad-070f5e9ee029 (query via POST /v1/data_sources//query). Never use database id 33bf7118-384a-8256-a86c-01c08c40b991 or any Notion id from memory or prior-run files — trust the manifest binding only.",
+  "applied": false
+}
