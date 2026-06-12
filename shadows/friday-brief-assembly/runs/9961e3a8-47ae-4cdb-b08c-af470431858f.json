@@ -1,0 +1,72 @@
+{
+  "run_id": "9961e3a8-47ae-4cdb-b08c-af470431858f",
+  "shadow_id": "friday-brief-assembly",
+  "status": "running",
+  "dry_run": false,
+  "summary": null,
+  "completed_at": null,
+  "steps": [
+    {
+      "step_id": "pull-from-notion",
+      "type": "connector",
+      "model": null,
+      "status": "succeeded",
+      "sub_agent_session": null,
+      "output_ref": "workspace/run/brief-assembly/notion-pull.json",
+      "started_at": "2026-06-12T18:10:22.825Z",
+      "ended_at": "2026-06-12T18:14:38.146Z",
+      "notes": "Pulled 27 candidate headlines from the AI Daily Brief database (b14bdb98), all created June 10 2026 — within the 7-day recency window. The original Story Pool (33bf7118) is trashed, so the current active database is AI Daily Brief. Headlines only — no rich metadata fields (Status, What It Means, Lens, Relevance) available on the current schema. Staged full client profiles alongside the candidate pool.",
+      "actions": [
+        "notion_exec: POST /search for AI Brief Story Pool",
+        "notion_exec: GET /databases/33bf7118 (trashed)",
+        "notion_exec: POST /search for AI Daily Brief database",
+        "notion_exec: POST /data_sources/a433cb61/query (100 results)",
+        "notion_exec: GET /databases/b14bdb98 for schema",
+        "notion_exec: GET /pages for sample rows to check properties",
+        "wrote notion-pull.json with 27 candidates + 7 client profiles"
+      ],
+      "context_created": [
+        "workspace/run/brief-assembly/notion-pull.json"
+      ]
+    },
+    {
+      "step_id": "save-and-mark",
+      "type": "deliver",
+      "model": null,
+      "status": "pending",
+      "sub_agent_session": null,
+      "output_ref": null,
+      "started_at": null,
+      "ended_at": null,
+      "notes": null,
+      "actions": null,
+      "context_created": null
+    },
+    {
+      "step_id": "render-pdfs",
+      "type": "connector",
+      "model": null,
+      "status": "pending",
+      "sub_agent_session": null,
+      "output_ref": null,
+      "started_at": null,
+      "ended_at": null,
+      "notes": null,
+      "actions": null,
+      "context_created": null
+    },
+    {
+      "step_id": "select-and-tailor",
+      "type": "oliver_step",
+      "model": null,
+      "status": "pending",
+      "sub_agent_session": null,
+      "output_ref": null,
+      "started_at": null,
+      "ended_at": null,
+      "notes": null,
+      "actions": null,
+      "context_created": null
+    }
+  ]
+}
