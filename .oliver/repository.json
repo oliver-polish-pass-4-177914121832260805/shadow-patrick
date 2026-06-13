@@ -2,7 +2,7 @@
   "version": "1.1",
   "projectId": "999319d3-5993-40ad-84a1-ccce30abc072",
   "createdAt": "2026-06-11T15:02:56.695Z",
-  "updatedAt": "2026-06-13T00:58:42.595Z",
+  "updatedAt": "2026-06-13T01:18:41.731Z",
   "files": [
     {
       "id": "44581b2b-5e12-49e4-8481-b7d1e2b54f6a",
@@ -667,12 +667,13 @@
       "path": "code/src/App.jsx",
       "folder": "code",
       "mimeType": "application/octet-stream",
-      "size": 3177,
+      "size": 3515,
       "sha": "",
       "createdAt": "2026-06-13T00:58:14.465Z",
-      "updatedAt": "2026-06-13T00:58:14.465Z",
+      "updatedAt": "2026-06-13T01:18:41.731Z",
       "tags": [],
-      "actor": "plugin"
+      "actor": "plugin",
+      "deleted": false
     },
     {
       "id": "6e317135-f821-4686-9896-cd553a0edb4f",
@@ -725,7 +726,7 @@
       "updatedAt": "2026-06-11T15:11:33.078Z"
     }
   ],
-  "storageUsed": 1088597,
+  "storageUsed": 1088935,
   "folders": [
     {
       "name": "previous-briefs",
