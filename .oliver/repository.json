@@ -2,7 +2,7 @@
   "version": "1.1",
   "projectId": "999319d3-5993-40ad-84a1-ccce30abc072",
   "createdAt": "2026-06-11T15:02:56.695Z",
-  "updatedAt": "2026-06-13T01:18:41.731Z",
+  "updatedAt": "2026-06-13T01:19:01.898Z",
   "files": [
     {
       "id": "44581b2b-5e12-49e4-8481-b7d1e2b54f6a",
@@ -681,12 +681,13 @@
       "path": "code/src/App.css",
       "folder": "code",
       "mimeType": "text/css",
-      "size": 1857,
+      "size": 2187,
       "sha": "",
       "createdAt": "2026-06-13T00:58:14.465Z",
-      "updatedAt": "2026-06-13T00:58:14.465Z",
+      "updatedAt": "2026-06-13T01:19:01.898Z",
       "tags": [],
-      "actor": "plugin"
+      "actor": "plugin",
+      "deleted": false
     },
     {
       "id": "2d0ab530-ec43-4da3-be26-3299ee884308",
@@ -726,7 +727,7 @@
       "updatedAt": "2026-06-11T15:11:33.078Z"
     }
   ],
-  "storageUsed": 1088935,
+  "storageUsed": 1089265,
   "folders": [
     {
       "name": "previous-briefs",
