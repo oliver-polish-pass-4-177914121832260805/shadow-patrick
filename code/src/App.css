@@ -1,0 +1,117 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: #faf6f2;
+  color: #3b2a1a;
+  min-height: 100dvh;
+}
+
+.app {
+  max-width: 420px;
+  margin: 0 auto;
+  padding: 24px 20px 48px;
+}
+
+.header h1 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+}
+
+/* Today's count card */
+.today-card {
+  background: #fff;
+  border-radius: 20px;
+  padding: 28px 44px;
+  text-align: center;
+  box-shadow: 0 2px 12px rgba(107, 78, 55, 0.08);
+  width: 100%;
+}
+
+.today-label {
+  font-size: 0.9rem;
+  color: #8c6e5a;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 6px;
+}
+
+.today-count {
+  font-size: 4.5rem;
+  font-weight: 800;
+  color: #6F4E37;
+  line-height: 1.1;
+}
+
+.today-sub {
+  font-size: 0.85rem;
+  color: #9e8a7a;
+  margin-top: 4px;
+}
+
+/* Add Cup button */
+.add-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 18px;
+  background: #6F4E37;
+  color: #fff;
+  border: none;
+  border-radius: 16px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s, transform 0.1s;
+  box-shadow: 0 4px 14px rgba(111, 78, 55, 0.3);
+}
+
+.add-btn:hover {
+  background: #5a3e2c;
+}
+
+.add-btn:active {
+  transform: scale(0.97);
+}
+
+.add-icon {
+  font-size: 1.8rem;
+  font-weight: 300;
+  line-height: 1;
+}
+
+/* Chart section */
+.chart-section {
+  width: 100%;
+  background: #fff;
+  border-radius: 20px;
+  padding: 22px 16px 16px;
+  box-shadow: 0 2px 12px rgba(107, 78, 55, 0.08);
+}
+
+.chart-section h2 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #5a3e2c;
+  margin-bottom: 12px;
+  padding-left: 4px;
+}
+
+.chart-wrap {
+  width: 100%;
+}
