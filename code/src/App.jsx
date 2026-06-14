@@ -1,122 +1,136 @@
-import { useState, useEffect } from 'react';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import { useState, useEffect, useRef } from 'react';
 import './App.css';
 
-const DRINKS = [
-  { key: 'coffee', label: '☕ Coffee', color: '#6F4E37', bg: '#faf6f2' },
-  { key: 'tea',    label: '🍵 Tea',   color: '#4A7C59', bg: '#f4f8f2' },
-];
+const DAYS = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
 
-function getToday() {
-  return new Date().toISOString().slice(0, 10);
-}
-
-function getLast7Days() {
-  const days = [];
-  for (let i = 6; i >= 0; i--) {
-    const d = new Date();
-    d.setDate(d.getDate() - i);
-    days.push(d.toISOString().slice(0, 10));
-  }
-  return days;
-}
-
-function formatDayLabel(dateStr) {
-  const d = new Date(dateStr + 'T12:00:00');
-  return d.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
-}
-
-function loadData(drinkKey) {
+function loadHabits() {
   try {
-    return JSON.parse(localStorage.getItem(`drink-${drinkKey}`)) || {};
+    return JSON.parse(localStorage.getItem('habits')) || [];
   } catch {
-    return {};
+    return [];
   }
 }
 
-function saveData(drinkKey, data) {
-  localStorage.setItem(`drink-${drinkKey}`, JSON.stringify(data));
+function saveHabits(habits) {
+  localStorage.setItem('habits', JSON.stringify(habits));
 }
 
-function DrinkSection({ drink }) {
-  const [data, setData] = useState(() => loadData(drink.key));
-  const today = getToday();
-
-  useEffect(() => {
-    saveData(drink.key, data);
-  }, [data, drink.key]);
-
-  const addCup = () => {
-    setData(prev => ({ ...prev, [today]: (prev[today] || 0) + 1 }));
-  };
-
-  const todayCups = data[today] || 0;
-  const days = getLast7Days();
-
-  const shortLabels = days.map(date => {
-    const d = new Date(date + 'T12:00:00');
-    return d.toLocaleDateString('en-US', { weekday: 'short' });
-  });
-
-  const chartData = days.map((date, i) => ({
-    date,
-    label: formatDayLabel(date),
-    short: shortLabels[i],
-    cups: data[date] || 0,
-  }));
-
-  const sectionStyle = { '--drink-color': drink.color, '--drink-bg': drink.bg };
-
-  return (
-    <section className="drink-section" style={sectionStyle}>
-      <div className="today-card">
-        <p className="today-label">{drink.label} · Today</p>
-        <p className="today-count">{todayCups}</p>
-        <p className="today-sub">cup{todayCups !== 1 ? 's' : ''} so far</p>
-      </div>
-
-      <button className="add-btn" onClick={addCup}>
-        <span className="add-icon">+</span>
-        <span className="add-label">Add Cup</span>
-      </button>
-
-      <div className="chart-section">
-        <h2>Last 7 Days</h2>
-        <div className="chart-wrap">
-          <ResponsiveContainer width="100%" height={220}>
-            <BarChart data={chartData}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#e8e8e8" />
-              <XAxis dataKey="short" tick={{ fontSize: 13, fill: '#555' }} />
-              <YAxis allowDecimals={false} tick={{ fontSize: 13, fill: '#555' }} />
-              <Tooltip
-                formatter={(value) => [`${value} cup${value !== 1 ? 's' : ''}`, '']}
-                labelFormatter={(_, payload) => payload?.[0]?.payload?.label}
-              />
-              <Bar
-                dataKey="cups"
-                fill={drink.color}
-                radius={[6, 6, 0, 0]}
-                maxBarSize={50}
-              />
-            </BarChart>
-          </ResponsiveContainer>
-        </div>
-      </div>
-    </section>
-  );
+function getWeekKey() {
+  const d = new Date();
+  const day = d.getDay();
+  // Monday = start of week
+  const monday = new Date(d);
+  monday.setDate(d.getDate() - ((day + 6) % 7));
+  return monday.toISOString().slice(0, 10);
 }
 
 export default function App() {
+  const [habits, setHabits] = useState(loadHabits);
+  const [input, setInput] = useState('');
+  const inputRef = useRef(null);
+
+  useEffect(() => {
+    saveHabits(habits);
+  }, [habits]);
+
+  // Reset checkboxes when the week changes
+  const weekKey = getWeekKey();
+  const [lastWeekKey, setLastWeekKey] = useState(() => weekKey);
+
+  useEffect(() => {
+    if (weekKey !== lastWeekKey) {
+      setLastWeekKey(weekKey);
+      setHabits(prev => prev.map(h => ({ ...h, checked: Array(7).fill(false) })));
+    }
+  }, [weekKey, lastWeekKey]);
+
+  const addHabit = () => {
+    const name = input.trim();
+    if (!name) return;
+    if (habits.some(h => h.name.toLowerCase() === name.toLowerCase())) {
+      setInput('');
+      return;
+    }
+    setHabits(prev => [...prev, { id: Date.now(), name, checked: Array(7).fill(false) }]);
+    setInput('');
+    inputRef.current?.focus();
+  };
+
+  const toggleDay = (habitId, dayIdx) => {
+    setHabits(prev =>
+      prev.map(h => {
+        if (h.id !== habitId) return h;
+        const next = [...h.checked];
+        next[dayIdx] = !next[dayIdx];
+        return { ...h, checked: next };
+      })
+    );
+  };
+
+  const removeHabit = (habitId) => {
+    setHabits(prev => prev.filter(h => h.id !== habitId));
+  };
+
   return (
     <div className="app">
       <header className="header">
-        <h1>☕🍵 Daily Tracker</h1>
+        <h1>Habit Tracker</h1>
       </header>
-      <main className="main">
-        {DRINKS.map(drink => (
-          <DrinkSection key={drink.key} drink={drink} />
+
+      <form
+        className="add-form"
+        onSubmit={e => {
+          e.preventDefault();
+          addHabit();
+        }}
+      >
+        <input
+          ref={inputRef}
+          className="add-input"
+          type="text"
+          placeholder="Add a habit…"
+          value={input}
+          onChange={e => setInput(e.target.value)}
+          maxLength={60}
+        />
+        <button className="add-btn" type="submit" disabled={!input.trim()}>
+          +
+        </button>
+      </form>
+
+      {habits.length === 0 && (
+        <p className="empty-hint">Start by adding a habit above.</p>
+      )}
+
+      <div className="habit-list">
+        {habits.map(habit => (
+          <div key={habit.id} className="habit-row">
+            <div className="habit-name-wrap">
+              <span className="habit-name">{habit.name}</span>
+              <button
+                className="habit-remove"
+                onClick={() => removeHabit(habit.id)}
+                title="Remove"
+              >
+                ×
+              </button>
+            </div>
+            <div className="habit-checks">
+              {DAYS.map((day, idx) => (
+                <label key={idx} className="check-label">
+                  <input
+                    type="checkbox"
+                    checked={habit.checked[idx]}
+                    onChange={() => toggleDay(habit.id, idx)}
+                  />
+                  <span className="check-box" />
+                  <span className="check-day">{day}</span>
+                </label>
+              ))}
+            </div>
+          </div>
         ))}
-      </main>
+      </div>
     </div>
   );
 }
