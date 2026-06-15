@@ -2,7 +2,7 @@
   "version": "1.1",
   "projectId": "999319d3-5993-40ad-84a1-ccce30abc072",
   "createdAt": "2026-06-11T15:02:56.695Z",
-  "updatedAt": "2026-06-15T20:29:42.655Z",
+  "updatedAt": "2026-06-15T20:44:01.065Z",
   "files": [
     {
       "id": "44581b2b-5e12-49e4-8481-b7d1e2b54f6a",
@@ -722,16 +722,16 @@
       "path": "repository/weekly-briefs/Keel3_AI_Brief_MTBank_W25_2026.pdf",
       "folder": "weekly-briefs",
       "mimeType": "application/pdf",
-      "size": 91024,
+      "size": 78308,
       "sha": "",
       "createdAt": "2026-06-15T19:57:37.033Z",
-      "updatedAt": "2026-06-15T20:29:42.655Z",
+      "updatedAt": "2026-06-15T20:44:01.065Z",
       "tags": [
         "m-t-bank",
         "weekly-brief"
       ],
       "generationContext": {
-        "description": "M&T Bank Week 25 2026 AI brief v2 — 5 stories from last 7 days (Source Date June 8-15), filtered from Notion Candidate pool via project Notion link"
+        "description": "M&T Bank Week 25 2026 AI brief — footer overlap fix applied, renders at full zoom 1.0"
       },
       "actor": "agent",
       "deleted": false
@@ -748,7 +748,7 @@
       "updatedAt": "2026-06-15T20:01:03.083Z"
     }
   ],
-  "storageUsed": 1181361,
+  "storageUsed": 1168645,
   "folders": [
     {
       "name": "previous-briefs",
