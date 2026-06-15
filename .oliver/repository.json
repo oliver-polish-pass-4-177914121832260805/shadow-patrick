@@ -2,7 +2,7 @@
   "version": "1.1",
   "projectId": "999319d3-5993-40ad-84a1-ccce30abc072",
   "createdAt": "2026-06-11T15:02:56.695Z",
-  "updatedAt": "2026-06-15T17:00:08.103Z",
+  "updatedAt": "2026-06-15T19:57:37.033Z",
   "files": [
     {
       "id": "44581b2b-5e12-49e4-8481-b7d1e2b54f6a",
@@ -715,6 +715,25 @@
       "updatedAt": "2026-06-13T00:58:42.595Z",
       "tags": [],
       "actor": "plugin"
+    },
+    {
+      "id": "af7154d3-b2ff-4dab-a4cd-325b93728aaa",
+      "name": "Keel3_AI_Brief_MTBank_W25_2026.pdf",
+      "path": "repository/weekly-briefs/Keel3_AI_Brief_MTBank_W25_2026.pdf",
+      "folder": "weekly-briefs",
+      "mimeType": "application/pdf",
+      "size": 93857,
+      "sha": "",
+      "createdAt": "2026-06-15T19:57:37.033Z",
+      "updatedAt": "2026-06-15T19:57:37.033Z",
+      "tags": [
+        "m-t-bank",
+        "weekly-brief"
+      ],
+      "generationContext": {
+        "description": "M&T Bank Week 25 2026 brief — 5 stories: Illinois AI audit law, FTC AI-washing fines, CNN v. Perplexity copyright, Anthropic Mythos cyber release, voice-driven workplaces. Regional bank lens: compliance, vendor risk, cyber."
+      },
+      "actor": "agent"
     }
   ],
   "externalLinks": [
@@ -728,7 +747,7 @@
       "updatedAt": "2026-06-15T17:00:08.103Z"
     }
   ],
-  "storageUsed": 1090337,
+  "storageUsed": 1184194,
   "folders": [
     {
       "name": "previous-briefs",
