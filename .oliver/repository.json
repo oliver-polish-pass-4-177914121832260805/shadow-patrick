@@ -2,7 +2,7 @@
   "version": "1.1",
   "projectId": "999319d3-5993-40ad-84a1-ccce30abc072",
   "createdAt": "2026-06-11T15:02:56.695Z",
-  "updatedAt": "2026-06-15T19:57:37.033Z",
+  "updatedAt": "2026-06-15T20:01:03.083Z",
   "files": [
     {
       "id": "44581b2b-5e12-49e4-8481-b7d1e2b54f6a",
@@ -739,12 +739,12 @@
   "externalLinks": [
     {
       "id": "b9a6f91b-4f8d-45d7-b9fc-54ff9fd7fe09",
-      "url": "https://www.notion.so/f61f7118384a82afac7e01275b9b8d7a?v=adcf7118384a82f98be9083e5dacb1d3&source=copy_link",
-      "title": "notion.so",
+      "url": "https://www.notion.so/c03f7118384a83d492cf81117eb54502?v=fd1f7118384a834191a38802c4ef0c95&source=copy_link",
+      "title": "AI Brief Story pool current",
       "folder": "story-notion-database",
       "domain": "notion",
       "createdAt": "2026-06-15T17:00:08.103Z",
-      "updatedAt": "2026-06-15T17:00:08.103Z"
+      "updatedAt": "2026-06-15T20:01:03.083Z"
     }
   ],
   "storageUsed": 1184194,
