@@ -2,7 +2,7 @@
   "version": "1.1",
   "projectId": "999319d3-5993-40ad-84a1-ccce30abc072",
   "createdAt": "2026-06-11T15:02:56.695Z",
-  "updatedAt": "2026-06-15T21:42:56.015Z",
+  "updatedAt": "2026-06-15T21:51:32.438Z",
   "files": [
     {
       "id": "44581b2b-5e12-49e4-8481-b7d1e2b54f6a",
@@ -752,6 +752,22 @@
       ],
       "actor": "agent",
       "deleted": false
+    },
+    {
+      "id": "cd950119-3e0d-4132-a53e-46e33c493a69",
+      "name": "Keel3_AI_Brief_Incserv_W24_2026.pdf",
+      "path": "repository/weekly-briefs/Keel3_AI_Brief_Incserv_W24_2026.pdf",
+      "folder": "weekly-briefs",
+      "mimeType": "application/pdf",
+      "size": 85479,
+      "sha": "",
+      "createdAt": "2026-06-15T21:51:32.438Z",
+      "updatedAt": "2026-06-15T21:51:32.438Z",
+      "tags": [
+        "incserv",
+        "weekly-brief"
+      ],
+      "actor": "agent"
     }
   ],
   "externalLinks": [
@@ -765,7 +781,7 @@
       "updatedAt": "2026-06-15T20:01:03.083Z"
     }
   ],
-  "storageUsed": 1263011,
+  "storageUsed": 1348490,
   "folders": [
     {
       "name": "previous-briefs",
