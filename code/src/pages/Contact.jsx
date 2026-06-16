@@ -6,15 +6,20 @@ const Contact = () => {
     name: '',
     email: '',
     subject: '',
-    message: '',
+    message: ''
   });
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    // Form submission logic would go here
   };
 
   return (
@@ -22,109 +27,107 @@ const Contact = () => {
       {/* Hero Section */}
       <section className="contact-hero">
         <div className="contact-hero-content">
-          <h1>Let's Connect</h1>
-          <p>
-            I'm always open to new opportunities, collaborations, and
-            conversations. Whether you have a project in mind or just want to
-            say hello — I'd love to hear from you.
+          <h1 className="contact-hero-title">Let's Work Together</h1>
+          <p className="contact-hero-subtitle">
+            Have a project in mind? We'd love to hear from you. Send us a message and we'll respond as soon as possible.
           </p>
         </div>
       </section>
 
-      {/* Two-Column Section */}
+      {/* Contact Body */}
       <section className="contact-body">
-        {/* Left: Contact Form */}
-        <div className="contact-form-wrapper">
-          <h2>Send a Message</h2>
-          <form className="contact-form" onSubmit={handleSubmit}>
-            <div className="form-group">
-              <label htmlFor="name">Name</label>
-              <input
-                type="text"
-                id="name"
-                name="name"
-                value={formData.name}
-                onChange={handleChange}
-                placeholder="Your name"
-                required
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="email">Email</label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                placeholder="you@example.com"
-                required
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="subject">Subject</label>
-              <input
-                type="text"
-                id="subject"
-                name="subject"
-                value={formData.subject}
-                onChange={handleChange}
-                placeholder="What's this about?"
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="message">Message</label>
-              <textarea
-                id="message"
-                name="message"
-                value={formData.message}
-                onChange={handleChange}
-                placeholder="Your message..."
-                rows={6}
-                required
-              />
-            </div>
-            <button type="submit" className="contact-submit-btn">
-              Send Message
-            </button>
-          </form>
-        </div>
+        <div className="contact-body-container">
+          {/* Contact Form */}
+          <div className="contact-form-wrapper">
+            <form className="contact-form" onSubmit={handleSubmit}>
+              <div className="contact-form-group">
+                <label htmlFor="name" className="contact-form-label">Name</label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  className="contact-form-input"
+                  placeholder="Your name"
+                  required
+                />
+              </div>
 
-        {/* Right: Contact Info */}
-        <div className="contact-info-wrapper">
-          <h2>Contact Info</h2>
+              <div className="contact-form-group">
+                <label htmlFor="email" className="contact-form-label">Email</label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  className="contact-form-input"
+                  placeholder="your.email@example.com"
+                  required
+                />
+              </div>
 
-          <div className="contact-info-cards">
+              <div className="contact-form-group">
+                <label htmlFor="subject" className="contact-form-label">Subject</label>
+                <input
+                  type="text"
+                  id="subject"
+                  name="subject"
+                  value={formData.subject}
+                  onChange={handleChange}
+                  className="contact-form-input"
+                  placeholder="What's this about?"
+                  required
+                />
+              </div>
+
+              <div className="contact-form-group">
+                <label htmlFor="message" className="contact-form-label">Message</label>
+                <textarea
+                  id="message"
+                  name="message"
+                  value={formData.message}
+                  onChange={handleChange}
+                  className="contact-form-textarea"
+                  placeholder="Tell us about your project..."
+                  rows="6"
+                  required
+                />
+              </div>
+
+              <button type="submit" className="contact-form-submit">
+                Send Message
+              </button>
+            </form>
+          </div>
+
+          {/* Contact Info */}
+          <div className="contact-info">
             <div className="contact-info-card">
-              <span className="info-dot info-dot--email" />
-              <div>
-                <h3>Email</h3>
-                <a href="mailto:hello@alexmorgan.dev">hello@alexmorgan.dev</a>
+              <div className="contact-info-icon contact-info-icon--email"></div>
+              <div className="contact-info-content">
+                <h3 className="contact-info-title">Email</h3>
+                <p className="contact-info-detail">hello@horizonstudio.com</p>
               </div>
             </div>
 
             <div className="contact-info-card">
-              <span className="info-dot info-dot--location" />
-              <div>
-                <h3>Location</h3>
-                <p>New York, NY</p>
+              <div className="contact-info-icon contact-info-icon--location"></div>
+              <div className="contact-info-content">
+                <h3 className="contact-info-title">Location</h3>
+                <p className="contact-info-detail">San Francisco, CA</p>
               </div>
             </div>
 
             <div className="contact-info-card">
-              <span className="info-dot info-dot--social" />
-              <div>
-                <h3>Social</h3>
-                <div className="social-links">
-                  <a href="#" target="_blank" rel="noopener noreferrer">
-                    GitHub
-                  </a>
-                  <a href="#" target="_blank" rel="noopener noreferrer">
-                    LinkedIn
-                  </a>
-                  <a href="#" target="_blank" rel="noopener noreferrer">
-                    Twitter
-                  </a>
+              <div className="contact-info-icon contact-info-icon--social"></div>
+              <div className="contact-info-content">
+                <h3 className="contact-info-title">Social</h3>
+                <div className="contact-info-links">
+                  <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="contact-info-link">GitHub</a>
+                  <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="contact-info-link">LinkedIn</a>
+                  <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="contact-info-link">Twitter</a>
                 </div>
               </div>
             </div>
