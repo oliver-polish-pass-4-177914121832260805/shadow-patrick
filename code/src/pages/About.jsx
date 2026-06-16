@@ -1,109 +1,86 @@
 import React from 'react';
 import './About.css';
 
-const skills = [
-  { name: 'React', icon: '⚛️' },
-  { name: 'TypeScript', icon: '🔷' },
-  { name: 'Node.js', icon: '🟢' },
-  { name: 'Figma', icon: '🎨' },
-  { name: 'Python', icon: '🐍' },
-  { name: 'AWS', icon: '☁️' },
-  { name: 'GraphQL', icon: '◆' },
-  { name: 'Tailwind CSS', icon: '🌊' },
-  { name: 'PostgreSQL', icon: '🐘' },
-  { name: 'Docker', icon: '🐳' },
-  { name: 'Git', icon: '🔀' },
-  { name: 'Next.js', icon: '▲' },
+const values = [
+  { emoji: '🎨', name: 'Craft', description: 'Every pixel and every line of code is an expression of care.' },
+  { emoji: '💡', name: 'Clarity', description: 'We strip away noise so the message and the experience feel effortless.' },
+  { emoji: '🤝', name: 'Collaboration', description: 'Great work is born when strategy, design, and engineering move as one.' },
 ];
 
-const timeline = [
-  { year: '2016', role: 'Junior Frontend Developer', company: 'PixelCraft Studios' },
-  { year: '2018', role: 'Senior UI Engineer', company: 'Wavelength Digital' },
-  { year: '2021', role: 'Lead Product Designer & Developer', company: 'Nimbus Labs' },
-  { year: '2024', role: 'Freelance Creative Technologist', company: 'Independent' },
+const team = [
+  { name: 'Jamie Chen', role: 'Founder & Strategy', bio: 'Charted the course from a two-person garage to a studio that ships worldwide.', gradient: 'linear-gradient(135deg, #6366F1, #8B5CF6)' },
+  { name: 'Marcus Rivera', role: 'Lead Engineer', bio: 'Turns ambitious designs into bulletproof, scalable products.', gradient: 'linear-gradient(135deg, #3B82F6, #06B6D4)' },
+  { name: 'Priya Sharma', role: 'Design Director', bio: 'Believes the best interfaces are the ones people never have to think about.', gradient: 'linear-gradient(135deg, #F59E0B, #EF4444)' },
+  { name: 'Alex Okafor', role: 'Full-Stack Developer', bio: 'Bridges front-end polish with back-end reliability on every project.', gradient: 'linear-gradient(135deg, #10B981, #14B8A6)' },
 ];
 
 export default function About() {
   return (
-    <div className="about-page">
-      {/* Hero Section */}
+    <>
+      {/* Hero */}
       <section className="about-hero">
-        <div className="about-hero-content">
-          <h1 className="about-hero-heading">About Me</h1>
-          <p className="about-hero-tagline">
-            Designer, developer, and lifelong tinkerer — turning ideas into interfaces people love.
-          </p>
-        </div>
+        <h1 className="about-hero__title">About Horizon</h1>
+        <p className="about-hero__subtitle">
+          We're a small studio with a big belief — that thoughtful design and sharp
+          engineering can make the digital world feel a little more human.
+        </p>
       </section>
 
-      {/* Two-Column Bio */}
-      <section className="about-bio">
-        <div className="about-bio-left">
-          <div className="about-avatar" aria-label="Avatar placeholder" />
-          <h2 className="about-name">Alex Morgan</h2>
-          <p className="about-title">Creative Technologist &amp; Full-Stack Designer</p>
-        </div>
-        <div className="about-bio-right">
-          <p>
-            I got my start back in 2016, fresh out of a graphic design program and absolutely
-            obsessed with the idea that code could be a creative medium. I landed a junior role at
-            a tiny agency called PixelCraft Studios, where I learned that building for the web is
-            equal parts empathy, craft, and stubbornness. Those early days of wrestling with CSS
-            floats and jQuery plugins taught me resilience — and a deep appreciation for modern tooling.
-          </p>
-          <p>
-            Over the next several years I moved into increasingly senior roles, eventually leading
-            product design and frontend engineering at Nimbus Labs. There I had the chance to ship
-            three products from zero to launch, build a design system used by forty engineers, and
-            mentor a small team of incredibly talented designers and developers. It was also where I
-            fell in love with the space between design and engineering — the messy, fertile ground
-            where prototypes become products.
-          </p>
-          <p>
-            Today I work independently as a creative technologist, partnering with startups and
-            established teams who need someone fluent in both design and code. Whether it's rapid
-            prototyping, full-stack web applications, or accessibility audits, I bring eight-plus
-            years of cross-disciplinary experience and a genuine enthusiasm for solving hard problems
-            with elegant solutions.
-          </p>
-          <p>
-            When I'm not at a keyboard you'll find me trail running, experimenting with generative
-            art, or trying (and mostly failing) to bake sourdough that looks as good as the
-            Instagram posts. I believe great work comes from curiosity, collaboration, and just
-            enough caffeine.
-          </p>
-        </div>
+      {/* Our Story */}
+      <section className="about-story">
+        <h2 className="about-story__heading">Our Story</h2>
+        <p className="about-story__text">
+          Horizon started in 2020 as a two-person team working out of a shared desk in
+          Brooklyn. Jamie and Marcus had spent years watching agencies prioritize speed
+          over substance, and they wanted to build something different — a studio where
+          craft wasn't a luxury, it was the default. With one designer and one engineer,
+          they took on their first client projects, obsessing over every detail and
+          learning that the best digital products come from people who genuinely care
+          about the people using them.
+        </p>
+        <p className="about-story__text">
+          Six years later, Horizon has grown into a tight-knit team of strategists,
+          designers, and engineers who blend creative vision with technical precision.
+          We've shipped products for startups finding their footing and enterprises
+          reimagining their platforms. Our work spans brand identity, product design,
+          and full-stack development — but what ties it all together is a shared
+          obsession with clarity, quality, and the quiet confidence that comes from
+          knowing every decision was intentional.
+        </p>
       </section>
 
-      {/* Skills & Tools */}
-      <section className="about-skills">
-        <h2 className="about-section-heading">Skills &amp; Tools</h2>
-        <div className="about-skills-grid">
-          {skills.map((skill) => (
-            <div key={skill.name} className="about-skill-chip">
-              <span className="about-skill-icon">{skill.icon}</span>
-              <span className="about-skill-name">{skill.name}</span>
-            </div>
+      {/* Our Values */}
+      <section className="about-values">
+        <h2 className="about-values__heading">Our Values</h2>
+        <div className="about-values__grid">
+          {values.map((v) => (
+            <article key={v.name} className="about-values__card">
+              <span className="about-values__emoji">{v.emoji}</span>
+              <h3 className="about-values__name">{v.name}</h3>
+              <p className="about-values__desc">{v.description}</p>
+            </article>
           ))}
         </div>
       </section>
 
-      {/* Timeline */}
-      <section className="about-timeline">
-        <h2 className="about-section-heading">Career Timeline</h2>
-        <div className="about-timeline-track">
-          {timeline.map((item, index) => (
-            <div key={index} className="about-timeline-item">
-              <div className="about-timeline-dot" />
-              <div className="about-timeline-content">
-                <span className="about-timeline-year">{item.year}</span>
-                <h3 className="about-timeline-role">{item.role}</h3>
-                <p className="about-timeline-company">{item.company}</p>
-              </div>
-            </div>
+      {/* The Team */}
+      <section className="about-team">
+        <h2 className="about-team__heading">The Team</h2>
+        <div className="about-team__grid">
+          {team.map((member) => (
+            <article key={member.name} className="about-team__card">
+              <div
+                className="about-team__avatar"
+                style={{ background: member.gradient }}
+                aria-hidden="true"
+              />
+              <h3 className="about-team__name">{member.name}</h3>
+              <p className="about-team__role">{member.role}</p>
+              <p className="about-team__bio">{member.bio}</p>
+            </article>
           ))}
         </div>
       </section>
-    </div>
+    </>
   );
 }
