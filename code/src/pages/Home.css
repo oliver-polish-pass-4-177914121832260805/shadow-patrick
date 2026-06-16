@@ -28,7 +28,8 @@
   z-index: 1;
   max-width: 720px;
   padding: 2rem;
-  animation: fadeInUp 1s ease-out both;
+  opacity: 1;
+  animation: fadeInUp 1s ease-out forwards;
 }
 
 .hero-eyebrow {
@@ -117,8 +118,7 @@
 
 /* Scroll-triggered fade for cards */
 .featured-card {
-  opacity: 0;
-  transform: translateY(24px);
+  opacity: 1;
   animation: fadeInUp 0.7s ease-out forwards;
 }
 .featured-card:nth-child(1) { animation-delay: 0.1s; }
