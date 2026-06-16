@@ -5,5 +5,8 @@ export default defineConfig({
   plugins: [react()],
   preview: {
     allowedHosts: ['.e2b.app']
+  },
+  server: {
+    host: true
   }
 })

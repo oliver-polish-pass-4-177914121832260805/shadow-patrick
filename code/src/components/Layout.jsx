@@ -1,37 +1,35 @@
-import { Link, useLocation } from 'react-router-dom'
+import { Outlet, NavLink, useLocation } from 'react-router-dom'
+import { useEffect } from 'react'
 
-export default function Layout({ children }) {
-  const { pathname } = useLocation()
+export default function Layout() {
+  const location = useLocation()
 
-  const links = [
-    { to: '/', label: 'Home' },
-    { to: '/projects', label: 'Projects' },
-    { to: '/about', label: 'About' },
-    { to: '/contact', label: 'Contact' },
-  ]
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [location.pathname])
 
   return (
-    <div className="app">
-      <nav className="nav-bar">
-        <Link to="/" className="nav-logo">Portfolio</Link>
-        <ul className="nav-links">
-          {links.map(l => (
-            <li key={l.to}>
-              <Link
-                to={l.to}
-                className={`nav-link${pathname === l.to ? ' active' : ''}`}
-              >
-                {l.label}
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </nav>
-      <main className="main-content">
-        {children}
+    <div className="layout">
+      <header className="site-header">
+        <div className="site-header__inner">
+          <NavLink to="/" className="site-logo">
+            Alex Morgan
+          </NavLink>
+          <nav className="site-nav">
+            <NavLink to="/" end className={({ isActive }) => isActive ? 'active' : ''}>Home</NavLink>
+            <NavLink to="/projects" className={({ isActive }) => isActive ? 'active' : ''}>Projects</NavLink>
+            <NavLink to="/about" className={({ isActive }) => isActive ? 'active' : ''}>About</NavLink>
+            <NavLink to="/contact" className={({ isActive }) => isActive ? 'active' : ''}>Contact</NavLink>
+          </nav>
+        </div>
+      </header>
+      <main>
+        <Outlet />
       </main>
-      <footer className="footer">
-        <p>&copy; 2026 Portfolio. Built with care.</p>
+      <footer className="site-footer">
+        <div className="site-footer__inner">
+          <p>© {new Date().getFullYear()} Alex Morgan. Built with care.</p>
+        </div>
       </footer>
     </div>
   )
