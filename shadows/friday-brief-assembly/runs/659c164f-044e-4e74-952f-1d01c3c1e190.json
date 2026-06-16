@@ -1,0 +1,62 @@
+{
+  "run_id": "659c164f-044e-4e74-952f-1d01c3c1e190",
+  "shadow_id": "friday-brief-assembly",
+  "status": "failed",
+  "dry_run": false,
+  "summary": "Run watchdog: the runner went quiet twice (no sub-agent spawn, no park, no finish) — failed honestly by the bridge liveness watchdog.",
+  "completed_at": "2026-06-16T22:34:59.211Z",
+  "steps": [
+    {
+      "step_id": "save-and-mark",
+      "type": "deliver",
+      "model": null,
+      "status": "pending",
+      "sub_agent_session": null,
+      "output_ref": null,
+      "started_at": null,
+      "ended_at": null,
+      "notes": null,
+      "actions": null,
+      "context_created": null
+    },
+    {
+      "step_id": "render-pdfs",
+      "type": "connector",
+      "model": null,
+      "status": "pending",
+      "sub_agent_session": null,
+      "output_ref": null,
+      "started_at": null,
+      "ended_at": null,
+      "notes": null,
+      "actions": null,
+      "context_created": null
+    },
+    {
+      "step_id": "select-and-tailor",
+      "type": "oliver_step",
+      "model": null,
+      "status": "pending",
+      "sub_agent_session": null,
+      "output_ref": null,
+      "started_at": null,
+      "ended_at": null,
+      "notes": null,
+      "actions": null,
+      "context_created": null
+    },
+    {
+      "step_id": "pull-from-notion",
+      "type": "connector",
+      "model": null,
+      "status": "pending",
+      "sub_agent_session": null,
+      "output_ref": null,
+      "started_at": null,
+      "ended_at": null,
+      "notes": null,
+      "actions": null,
+      "context_created": null
+    }
+  ]
+}
