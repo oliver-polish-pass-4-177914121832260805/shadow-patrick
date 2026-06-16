@@ -2,7 +2,7 @@
   "version": "1.1",
   "projectId": "999319d3-5993-40ad-84a1-ccce30abc072",
   "createdAt": "2026-06-11T15:02:56.695Z",
-  "updatedAt": "2026-06-16T00:13:22.769Z",
+  "updatedAt": "2026-06-16T00:14:07.526Z",
   "files": [
     {
       "id": "44581b2b-5e12-49e4-8481-b7d1e2b54f6a",
@@ -775,12 +775,13 @@
       "path": "repository/plans/BUILD_PLAN_v1.md",
       "folder": "plans",
       "mimeType": "text/markdown",
-      "size": 561,
+      "size": 1106,
       "sha": "",
       "createdAt": "2026-06-16T00:07:32.193Z",
-      "updatedAt": "2026-06-16T00:07:32.193Z",
+      "updatedAt": "2026-06-16T00:14:07.526Z",
       "tags": [],
-      "actor": "plugin"
+      "actor": "plugin",
+      "deleted": false
     },
     {
       "id": "2b894375-60f9-4db1-9e2f-0c06816fb7b9",
@@ -846,7 +847,7 @@
       "updatedAt": "2026-06-15T20:01:03.083Z"
     }
   ],
-  "storageUsed": 1383597,
+  "storageUsed": 1384142,
   "folders": [
     {
       "name": "previous-briefs",
