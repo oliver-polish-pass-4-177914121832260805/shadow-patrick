@@ -2,7 +2,7 @@
   "version": "1.1",
   "projectId": "999319d3-5993-40ad-84a1-ccce30abc072",
   "createdAt": "2026-06-11T15:02:56.695Z",
-  "updatedAt": "2026-06-16T16:05:47.061Z",
+  "updatedAt": "2026-06-16T16:07:02.648Z",
   "files": [
     {
       "id": "44581b2b-5e12-49e4-8481-b7d1e2b54f6a",
@@ -641,12 +641,13 @@
       "path": "code/vite.config.js",
       "folder": "code",
       "mimeType": "application/javascript",
-      "size": 276,
+      "size": 248,
       "sha": "",
       "createdAt": "2026-06-13T00:57:54.338Z",
-      "updatedAt": "2026-06-13T00:57:54.338Z",
+      "updatedAt": "2026-06-16T16:07:02.648Z",
       "tags": [],
-      "actor": "plugin"
+      "actor": "plugin",
+      "deleted": false
     },
     {
       "id": "e5e73417-7470-4ad2-a8ab-94020ff4eccb",
@@ -654,10 +655,10 @@
       "path": "code/index.html",
       "folder": "code",
       "mimeType": "text/html",
-      "size": 7457,
+      "size": 543,
       "sha": "",
       "createdAt": "2026-06-13T00:57:54.338Z",
-      "updatedAt": "2026-06-16T14:19:38.929Z",
+      "updatedAt": "2026-06-16T16:07:02.648Z",
       "tags": [],
       "actor": "plugin",
       "deleted": false
@@ -668,10 +669,10 @@
       "path": "code/src/App.jsx",
       "folder": "code",
       "mimeType": "application/octet-stream",
-      "size": 3609,
+      "size": 576,
       "sha": "",
       "createdAt": "2026-06-13T00:58:14.465Z",
-      "updatedAt": "2026-06-14T23:02:52.335Z",
+      "updatedAt": "2026-06-16T16:07:02.648Z",
       "tags": [],
       "actor": "plugin",
       "deleted": false
@@ -851,6 +852,45 @@
       "updatedAt": "2026-06-16T16:05:47.061Z",
       "tags": [],
       "actor": "plugin"
+    },
+    {
+      "id": "87e6e4aa-6fed-4d79-98e7-e3bbcacbcdac",
+      "name": "main.jsx",
+      "path": "code/src/main.jsx",
+      "folder": "code",
+      "mimeType": "application/octet-stream",
+      "size": 330,
+      "sha": "",
+      "createdAt": "2026-06-16T16:07:02.648Z",
+      "updatedAt": "2026-06-16T16:07:02.648Z",
+      "tags": [],
+      "actor": "plugin"
+    },
+    {
+      "id": "58a53b60-1a10-40a4-b91f-12375f11a60f",
+      "name": "global.css",
+      "path": "code/src/styles/global.css",
+      "folder": "code",
+      "mimeType": "text/css",
+      "size": 7822,
+      "sha": "",
+      "createdAt": "2026-06-16T16:07:02.648Z",
+      "updatedAt": "2026-06-16T16:07:02.648Z",
+      "tags": [],
+      "actor": "plugin"
+    },
+    {
+      "id": "b6789f4a-84ac-4aae-9e1a-42927b8f1007",
+      "name": "Layout.jsx",
+      "path": "code/src/components/Layout.jsx",
+      "folder": "code",
+      "mimeType": "application/octet-stream",
+      "size": 1058,
+      "sha": "",
+      "createdAt": "2026-06-16T16:07:02.648Z",
+      "updatedAt": "2026-06-16T16:07:02.648Z",
+      "tags": [],
+      "actor": "plugin"
     }
   ],
   "externalLinks": [
@@ -864,7 +904,7 @@
       "updatedAt": "2026-06-15T20:01:03.083Z"
     }
   ],
-  "storageUsed": 1460003,
+  "storageUsed": 1459238,
   "folders": [
     {
       "name": "previous-briefs",
