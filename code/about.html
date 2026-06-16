@@ -8,10 +8,203 @@
   <title>About — Patrick Reyes</title>
   <link rel="icon" href="public/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="styles.css">
+  <style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+:root {
+  --bg-deep: #0a0a0f;
+  --bg-mid: #111118;
+  --bg-card: rgba(255, 255, 255, 0.035);
+  --bg-card-hover: rgba(255, 255, 255, 0.06);
+  --bg-nav: rgba(10, 10, 15, 0.78);
+  --border-glass: rgba(255, 255, 255, 0.08);
+  --border-glass-hover: rgba(255, 255, 255, 0.14);
+  --accent: #6366f1;
+  --accent-glow: rgba(99, 102, 241, 0.35);
+  --accent-light: #818cf8;
+  --warm: #fbbf24;
+  --warm-glow: rgba(251, 191, 36, 0.25);
+  --text-primary: #f4f4f5;
+  --text-muted: #a1a1aa;
+  --text-dim: #71717a;
+  --success: #34d399;
+  --error: #f87171;
+  --font-display: 'Space Grotesk', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+  --sp-1: 0.25rem;
+  --sp-2: 0.5rem;
+  --sp-3: 0.75rem;
+  --sp-4: 1rem;
+  --sp-5: 1.25rem;
+  --sp-6: 1.5rem;
+  --sp-8: 2rem;
+  --sp-10: 2.5rem;
+  --sp-12: 3rem;
+  --sp-16: 4rem;
+  --max-w: 1200px;
+  --nav-h: 72px;
+  --radius: 14px;
+  --radius-sm: 8px;
+  --ease: cubic-bezier(0.4, 0, 0.2, 1);
+  --spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+body { font-family: var(--font-body); font-size: 1rem; line-height: 1.7; color: var(--text-muted); background-color: var(--bg-deep); overflow-x: hidden; min-height: 100vh; animation: pageFadeIn 0.5s var(--ease); }
+img, svg, video { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+ul, ol { list-style: none; }
+button, input, textarea { font: inherit; color: inherit; background: none; border: none; }
+button { cursor: pointer; }
+h1, h2, h3, h4, h5, h6 { font-family: var(--font-display); color: var(--text-primary); line-height: 1.1; font-weight: 700; }
+::selection { background: var(--accent); color: #fff; }
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--bg-deep); }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.2); }
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 80% 50% at 20% 10%, rgba(99, 102, 241, 0.08) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 40% at 80% 80%, rgba(251, 191, 36, 0.04) 0%, transparent 60%),
+    radial-gradient(ellipse 100% 100% at 50% 50%, transparent 0%, var(--bg-deep) 100%);
+}
+main, section, .container { position: relative; z-index: 1; }
+
+.nav { position: fixed; top: 0; left: 0; right: 0; height: var(--nav-h); background: var(--bg-nav); backdrop-filter: blur(20px) saturate(1.6); -webkit-backdrop-filter: blur(20px) saturate(1.6); border-bottom: 1px solid var(--border-glass); z-index: 1000; transition: background 0.3s var(--ease); }
+.nav__inner { max-width: var(--max-w); margin: 0 auto; padding: 0 var(--sp-6); height: 100%; display: flex; align-items: center; justify-content: space-between; }
+.nav__logo { font-family: var(--font-display); font-size: 1.5rem; font-weight: 700; color: var(--text-primary); letter-spacing: -0.02em; }
+.nav__logo span { color: var(--accent); }
+.nav__links { display: flex; align-items: center; gap: var(--sp-8); }
+.nav__link { position: relative; font-size: 0.875rem; font-weight: 500; color: var(--text-muted); transition: color 0.25s var(--ease); letter-spacing: 0.01em; }
+.nav__link:hover, .nav__link.active { color: var(--text-primary); }
+.nav__link.active::after { content: ''; position: absolute; bottom: -4px; left: 0; right: 0; height: 2px; background: var(--accent); border-radius: 2px; animation: slideInX 0.3s var(--ease); }
+.nav__toggle { display: none; flex-direction: column; gap: 5px; padding: 4px; }
+.nav__toggle span { display: block; width: 22px; height: 2px; background: var(--text-primary); border-radius: 2px; transition: 0.25s var(--ease); }
+.nav__cta { font-size: 0.8125rem; font-weight: 600; color: #fff; background: var(--accent); padding: 0.5rem 1.25rem; border-radius: 999px; transition: transform 0.2s var(--ease), box-shadow 0.2s var(--ease); }
+.nav__cta:hover { transform: translateY(-1px); box-shadow: 0 6px 24px var(--accent-glow); }
+
+@media (max-width: 768px) {
+  .nav__toggle { display: flex; }
+  .nav__links { position: fixed; top: var(--nav-h); left: 0; right: 0; background: var(--bg-nav); backdrop-filter: blur(24px); flex-direction: column; align-items: center; padding: var(--sp-8) var(--sp-6); gap: var(--sp-5); border-bottom: 1px solid var(--border-glass); transform: translateY(-110%); opacity: 0; transition: transform 0.35s var(--ease), opacity 0.3s var(--ease); pointer-events: none; }
+  .nav__links.open { transform: translateY(0); opacity: 1; pointer-events: all; }
+  .nav__cta { margin-top: var(--sp-2); }
+  .nav.open .nav__toggle span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .nav.open .nav__toggle span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+  .nav.open .nav__toggle span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent-light) 50%, var(--warm) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: var(--sp-2); padding: 0.875rem 2rem; font-family: var(--font-display); font-weight: 600; font-size: 0.9375rem; border-radius: 999px; transition: all 0.25s var(--ease); letter-spacing: 0.01em; white-space: nowrap; }
+.btn--primary { background: linear-gradient(135deg, var(--accent) 0%, #7c3aed 100%); color: #fff; box-shadow: 0 4px 24px var(--accent-glow); }
+.btn--primary:hover { transform: translateY(-2px); box-shadow: 0 8px 36px rgba(99, 102, 241, 0.5), 0 0 60px rgba(99, 102, 241, 0.2); }
+.btn--outline { border: 1.5px solid var(--border-glass-hover); color: var(--text-primary); background: var(--bg-card); backdrop-filter: blur(8px); }
+.btn--outline:hover { background: var(--bg-card-hover); border-color: var(--accent); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(99, 102, 241, 0.15); }
+.btn__arrow { font-size: 1.1em; transition: transform 0.25s var(--ease); }
+.btn:hover .btn__arrow { transform: translateX(3px); }
+
+.card { background: var(--bg-card); border: 1px solid var(--border-glass); border-radius: var(--radius); padding: var(--sp-6); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); transition: all 0.3s var(--ease); }
+.card:hover { background: var(--bg-card-hover); border-color: var(--border-glass-hover); transform: translateY(-4px); box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4); }
+
+.section { padding: var(--sp-16) 0; }
+.section__container { max-width: var(--max-w); margin: 0 auto; padding: 0 var(--sp-6); }
+.section__eyebrow { font-family: var(--font-display); font-size: 0.8125rem; font-weight: 600; color: var(--accent-light); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: var(--sp-3); }
+.section__heading { font-size: clamp(1.75rem, 4vw, 2.75rem); margin-bottom: var(--sp-3); }
+.section__sub { font-size: 1.0625rem; color: var(--text-muted); max-width: 560px; margin-bottom: var(--sp-10); }
+
+.about-hero { min-height: 100vh; padding-top: var(--nav-h); display: flex; align-items: center; }
+.about-hero__inner { max-width: var(--max-w); margin: 0 auto; padding: var(--sp-16) var(--sp-6); width: 100%; display: grid; grid-template-columns: 1fr 1.2fr; gap: var(--sp-12); align-items: center; }
+.about-hero__image { aspect-ratio: 3 / 4; border-radius: var(--radius); background: linear-gradient(135deg, #1e1b4b 0%, #312e81 40%, #4c1d95 100%); border: 1px solid var(--border-glass); display: flex; align-items: center; justify-content: center; font-size: 5rem; position: relative; overflow: hidden; }
+.about-hero__image::after { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 30% 20%, rgba(255,255,255,0.05) 0%, transparent 50%); }
+.about-hero__label { position: absolute; bottom: var(--sp-4); left: var(--sp-4); font-size: 0.75rem; color: rgba(255,255,255,0.5); font-style: italic; }
+
+@media (max-width: 768px) {
+  .about-hero__inner { grid-template-columns: 1fr; gap: var(--sp-8); }
+  .about-hero__image { max-width: 320px; margin: 0 auto; }
+}
+
+.about-hero__text .hero-eyebrow { font-size: 0.8125rem; font-weight: 600; color: var(--accent-light); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: var(--sp-4); }
+.about-hero__text h1 { font-size: clamp(2.5rem, 5vw, 4rem); margin-bottom: var(--sp-5); }
+.about-hero__text p { font-size: 1.125rem; color: var(--text-muted); max-width: 480px; line-height: 1.8; margin-bottom: var(--sp-6); }
+
+.editorial { display: grid; grid-template-columns: 2fr 1fr; gap: var(--sp-10); align-items: start; }
+.editorial__text p { font-size: 1.0625rem; color: var(--text-muted); line-height: 1.8; margin-bottom: var(--sp-5); }
+.editorial__text p:first-child::first-letter { font-family: var(--font-display); font-size: 3.5rem; font-weight: 700; float: left; line-height: 1; margin-right: var(--sp-2); margin-top: 0.1em; color: var(--accent-light); }
+.editorial__pull-quote { font-family: var(--font-display); font-size: 1.25rem; font-weight: 500; font-style: italic; color: var(--text-primary); line-height: 1.5; padding: var(--sp-6); background: var(--bg-card); border-left: 3px solid var(--accent); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; position: sticky; top: calc(var(--nav-h) + var(--sp-6)); }
+@media (max-width: 768px) { .editorial { grid-template-columns: 1fr; } .editorial__pull-quote { position: static; } }
+
+.skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: var(--sp-4); }
+.skill-card { background: var(--bg-card); border: 1px solid var(--border-glass); border-radius: var(--radius); padding: var(--sp-6); transition: all 0.3s var(--ease); position: relative; overflow: hidden; }
+.skill-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--accent), transparent); opacity: 0; transition: opacity 0.3s var(--ease); }
+.skill-card:hover { border-color: var(--border-glass-hover); transform: translateY(-3px); }
+.skill-card:hover::before { opacity: 1; }
+.skill-card__icon { font-size: 1.75rem; margin-bottom: var(--sp-3); }
+.skill-card__title { font-size: 1rem; font-weight: 600; margin-bottom: var(--sp-2); }
+.skill-card__desc { font-size: 0.8125rem; color: var(--text-dim); line-height: 1.6; }
+
+.timeline { position: relative; padding-left: 2rem; }
+.timeline::before { content: ''; position: absolute; top: 0; left: 0; bottom: 0; width: 1px; background: linear-gradient(to bottom, var(--accent) 0%, var(--border-glass) 50%, transparent 100%); }
+.timeline__item { position: relative; padding-bottom: var(--sp-8); }
+.timeline__item:last-child { padding-bottom: 0; }
+.timeline__dot { position: absolute; left: -2rem; top: var(--sp-1); width: 11px; height: 11px; border-radius: 50%; background: var(--accent); border: 2px solid var(--bg-deep); transform: translateX(-5px); }
+.timeline__year { font-size: 0.75rem; font-weight: 600; color: var(--accent-light); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: var(--sp-1); }
+.timeline__title { font-size: 1.125rem; font-weight: 600; margin-bottom: var(--sp-1); }
+.timeline__company { font-size: 0.875rem; color: var(--text-dim); margin-bottom: var(--sp-2); }
+.timeline__desc { font-size: 0.875rem; color: var(--text-muted); line-height: 1.7; }
+
+.fun-facts { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: var(--sp-4); }
+.fun-fact { padding: var(--sp-5) var(--sp-4); background: var(--bg-card); border: 1px solid var(--border-glass); border-radius: var(--radius); text-align: center; transition: all 0.25s var(--ease); }
+.fun-fact:hover { transform: scale(1.03); border-color: var(--border-glass-hover); }
+.fun-fact__icon { font-size: 2rem; margin-bottom: var(--sp-2); }
+.fun-fact__label { font-size: 0.8125rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: var(--sp-1); }
+.fun-fact__value { font-size: 0.9375rem; color: var(--text-primary); font-weight: 500; }
+
+.cta-band { background: var(--bg-mid); border-top: 1px solid var(--border-glass); border-bottom: 1px solid var(--border-glass); padding: var(--sp-16) 0; text-align: center; position: relative; overflow: hidden; }
+.cta-band::before { content: ''; position: absolute; top: -50%; left: 20%; width: 60%; height: 200%; background: radial-gradient(ellipse at center, rgba(99,102,241,0.06) 0%, transparent 70%); pointer-events: none; }
+.cta-band__heading { font-size: clamp(1.75rem, 4vw, 2.5rem); margin-bottom: var(--sp-3); }
+.cta-band__sub { font-size: 1.0625rem; color: var(--text-muted); max-width: 520px; margin: 0 auto var(--sp-8); }
+.cta-band__actions { display: flex; align-items: center; justify-content: center; gap: var(--sp-4); flex-wrap: wrap; }
+
+.footer { position: relative; z-index: 1; padding: var(--sp-10) 0; border-top: 1px solid var(--border-glass); background: var(--bg-mid); }
+.footer__inner { max-width: var(--max-w); margin: 0 auto; padding: 0 var(--sp-6); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: var(--sp-4); }
+.footer__copy { font-size: 0.8125rem; color: var(--text-dim); }
+.footer__links { display: flex; gap: var(--sp-5); }
+.footer__link { font-size: 0.8125rem; color: var(--text-dim); transition: color 0.2s var(--ease); }
+.footer__link:hover { color: var(--text-primary); }
+
+.deco-line { width: 60px; height: 3px; background: linear-gradient(90deg, var(--accent), var(--accent-light)); border-radius: 2px; margin-bottom: var(--sp-6); }
+
+@keyframes fadeInUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes slideInX { from { transform: scaleX(0); opacity: 0; } to { transform: scaleX(1); opacity: 1; } }
+.anim-fade-in-up { animation: fadeInUp 0.7s var(--ease) both; }
+.anim-fade-in { animation: fadeIn 0.8s var(--ease) both; }
+.anim-delay-1 { animation-delay: 0.1s; }
+.anim-delay-2 { animation-delay: 0.2s; }
+.anim-delay-3 { animation-delay: 0.3s; }
+
+.flex { display: flex; }
+.gap-4 { gap: var(--sp-4); }
+.mb-6 { margin-bottom: var(--sp-6); }
+
+@keyframes pageFadeIn { from { opacity: 0; } to { opacity: 1; } }
+  </style>
 </head>
 <body>
 
-  <!-- NAVIGATION -->
   <nav class="nav" id="nav">
     <div class="nav__inner">
       <a href="index.html" class="nav__logo">patrick<span>.</span></a>
@@ -28,7 +221,6 @@
     </div>
   </nav>
 
-  <!-- ABOUT HERO -->
   <section class="about-hero">
     <div class="about-hero__inner">
       <div class="about-hero__image anim-fade-in-up">
@@ -56,7 +248,6 @@
     </div>
   </section>
 
-  <!-- EXTENDED BIO -->
   <section class="section">
     <div class="section__container">
       <div class="deco-line"></div>
@@ -64,86 +255,37 @@
         <div class="editorial__text">
           <span class="section__eyebrow">The Story</span>
           <h2 class="section__heading mb-6">How I got here</h2>
-          <p>
-            I fell into design at sixteen when I tried to make my first blog look less terrible. 
-            That rabbit hole led me through graphic design, UI/UX, and eventually into code — 
-            because I wanted complete control over what I was building, from the first sketch to 
-            the final deploy.
-          </p>
-          <p>
-            Over the past eight years, I've designed and shipped products for startups, 
-            Fortune 500 companies, and everything in between. I've led design teams, built 
-            design systems from scratch, and spent more late nights debugging CSS than I'd 
-            care to admit.
-          </p>
-          <p>
-            When I'm not pushing pixels or writing code, you'll find me sketching typefaces, 
-            hiking trails near Manila, or obsessing over coffee extraction ratios.
-          </p>
+          <p>I fell into design at sixteen when I tried to make my first blog look less terrible. That rabbit hole led me through graphic design, UI/UX, and eventually into code — because I wanted complete control over what I was building, from the first sketch to the final deploy.</p>
+          <p>Over the past eight years, I've designed and shipped products for startups, Fortune 500 companies, and everything in between. I've led design teams, built design systems from scratch, and spent more late nights debugging CSS than I'd care to admit. I believe the best products come from the people who can both imagine and execute.</p>
+          <p>When I'm not pushing pixels or writing code, you'll find me sketching typefaces, hiking trails near Manila, or obsessing over coffee extraction ratios. I'm currently exploring the intersection of AI and design tooling — the future of how we create is being rewritten, and I want to be part of that story.</p>
         </div>
         <div>
           <div class="editorial__pull-quote">
-            "I don't believe in design for design's sake. I believe in design that 
-            <em>solves</em>, design that <em>delights</em>, design that respects every second 
-            of a user's time."
+            "I don't believe in design for design's sake. I believe in design that <em>solves</em>, design that <em>delights</em>, design that respects every second of a user's time."
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- SKILLS -->
   <section class="section" style="background: var(--bg-mid); border-top: 1px solid var(--border-glass); border-bottom: 1px solid var(--border-glass);">
     <div class="section__container">
       <span class="section__eyebrow">What I Do</span>
       <h2 class="section__heading">Skills & Expertise</h2>
       <p class="section__sub">A toolkit refined over years of shipping real products for real users.</p>
       <div class="skills-grid">
-        <div class="skill-card">
-          <div class="skill-card__icon">🎨</div>
-          <div class="skill-card__title">Product Design</div>
-          <div class="skill-card__desc">End-to-end design from research & wireframes to high-fidelity prototypes and handoff.</div>
-        </div>
-        <div class="skill-card">
-          <div class="skill-card__icon">⚡</div>
-          <div class="skill-card__title">Frontend Development</div>
-          <div class="skill-card__desc">React, Next.js, Vue — performant, accessible, beautifully crafted interfaces.</div>
-        </div>
-        <div class="skill-card">
-          <div class="skill-card__icon">🧱</div>
-          <div class="skill-card__title">Design Systems</div>
-          <div class="skill-card__desc">Building scalable component libraries that bridge design and engineering.</div>
-        </div>
-        <div class="skill-card">
-          <div class="skill-card__icon">📱</div>
-          <div class="skill-card__title">Mobile Design</div>
-          <div class="skill-card__desc">iOS & Android native patterns, responsive-first thinking, and gesture-driven UX.</div>
-        </div>
-        <div class="skill-card">
-          <div class="skill-card__icon">🔧</div>
-          <div class="skill-card__title">Backend & APIs</div>
-          <div class="skill-card__desc">Node.js, Python, PostgreSQL — full-stack when the project calls for it.</div>
-        </div>
-        <div class="skill-card">
-          <div class="skill-card__icon">🤖</div>
-          <div class="skill-card__title">AI & Prototyping</div>
-          <div class="skill-card__desc">Integrating LLMs, AI-driven features, and rapid prototyping with modern tooling.</div>
-        </div>
-        <div class="skill-card">
-          <div class="skill-card__icon">🎬</div>
-          <div class="skill-card__title">Motion & Animation</div>
-          <div class="skill-card__desc">Micro-interactions, page transitions, and scroll-driven storytelling that feels alive.</div>
-        </div>
-        <div class="skill-card">
-          <div class="skill-card__icon">👥</div>
-          <div class="skill-card__title">User Research</div>
-          <div class="skill-card__desc">Interviews, usability testing, and data analysis to ground every design decision.</div>
-        </div>
+        <div class="skill-card"><div class="skill-card__icon">🎨</div><div class="skill-card__title">Product Design</div><div class="skill-card__desc">End-to-end design from research & wireframes to high-fidelity prototypes and handoff.</div></div>
+        <div class="skill-card"><div class="skill-card__icon">⚡</div><div class="skill-card__title">Frontend Development</div><div class="skill-card__desc">React, Next.js, Vue — performant, accessible, beautifully crafted interfaces.</div></div>
+        <div class="skill-card"><div class="skill-card__icon">🧱</div><div class="skill-card__title">Design Systems</div><div class="skill-card__desc">Building scalable component libraries that bridge design and engineering.</div></div>
+        <div class="skill-card"><div class="skill-card__icon">📱</div><div class="skill-card__title">Mobile Design</div><div class="skill-card__desc">iOS & Android native patterns, responsive-first thinking, and gesture-driven UX.</div></div>
+        <div class="skill-card"><div class="skill-card__icon">🔧</div><div class="skill-card__title">Backend & APIs</div><div class="skill-card__desc">Node.js, Python, PostgreSQL — full-stack when the project calls for it.</div></div>
+        <div class="skill-card"><div class="skill-card__icon">🤖</div><div class="skill-card__title">AI & Prototyping</div><div class="skill-card__desc">Integrating LLMs, AI-driven features, and rapid prototyping with modern tooling.</div></div>
+        <div class="skill-card"><div class="skill-card__icon">🎬</div><div class="skill-card__title">Motion & Animation</div><div class="skill-card__desc">Micro-interactions, page transitions, and scroll-driven storytelling that feels alive.</div></div>
+        <div class="skill-card"><div class="skill-card__icon">👥</div><div class="skill-card__title">User Research</div><div class="skill-card__desc">Interviews, usability testing, and data analysis to ground every design decision.</div></div>
       </div>
     </div>
   </section>
 
-  <!-- TIMELINE -->
   <section class="section">
     <div class="section__container">
       <span class="section__eyebrow">Career Journey</span>
@@ -155,90 +297,61 @@
           <div class="timeline__year">2024 — Present</div>
           <h3 class="timeline__title">Principal Designer & Developer</h3>
           <div class="timeline__company">Freelance / Studio Mode</div>
-          <p class="timeline__desc">Leading end-to-end product design and build for startups and scale-ups.</p>
+          <p class="timeline__desc">Leading end-to-end product design and build for startups and scale-ups. Advising on design systems, brand, and product strategy.</p>
         </div>
         <div class="timeline__item">
           <div class="timeline__dot"></div>
           <div class="timeline__year">2021 — 2024</div>
           <h3 class="timeline__title">Senior Product Designer</h3>
-          <div class="timeline__company">Orbital Labs</div>
-          <p class="timeline__desc">Built the design system from scratch, led a team of 4 designers, shipped the flagship product used by 800K+ users.</p>
+          <div class="timeline__company">Orbital Labs (Series B Startup)</div>
+          <p class="timeline__desc">Built the design system from scratch, led a team of 4 designers, and shipped the flagship product used by 800K+ users.</p>
         </div>
         <div class="timeline__item">
           <div class="timeline__dot"></div>
           <div class="timeline__year">2019 — 2021</div>
           <h3 class="timeline__title">UI/UX Designer</h3>
           <div class="timeline__company">Nexera Technologies</div>
-          <p class="timeline__desc">Designed mobile and web applications for enterprise clients.</p>
+          <p class="timeline__desc">Designed mobile and web applications for enterprise clients. Transitioned from pure design into design + frontend engineering.</p>
         </div>
         <div class="timeline__item">
           <div class="timeline__dot"></div>
           <div class="timeline__year">2018 — 2019</div>
           <h3 class="timeline__title">Junior Designer</h3>
           <div class="timeline__company">Pixel Studio Manila</div>
-          <p class="timeline__desc">First industry role. Pixel-perfect mocks, design QA, and working on a real design team.</p>
+          <p class="timeline__desc">My first industry role. Learned craft discipline — pixel-perfect mocks, design QA, and the humility of working on a real design team.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- FUN FACTS -->
   <section class="section" style="background: var(--bg-mid); border-top: 1px solid var(--border-glass);">
     <div class="section__container">
       <span class="section__eyebrow">Off the Clock</span>
       <h2 class="section__heading">A few things about me</h2>
       <p class="section__sub">The stuff that doesn't fit on a resume.</p>
       <div class="fun-facts">
-        <div class="fun-fact">
-          <div class="fun-fact__icon">☕</div>
-          <div class="fun-fact__label">Fuel</div>
-          <div class="fun-fact__value">Pour-over enthusiast</div>
-        </div>
-        <div class="fun-fact">
-          <div class="fun-fact__icon">🎸</div>
-          <div class="fun-fact__label">Hobby</div>
-          <div class="fun-fact__value">Plays guitar badly</div>
-        </div>
-        <div class="fun-fact">
-          <div class="fun-fact__icon">📚</div>
-          <div class="fun-fact__label">Current Read</div>
-          <div class="fun-fact__value">"Thinking in Systems"</div>
-        </div>
-        <div class="fun-fact">
-          <div class="fun-fact__icon">🏔️</div>
-          <div class="fun-fact__label">Last Adventure</div>
-          <div class="fun-fact__value">Mt. Pulag, Philippines</div>
-        </div>
-        <div class="fun-fact">
-          <div class="fun-fact__icon">🎨</div>
-          <div class="fun-fact__label">Side Project</div>
-          <div class="fun-fact__value">Open-source typeface</div>
-        </div>
-        <div class="fun-fact">
-          <div class="fun-fact__icon">🐱</div>
-          <div class="fun-fact__label">Pet Parent</div>
-          <div class="fun-fact__value">1 cat named Figma</div>
-        </div>
+        <div class="fun-fact"><div class="fun-fact__icon">☕</div><div class="fun-fact__label">Fuel</div><div class="fun-fact__value">Pour-over enthusiast</div></div>
+        <div class="fun-fact"><div class="fun-fact__icon">🎸</div><div class="fun-fact__label">Hobby</div><div class="fun-fact__value">Plays guitar badly</div></div>
+        <div class="fun-fact"><div class="fun-fact__icon">📚</div><div class="fun-fact__label">Current Read</div><div class="fun-fact__value">"Thinking in Systems"</div></div>
+        <div class="fun-fact"><div class="fun-fact__icon">🏔️</div><div class="fun-fact__label">Last Adventure</div><div class="fun-fact__value">Mt. Pulag, Philippines</div></div>
+        <div class="fun-fact"><div class="fun-fact__icon">🎨</div><div class="fun-fact__label">Side Project</div><div class="fun-fact__value">Open-source typeface</div></div>
+        <div class="fun-fact"><div class="fun-fact__icon">🐱</div><div class="fun-fact__label">Pet Parent</div><div class="fun-fact__value">1 cat named Figma</div></div>
       </div>
     </div>
   </section>
 
-  <!-- CTA BAND -->
   <section class="cta-band">
     <div class="section__container">
       <div class="deco-line deco-line--center"></div>
       <h2 class="cta-band__heading">Let's create something together</h2>
       <p class="cta-band__sub">Whether it's a project, a conversation, or a coffee — I'd love to hear from you.</p>
       <div class="cta-band__actions">
-        <a href="contact.html" class="btn btn--primary">
-          Get in Touch <span class="btn__arrow">→</span>
-        </a>
+        <a href="contact.html" class="btn btn--primary">Get in Touch <span class="btn__arrow">→</span></a>
         <a href="projects.html" class="btn btn--outline">See My Projects</a>
       </div>
     </div>
   </section>
 
-  <!-- FOOTER -->
   <footer class="footer">
     <div class="footer__inner">
       <p class="footer__copy">© 2026 Patrick Reyes. Crafted with care.</p>
@@ -254,18 +367,8 @@
     const nav = document.getElementById('nav');
     const toggle = document.getElementById('navToggle');
     const links = document.getElementById('navLinks');
-
-    toggle.addEventListener('click', () => {
-      nav.classList.toggle('open');
-      links.classList.toggle('open');
-    });
-
-    links.querySelectorAll('a').forEach(a => {
-      a.addEventListener('click', () => {
-        nav.classList.remove('open');
-        links.classList.remove('open');
-      });
-    });
+    toggle.addEventListener('click', () => { nav.classList.toggle('open'); links.classList.toggle('open'); });
+    links.querySelectorAll('a').forEach(a => { a.addEventListener('click', () => { nav.classList.remove('open'); links.classList.remove('open'); }); });
   </script>
 </body>
 </html>
