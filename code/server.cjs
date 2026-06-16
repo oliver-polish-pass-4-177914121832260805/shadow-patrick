@@ -6,9 +6,9 @@ const DIST = path.join(__dirname, 'dist');
 const PORT = 3000;
 
 const MIME = {
-  '.html': 'text/html',
-  '.css': 'text/css',
-  '.js': 'application/javascript',
+  '.html': 'text/html; charset=utf-8',
+  '.css': 'text/css; charset=utf-8',
+  '.js': 'application/javascript; charset=utf-8',
   '.json': 'application/json',
   '.png': 'image/png',
   '.svg': 'image/svg+xml',
@@ -20,7 +20,7 @@ const MIME = {
 const server = http.createServer((req, res) => {
   let filePath = path.join(DIST, req.url === '/' ? 'index.html' : req.url);
 
-  // SPA fallback — if file doesn't exist, serve index.html
+  // SPA fallback
   if (!fs.existsSync(filePath) || fs.statSync(filePath).isDirectory()) {
     filePath = path.join(DIST, 'index.html');
   }
@@ -34,7 +34,14 @@ const server = http.createServer((req, res) => {
       res.end('<h1>Not Found</h1>');
       return;
     }
-    res.writeHead(200, { 'Content-Type': contentType });
+    res.writeHead(200, {
+      'Content-Type': contentType,
+      'X-Frame-Options': '',
+      'Content-Security-Policy': "frame-ancestors *;",
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET, OPTIONS',
+      'Access-Control-Allow-Headers': '*',
+    });
     res.end(data);
   });
 });
