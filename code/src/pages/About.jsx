@@ -1,99 +1,120 @@
-import './About.css'
+/* === About Page Hero === */
+.about-hero {
+  background: radial-gradient(ellipse at 30% 20%, rgba(245, 166, 35, 0.15) 0%, transparent 50%),
+              radial-gradient(ellipse at 70% 80%, rgba(219, 84, 97, 0.12) 0%, transparent 50%),
+              radial-gradient(ellipse at 50% 50%, rgba(255, 193, 120, 0.08) 0%, transparent 60%),
+              var(--surface);
+}
 
-const skills = [
-  { icon: '⚛️', name: 'React', desc: 'Component-driven UIs with hooks, context, and modern patterns' },
-  { icon: '🔷', name: 'TypeScript', desc: 'Type-safe codebases that scale with confidence' },
-  { icon: '🟢', name: 'Node.js', desc: 'REST APIs, real-time services, and server-side tooling' },
-  { icon: '🎨', name: 'UI/UX Design', desc: 'Figma to pixel-perfect, accessible interfaces' },
-  { icon: '🐍', name: 'Python', desc: 'Automation, data pipelines, and ML prototypes' },
-  { icon: '☁️', name: 'Cloud / AWS', desc: 'Deployments with Lambda, S3, ECS, and IaC' },
-]
+/* === Story Section (two-column) === */
+.about-story {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 3rem;
+  align-items: start;
+}
 
-const timeline = [
-  {
-    year: '2018',
-    role: 'B.S. Computer Science',
-    desc: 'Graduated with a focus on human-computer interaction and software engineering. Built my first full-stack app in a dorm room and never looked back.',
-  },
-  {
-    year: '2019',
-    role: 'Frontend Developer — BrightLoop Studio',
-    desc: 'Joined a small agency crafting polished web products for startups. Learned the craft of shipping fast without sacrificing quality.',
-  },
-  {
-    year: '2021',
-    role: 'Senior Developer — Nimbus Health',
-    desc: 'Led the frontend rebuild of a patient-facing telehealth platform serving 200k+ users. Deep-dived into performance, accessibility, and design systems.',
-  },
-  {
-    year: '2024',
-    role: 'Freelance Creative Developer',
-    desc: 'Working independently with select clients on interactive experiences, design engineering, and React ecosystem consulting.',
-  },
-]
+@media (max-width: 768px) {
+  .about-story {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    justify-items: center;
+    text-align: center;
+  }
+}
 
-export default function About() {
-  return (
-    <main>
-      {/* ── Hero ───────────────────────────────── */}
-      <section className="about-hero">
-        <h1>About Me</h1>
-        <p className="subtitle">
-          I build things for the web that feel as good as they look — blending craft, curiosity, and a healthy obsession with the details.
-        </p>
-      </section>
+/* === Avatar === */
+.about-avatar {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent) 0%, #db5461 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 4rem;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 0.05em;
+  box-shadow: 0 8px 30px rgba(219, 84, 97, 0.25);
+  flex-shrink: 0;
+  user-select: none;
+}
 
-      {/* ── Bio ────────────────────────────────── */}
-      <section className="about-bio" aria-label="Biography">
-        <div className="about-bio__avatar" aria-hidden="true">A</div>
-        <div className="about-bio__text">
-          <p>
-            Hey, I'm Alex. I studied Computer Science because I loved the idea of turning
-            abstract problems into tangible, visual solutions. Somewhere between algorithms
-            class and a late-night Figma session, I realised the sweet spot for me lives right
-            where engineering meets design.
-          </p>
-          <p>
-            Over the past six years I've shipped products for agencies, health-tech startups,
-            and my own side projects. I care deeply about the small things — smooth transitions,
-            thoughtful empty states, the way a button feels when you click it.
-          </p>
-          <p>
-            These days I'm focused on the React ecosystem: Next.js, server components, and
-            building design systems that teams actually enjoy using. When I'm not coding you'll
-            find me sketching UI concepts, tweaking my Neovim config, or experimenting with
-            generative art.
-          </p>
-        </div>
-      </section>
+.about-story-text {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
 
-      {/* ── Skills ──────────────────────────────── */}
-      <section className="about-skills" aria-label="Skills">
-        <h2>Skills</h2>
-        <div className="card-grid">
-          {skills.map((s) => (
-            <article className="card" key={s.name}>
-              <div className="card__icon" aria-hidden="true">{s.icon}</div>
-              <h3>{s.name}</h3>
-              <p>{s.desc}</p>
-            </article>
-          ))}
-        </div>
-      </section>
+.about-story-text p {
+  color: var(--text-muted);
+  line-height: 1.75;
+  font-size: 1rem;
+}
 
-      {/* ── Experience Timeline ─────────────────── */}
-      <section className="about-timeline" aria-label="Experience timeline">
-        <h2>Experience</h2>
-        <div className="timeline">
-          {timeline.map((item) => (
-            <div className="timeline__item" key={item.year}>
-              <span className="timeline__year">{item.year}</span>
-              <h3 className="timeline__role">{item.role}</h3>
-              <p className="timeline__desc">{item.desc}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-    </main>
-  )
+/* === Skills Grid overrides === */
+.about-skills .tag {
+  margin-top: 0.75rem;
+}
+
+/* === Timeline === */
+.about-timeline {
+  position: relative;
+  padding-left: 2.5rem;
+  margin-top: 1.5rem;
+}
+
+.about-timeline::before {
+  content: '';
+  position: absolute;
+  left: 0.5rem;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--border);
+}
+
+.about-timeline-entry {
+  position: relative;
+  margin-bottom: 2rem;
+}
+
+.about-timeline-entry:last-child {
+  margin-bottom: 0;
+}
+
+.about-timeline-entry::before {
+  content: '';
+  position: absolute;
+  left: -2.1rem;
+  top: 0.35rem;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--accent);
+  border: 2px solid var(--surface);
+  box-shadow: 0 0 0 2px var(--accent-light);
+}
+
+.about-timeline-year {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.25rem;
+}
+
+.about-timeline-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 0.25rem;
+}
+
+.about-timeline-desc {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1.6;
 }
