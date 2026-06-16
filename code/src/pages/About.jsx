@@ -2,106 +2,103 @@ import React from 'react';
 import './About.css';
 
 const skills = [
-  'React',
-  'TypeScript',
-  'Figma',
-  'Node.js',
-  'Design Systems',
-  'CSS / Tailwind',
-  'Next.js',
-  'Prototyping',
-  'User Research',
-  'Creative Coding',
+  { name: 'React', icon: '⚛️' },
+  { name: 'TypeScript', icon: '🔷' },
+  { name: 'Node.js', icon: '🟢' },
+  { name: 'Figma', icon: '🎨' },
+  { name: 'Python', icon: '🐍' },
+  { name: 'AWS', icon: '☁️' },
+  { name: 'GraphQL', icon: '◆' },
+  { name: 'Tailwind CSS', icon: '🌊' },
+  { name: 'PostgreSQL', icon: '🐘' },
+  { name: 'Docker', icon: '🐳' },
+  { name: 'Git', icon: '🔀' },
+  { name: 'Next.js', icon: '▲' },
 ];
 
 const timeline = [
-  {
-    year: '2016',
-    title: 'Started in Product Design',
-    description: 'Joined a small studio in Brooklyn, designing interfaces for early-stage startups.',
-  },
-  {
-    year: '2018',
-    title: 'Moved into Frontend Engineering',
-    description: 'Began writing production code alongside designers, bridging the gap between mock-up and markup.',
-  },
-  {
-    year: '2021',
-    title: 'Led a Design System at Scale',
-    description: 'Built and maintained a component library adopted by four product teams across the organization.',
-  },
-  {
-    year: '2024',
-    title: 'Went Independent',
-    description: 'Launched a freelance practice focused on design-engineering partnerships and creative technology.',
-  },
+  { year: '2016', role: 'Junior Frontend Developer', company: 'PixelCraft Studios' },
+  { year: '2018', role: 'Senior UI Engineer', company: 'Wavelength Digital' },
+  { year: '2021', role: 'Lead Product Designer & Developer', company: 'Nimbus Labs' },
+  { year: '2024', role: 'Freelance Creative Technologist', company: 'Independent' },
 ];
 
 export default function About() {
   return (
-    <div className="about">
-      {/* Hero */}
+    <div className="about-page">
+      {/* Hero Section */}
       <section className="about-hero">
-        <div className="about-hero__content">
-          <h1 className="about-hero__heading">About Me</h1>
+        <div className="about-hero-content">
+          <h1 className="about-hero-heading">About Me</h1>
+          <p className="about-hero-tagline">
+            Designer, developer, and lifelong tinkerer — turning ideas into interfaces people love.
+          </p>
         </div>
       </section>
 
-      {/* Bio */}
+      {/* Two-Column Bio */}
       <section className="about-bio">
-        <div className="about-bio__avatar">
-          <div className="about-bio__circle" aria-label="Alex Morgan initials">
-            AM
-          </div>
+        <div className="about-bio-left">
+          <div className="about-avatar" aria-label="Avatar placeholder" />
+          <h2 className="about-name">Alex Morgan</h2>
+          <p className="about-title">Creative Technologist &amp; Full-Stack Designer</p>
         </div>
-        <div className="about-bio__text">
+        <div className="about-bio-right">
           <p>
-            I'm a designer and frontend engineer based in Brooklyn, New York.
-            For the past eight years I've been working at the intersection of
-            visual design and code, helping teams build products that are both
-            beautiful and technically sound.
+            I got my start back in 2016, fresh out of a graphic design program and absolutely
+            obsessed with the idea that code could be a creative medium. I landed a junior role at
+            a tiny agency called PixelCraft Studios, where I learned that building for the web is
+            equal parts empathy, craft, and stubbornness. Those early days of wrestling with CSS
+            floats and jQuery plugins taught me resilience — and a deep appreciation for modern tooling.
           </p>
           <p>
-            My background spans product design, creative prototyping, and
-            frontend architecture. I believe the best digital experiences emerge
-            when the people shaping pixels also understand the systems that
-            render them.
+            Over the next several years I moved into increasingly senior roles, eventually leading
+            product design and frontend engineering at Nimbus Labs. There I had the chance to ship
+            three products from zero to launch, build a design system used by forty engineers, and
+            mentor a small team of incredibly talented designers and developers. It was also where I
+            fell in love with the space between design and engineering — the messy, fertile ground
+            where prototypes become products.
           </p>
           <p>
-            I'm drawn to craft—the typography, the micro-interactions, the
-            performance budgets. Every detail is an opportunity to show care for
-            the people who use what we build.
+            Today I work independently as a creative technologist, partnering with startups and
+            established teams who need someone fluent in both design and code. Whether it's rapid
+            prototyping, full-stack web applications, or accessibility audits, I bring eight-plus
+            years of cross-disciplinary experience and a genuine enthusiasm for solving hard problems
+            with elegant solutions.
           </p>
           <p>
-            When I'm not designing or coding, you'll find me experimenting with
-            generative art, exploring record shops, or walking the Brooklyn
-            waterfront with a camera.
+            When I'm not at a keyboard you'll find me trail running, experimenting with generative
+            art, or trying (and mostly failing) to bake sourdough that looks as good as the
+            Instagram posts. I believe great work comes from curiosity, collaboration, and just
+            enough caffeine.
           </p>
         </div>
       </section>
 
-      {/* Skills */}
+      {/* Skills & Tools */}
       <section className="about-skills">
-        <h2 className="section-heading">Skills &amp; Tools</h2>
-        <div className="about-skills__list">
+        <h2 className="about-section-heading">Skills &amp; Tools</h2>
+        <div className="about-skills-grid">
           {skills.map((skill) => (
-            <span className="about-skills__chip" key={skill}>
-              {skill}
-            </span>
+            <div key={skill.name} className="about-skill-chip">
+              <span className="about-skill-icon">{skill.icon}</span>
+              <span className="about-skill-name">{skill.name}</span>
+            </div>
           ))}
         </div>
       </section>
 
       {/* Timeline */}
       <section className="about-timeline">
-        <h2 className="section-heading">Journey</h2>
-        <div className="about-timeline__list">
-          {timeline.map((item) => (
-            <div className="about-timeline__item" key={item.year}>
-              <span className="about-timeline__year">{item.year}</span>
-              <div className="about-timeline__content">
-                <h3 className="about-timeline__title">{item.title}</h3>
-                <p className="about-timeline__desc">{item.description}</p>
+        <h2 className="about-section-heading">Career Timeline</h2>
+        <div className="about-timeline-track">
+          {timeline.map((item, index) => (
+            <div key={index} className="about-timeline-item">
+              <div className="about-timeline-dot" />
+              <div className="about-timeline-content">
+                <span className="about-timeline-year">{item.year}</span>
+                <h3 className="about-timeline-role">{item.role}</h3>
+                <p className="about-timeline-company">{item.company}</p>
               </div>
             </div>
           ))}
