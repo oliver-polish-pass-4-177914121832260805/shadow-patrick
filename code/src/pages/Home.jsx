@@ -1,41 +1,75 @@
+import React from 'react';
 import './Home.css';
-import { Link } from 'react-router-dom';
 
-function Home() {
+const featuredProjects = [
+  {
+    title: 'Pulse Analytics',
+    description:
+      'A real-time business intelligence dashboard that turns raw event streams into actionable insights with live visualizations.',
+    tags: ['React', 'D3.js', 'WebSocket', 'Node.js'],
+  },
+  {
+    title: 'Voyager CMS',
+    description:
+      'A headless content platform with a drag-and-drop page builder, role-based workflows, and a blazing-fast GraphQL API.',
+    tags: ['Next.js', 'GraphQL', 'PostgreSQL', 'Docker'],
+  },
+  {
+    title: 'Nimbus Deploy',
+    description:
+      'An opinionated CI/CD toolkit that takes apps from commit to production in minutes with zero-config cloud deployments.',
+    tags: ['Go', 'Terraform', 'AWS', 'GitHub Actions'],
+  },
+];
+
+export default function Home() {
   return (
-    <div className="page-home">
+    <>
+      {/* ── Hero ── */}
       <section className="hero">
-        <span className="hero-badge">Welcome to my portfolio</span>
-        <h1>Hi, I'm Alex Chen</h1>
-        <p>A full-stack developer crafting elegant digital experiences with code and creativity.</p>
-        <div className="hero-buttons">
-          <Link to="/projects" className="btn btn-primary">View My Work</Link>
-          <Link to="/contact" className="btn btn-outline">Get In Touch</Link>
+        <div className="hero-content">
+          <span className="hero-eyebrow">Portfolio</span>
+          <h1 className="hero-title">
+            Hi, I'm <span className="gradient-text">Alex</span>
+          </h1>
+          <p className="hero-tagline">
+            I design and build thoughtful digital experiences — blending clean
+            code with bold ideas to ship products people love.
+          </p>
+          <div className="hero-actions">
+            <a href="/projects" className="btn btn-primary">
+              View My Work
+            </a>
+            <a href="/contact" className="btn btn-outline">
+              Get in Touch
+            </a>
+          </div>
         </div>
       </section>
 
-      <section className="section highlights">
-        <h2>What I Do</h2>
-        <div className="card-grid card-grid-3">
-          <div className="card">
-            <div className="card-icon">⚡</div>
-            <h4>Web Development</h4>
-            <p>Building performant, accessible web applications with modern frameworks and best practices.</p>
-          </div>
-          <div className="card">
-            <div className="card-icon">🎨</div>
-            <h4>UI/UX Design</h4>
-            <p>Designing intuitive interfaces that delight users and solve real problems.</p>
-          </div>
-          <div className="card">
-            <div className="card-icon">🚀</div>
-            <h4>Performance</h4>
-            <p>Optimizing applications for speed, scalability, and exceptional user experience.</p>
-          </div>
+      {/* ── Featured Work ── */}
+      <section className="featured-section section">
+        <h2 className="featured-heading">Featured Work</h2>
+        <p className="featured-sub">
+          A selection of projects I've designed and shipped recently.
+        </p>
+
+        <div className="card-grid">
+          {featuredProjects.map((project) => (
+            <article className="card featured-card" key={project.title}>
+              <h3 className="card-title">{project.title}</h3>
+              <p className="card-desc">{project.description}</p>
+              <div className="card-tags">
+                {project.tags.map((tag) => (
+                  <span className="tag" key={tag}>
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            </article>
+          ))}
         </div>
       </section>
-    </div>
+    </>
   );
 }
-
-export default Home;
