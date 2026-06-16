@@ -1,75 +1,109 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import './Projects.css';
+
+const categories = ['All', 'Product', 'Engineering', 'Creative'];
 
 const projects = [
   {
-    name: 'E-commerce Platform',
-    description: 'Full-stack storefront with cart, checkout, and Stripe integration.',
-    tags: ['React', 'Node.js'],
+    id: 1,
+    title: 'Nexus Dashboard',
+    category: 'Product',
+    description: 'A real-time analytics platform redesigned for clarity, speed, and executive-level decision making.',
+    gradient: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
   },
   {
-    name: 'Weather App',
-    description: 'Real-time forecasts with location search and animated radar maps.',
-    tags: ['React Native', 'OpenWeather API'],
+    id: 2,
+    title: 'Verdant Commerce',
+    category: 'Engineering',
+    description: 'Headless e-commerce engine built on event-driven architecture handling 50k concurrent users.',
+    gradient: 'linear-gradient(135deg, #11998e 0%, #38ef7d 100%)',
   },
   {
-    name: 'Task Manager',
-    description: 'Kanban-style productivity tool with drag-and-drop and due dates.',
-    tags: ['Vue.js', 'Firebase'],
+    id: 3,
+    title: 'Luminary Brand System',
+    category: 'Creative',
+    description: 'Full visual identity and design system for a climate-tech startup, from logo to component library.',
+    gradient: 'linear-gradient(135deg, #F97316 0%, #FACC15 100%)',
   },
   {
-    name: 'AI Chat Interface',
-    description: 'Conversational UI powered by large language models with streaming responses.',
-    tags: ['TypeScript', 'OpenAI API'],
+    id: 4,
+    title: 'Pulse Health API',
+    category: 'Engineering',
+    description: 'HIPAA-compliant REST API powering wearable health data ingestion for 200k+ daily active users.',
+    gradient: 'linear-gradient(135deg, #2563EB 0%, #06B6D4 100%)',
   },
   {
-    name: 'Blog Platform',
-    description: 'Markdown-based CMS with SEO optimization and RSS feed generation.',
-    tags: ['Next.js', 'MDX'],
+    id: 5,
+    title: 'Arc Social Redesign',
+    category: 'Product',
+    description: 'Led the product strategy and UX overhaul that lifted daily engagement by 38% in three months.',
+    gradient: 'linear-gradient(135deg, #EC4899 0%, #8B5CF6 100%)',
   },
   {
-    name: 'Design System',
-    description: 'Reusable component library with tokens, themes, and Storybook docs.',
-    tags: ['Figma', 'Storybook'],
+    id: 6,
+    title: 'Kinetic Motion Reel',
+    category: 'Creative',
+    description: 'Animated brand film combining 3D renders and motion typography for a fintech product launch.',
+    gradient: 'linear-gradient(135deg, #0F172A 0%, #6366F1 100%)',
   },
 ];
 
-const filters = ['All', 'Web', 'Mobile', 'Design'];
-
 export default function Projects() {
+  const [active, setActive] = useState('All');
+
+  const filtered = active === 'All'
+    ? projects
+    : projects.filter((p) => p.category === active);
+
   return (
-    <>
-      <section className="hero projects-hero">
+    <div className="projects-page">
+      {/* Hero */}
+      <section className="projects-hero">
         <h1>Projects</h1>
-        <p>A selection of work I've built — from production apps to open-source tools.</p>
+        <p>A selection of recent work across product, code, and creative direction.</p>
       </section>
 
-      <section className="section">
-        <div className="filter-bar">
-          {filters.map((f, i) => (
-            <button
-              key={f}
-              className={`filter-btn${i === 0 ? ' active' : ''}`}
-            >
-              {f}
-            </button>
-          ))}
-        </div>
+      {/* Filter Bar */}
+      <div className="projects-filter">
+        {categories.map((cat) => (
+          <button
+            key={cat}
+            className={`filter-chip ${active === cat ? 'active' : ''}`}
+            onClick={() => setActive(cat)}
+          >
+            {cat}
+          </button>
+        ))}
+      </div>
 
-        <div className="card-grid">
-          {projects.map((p) => (
-            <div className="card" key={p.name}>
-              <h3>{p.name}</h3>
-              <p>{p.description}</p>
-              <div>
-                {p.tags.map((t) => (
-                  <span className="tag" key={t}>{t}</span>
-                ))}
-              </div>
+      {/* Project Grid */}
+      <div className="projects-grid">
+        {filtered.map((project) => (
+          <div key={project.id} className="project-card">
+            <div
+              className="project-card-image"
+              style={{ background: project.gradient }}
+            />
+            <div className="project-card-body">
+              <span className="project-card-tag">{project.category}</span>
+              <h3 className="project-card-title">{project.title}</h3>
+              <p className="project-card-desc">{project.description}</p>
+              <a href="#" className="project-card-link">
+                View case study →
+              </a>
             </div>
-          ))}
-        </div>
+          </div>
+        ))}
+      </div>
+
+      {/* CTA Strip */}
+      <section className="projects-cta">
+        <p>Have a project in mind?</p>
+        <Link to="/contact" className="cta-link">
+          Get in touch
+        </Link>
       </section>
-    </>
+    </div>
   );
 }
