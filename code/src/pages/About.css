@@ -1,195 +1,270 @@
-/* ===== About.css ===== */
+/* ============================================
+   About Page Styles
+   ============================================ */
 
-/* ---------- Hero ---------- */
+/* ---- Hero Section ---- */
 .about-hero {
   min-height: 50vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 4rem 1.5rem;
-  background-image:
-    url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%230F172A' fill-opacity='0.04'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"),
-    linear-gradient(135deg, #FEF3C7 0%, #FDE68A 100%);
+  background: linear-gradient(135deg, #f59e0b, #f97316, #e11d48);
+  padding: 4rem 2rem;
 }
 
-.about-hero__content {
+.about-hero-content {
+  max-width: 720px;
   text-align: center;
 }
 
-.about-hero__heading {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 3rem;
-  font-weight: 700;
-  color: #0F172A;
+.about-hero-heading {
+  font-family: var(--font-heading, 'Inter', sans-serif);
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: -0.02em;
+  margin: 0 0 1rem;
+  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.18);
+}
+
+.about-hero-tagline {
+  font-size: clamp(1rem, 2.5vw, 1.35rem);
+  color: rgba(255, 255, 255, 0.92);
+  line-height: 1.65;
   margin: 0;
+  font-weight: 400;
 }
 
-/* ---------- Bio section ---------- */
+/* ---- Bio Section ---- */
 .about-bio {
-  max-width: 1080px;
+  max-width: 1100px;
   margin: 0 auto;
-  padding: 5rem 1.5rem;
-  display: grid;
-  grid-template-columns: 1fr 2fr;
-  gap: 3rem;
-  align-items: start;
+  padding: 5rem 2rem;
+  display: flex;
+  flex-direction: row;
+  gap: 4rem;
+  align-items: flex-start;
 }
 
-.about-bio__avatar {
+/* Left: avatar + name */
+.about-bio-left {
+  flex: 0 0 280px;
   display: flex;
-  justify-content: center;
-  align-items: flex-start;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
   position: sticky;
   top: 2rem;
 }
 
-.about-bio__circle {
-  width: 180px;
-  height: 180px;
+.about-avatar {
+  width: 200px;
+  height: 200px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #6366F1 0%, #8B5CF6 100%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #ffffff;
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 3.5rem;
-  font-weight: 700;
-  letter-spacing: 0.05em;
-  box-shadow: 0 8px 24px rgba(99, 102, 241, 0.25);
-}
-
-.about-bio__text {
-  display: flex;
-  flex-direction: column;
-  gap: 1.25rem;
-}
-
-.about-bio__text p {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 1.05rem;
-  line-height: 1.75;
-  color: #0F172A;
-  margin: 0;
-}
-
-/* ---------- Section headings (shared) ---------- */
-.section-heading {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 2rem;
-  font-weight: 700;
-  color: #0F172A;
-  text-align: center;
-  margin: 0 0 2.5rem;
-}
-
-/* ---------- Skills ---------- */
-.about-skills {
-  background: #F8FAFC;
-  padding: 5rem 1.5rem;
-}
-
-.about-skills__list {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 0.75rem;
-  max-width: 720px;
-  margin: 0 auto;
-}
-
-.about-skills__chip {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 0.9rem;
-  font-weight: 500;
-  padding: 0.5rem 1.15rem;
-  border-radius: 9999px;
-  background: rgba(99, 102, 241, 0.1);
-  color: #6366F1;
-  transition: background 0.2s ease;
-}
-
-.about-skills__chip:hover {
-  background: rgba(99, 102, 241, 0.18);
-}
-
-/* ---------- Timeline ---------- */
-.about-timeline {
-  max-width: 720px;
-  margin: 0 auto;
-  padding: 5rem 1.5rem;
-}
-
-.about-timeline__list {
-  position: relative;
-  border-left: 2px solid #E2E8F0;
-  padding-left: 2rem;
-  display: flex;
-  flex-direction: column;
-  gap: 2.5rem;
-}
-
-.about-timeline__item {
-  display: flex;
-  gap: 1.5rem;
-  align-items: flex-start;
-}
-
-.about-timeline__year {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 0.85rem;
-  font-weight: 700;
-  color: #6366F1;
-  min-width: 3.5rem;
-  padding-top: 0.15rem;
+  background: linear-gradient(135deg, #f59e0b, #f97316, #e11d48);
+  box-shadow:
+    0 12px 40px rgba(249, 115, 22, 0.28),
+    0 4px 12px rgba(0, 0, 0, 0.08);
+  margin-bottom: 1.5rem;
   flex-shrink: 0;
 }
 
-.about-timeline__content {
+.about-name {
+  font-family: var(--font-heading, 'Inter', sans-serif);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-text, #1f2937);
+  margin: 0 0 0.4rem;
+}
+
+.about-title {
+  font-size: 0.95rem;
+  color: var(--color-muted, #6b7280);
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* Right: bio paragraphs */
+.about-bio-right {
+  flex: 1;
+}
+
+.about-bio-right p {
+  font-size: 1.05rem;
+  line-height: 1.78;
+  color: var(--color-text, #1f2937);
+  margin: 0 0 1.5rem;
+}
+
+.about-bio-right p:last-child {
+  margin-bottom: 0;
+}
+
+/* ---- Section Headings (shared) ---- */
+.about-section-heading {
+  font-family: var(--font-heading, 'Inter', sans-serif);
+  font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+  font-weight: 700;
+  color: var(--color-text, #1f2937);
+  text-align: center;
+  margin: 0 0 2.5rem;
+  letter-spacing: -0.01em;
+}
+
+/* ---- Skills Section ---- */
+.about-skills {
+  background: var(--color-bg-alt, #f9fafb);
+  padding: 5rem 2rem;
+}
+
+.about-skills-grid {
+  max-width: 900px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+
+.about-skill-chip {
   display: flex;
-  flex-direction: column;
-  gap: 0.35rem;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.85rem 1.1rem;
+  background: #fff;
+  border: 1.5px solid rgba(249, 115, 22, 0.35);
+  border-radius: 100px;
+  font-size: 0.92rem;
+  font-weight: 500;
+  color: var(--color-text, #1f2937);
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+  cursor: default;
 }
 
-.about-timeline__title {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 1.1rem;
+.about-skill-chip:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(249, 115, 22, 0.16);
+  border-color: #f97316;
+}
+
+.about-skill-icon {
+  font-size: 1.2rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.about-skill-name {
+  white-space: nowrap;
+}
+
+/* ---- Timeline Section ---- */
+.about-timeline {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 5rem 2rem;
+}
+
+.about-timeline-track {
+  position: relative;
+  padding-left: 2.5rem;
+}
+
+/* The vertical line */
+.about-timeline-track::before {
+  content: '';
+  position: absolute;
+  left: 0.5rem;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(to bottom, #f59e0b, #e11d48);
+  border-radius: 2px;
+}
+
+.about-timeline-item {
+  position: relative;
+  padding-bottom: 2.5rem;
+}
+
+.about-timeline-item:last-child {
+  padding-bottom: 0;
+}
+
+/* Dot on the line */
+.about-timeline-dot {
+  position: absolute;
+  left: -2.5rem;
+  top: 0.35rem;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #f97316;
+  border: 3px solid #fff;
+  box-shadow:
+    0 0 0 2px #f97316,
+    0 2px 8px rgba(249, 115, 22, 0.3);
+  z-index: 1;
+}
+
+.about-timeline-year {
+  display: inline-block;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #f97316;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.3rem;
+}
+
+.about-timeline-role {
+  font-family: var(--font-heading, 'Inter', sans-serif);
+  font-size: 1.15rem;
   font-weight: 600;
-  color: #0F172A;
+  color: var(--color-text, #1f2937);
+  margin: 0 0 0.25rem;
+}
+
+.about-timeline-company {
+  font-size: 0.95rem;
+  color: var(--color-muted, #6b7280);
   margin: 0;
 }
 
-.about-timeline__desc {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 0.9rem;
-  color: #64748B;
-  line-height: 1.6;
-  margin: 0;
-}
-
-/* ---------- Responsive ---------- */
+/* ---- Responsive ---- */
 @media (max-width: 768px) {
-  .about-hero__heading {
-    font-size: 2.25rem;
-  }
-
   .about-bio {
-    grid-template-columns: 1fr;
-    text-align: center;
-  }
-
-  .about-bio__avatar {
-    position: static;
-  }
-
-  .about-bio__circle {
-    width: 140px;
-    height: 140px;
-    font-size: 2.75rem;
-  }
-
-  .about-timeline__item {
     flex-direction: column;
-    gap: 0.25rem;
+    align-items: center;
+    gap: 2.5rem;
+    padding: 3.5rem 1.5rem;
+  }
+
+  .about-bio-left {
+    position: static;
+    flex: none;
+  }
+
+  .about-avatar {
+    width: 160px;
+    height: 160px;
+  }
+
+  .about-skills-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .about-timeline {
+    padding: 3.5rem 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .about-skills-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+  }
+
+  .about-skill-chip {
+    padding: 0.7rem 0.9rem;
+    font-size: 0.85rem;
   }
 }
