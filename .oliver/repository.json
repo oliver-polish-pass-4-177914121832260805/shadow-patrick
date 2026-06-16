@@ -2,7 +2,7 @@
   "version": "1.1",
   "projectId": "999319d3-5993-40ad-84a1-ccce30abc072",
   "createdAt": "2026-06-11T15:02:56.695Z",
-  "updatedAt": "2026-06-16T00:08:01.226Z",
+  "updatedAt": "2026-06-16T00:13:22.769Z",
   "files": [
     {
       "id": "44581b2b-5e12-49e4-8481-b7d1e2b54f6a",
@@ -654,10 +654,10 @@
       "path": "code/index.html",
       "folder": "code",
       "mimeType": "text/html",
-      "size": 4932,
+      "size": 5467,
       "sha": "",
       "createdAt": "2026-06-13T00:57:54.338Z",
-      "updatedAt": "2026-06-16T00:08:01.226Z",
+      "updatedAt": "2026-06-16T00:13:22.769Z",
       "tags": [],
       "actor": "plugin",
       "deleted": false
@@ -781,6 +781,58 @@
       "updatedAt": "2026-06-16T00:07:32.193Z",
       "tags": [],
       "actor": "plugin"
+    },
+    {
+      "id": "2b894375-60f9-4db1-9e2f-0c06816fb7b9",
+      "name": "styles.css",
+      "path": "code/styles.css",
+      "folder": "code",
+      "mimeType": "text/css",
+      "size": 4394,
+      "sha": "",
+      "createdAt": "2026-06-16T00:13:22.769Z",
+      "updatedAt": "2026-06-16T00:13:22.769Z",
+      "tags": [],
+      "actor": "plugin"
+    },
+    {
+      "id": "574d0bf2-ca1f-4a7b-b494-d82adba6227a",
+      "name": "about.html",
+      "path": "code/about.html",
+      "folder": "code",
+      "mimeType": "text/html",
+      "size": 7840,
+      "sha": "",
+      "createdAt": "2026-06-16T00:13:22.769Z",
+      "updatedAt": "2026-06-16T00:13:22.769Z",
+      "tags": [],
+      "actor": "plugin"
+    },
+    {
+      "id": "eb097e22-6e00-4253-a035-01b13445b677",
+      "name": "projects.html",
+      "path": "code/projects.html",
+      "folder": "code",
+      "mimeType": "text/html",
+      "size": 8361,
+      "sha": "",
+      "createdAt": "2026-06-16T00:13:22.769Z",
+      "updatedAt": "2026-06-16T00:13:22.769Z",
+      "tags": [],
+      "actor": "plugin"
+    },
+    {
+      "id": "6558e322-c4e2-4064-885a-29c2d1e4d93a",
+      "name": "contact.html",
+      "path": "code/contact.html",
+      "folder": "code",
+      "mimeType": "text/html",
+      "size": 8849,
+      "sha": "",
+      "createdAt": "2026-06-16T00:13:22.769Z",
+      "updatedAt": "2026-06-16T00:13:22.769Z",
+      "tags": [],
+      "actor": "plugin"
     }
   ],
   "externalLinks": [
@@ -794,7 +846,7 @@
       "updatedAt": "2026-06-15T20:01:03.083Z"
     }
   ],
-  "storageUsed": 1353618,
+  "storageUsed": 1383597,
   "folders": [
     {
       "name": "previous-briefs",

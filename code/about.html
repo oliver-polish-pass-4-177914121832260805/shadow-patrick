@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About — Patrick Reyes</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .about-hero { padding-top: calc(var(--nav-h) + 3rem); }
+
+    .bio-grid {
+      display: grid; grid-template-columns: 1fr 2fr;
+      gap: 3rem; margin-top: 2.5rem; align-items: start;
+    }
+    .bio-photo {
+      width: 100%; aspect-ratio: 4/5; border-radius: var(--radius);
+      background: linear-gradient(160deg, #232333 0%, #1a1a24 100%);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 5rem; color: var(--clr-accent); border: 1px solid var(--clr-border);
+    }
+    .bio-text p { color: var(--clr-muted); margin-bottom: 1.15rem; font-size: 1.02rem; }
+    .bio-text strong { color: var(--clr-text); }
+
+    /* Skills */
+    .skills { margin-top: 4rem; }
+    .skills-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem; margin-top: 2rem;
+    }
+    .skill-card { text-align: center; padding: 2rem 1.5rem; }
+    .skill-card__icon { font-size: 2.2rem; margin-bottom: .75rem; }
+    .skill-card__title { font-weight: 700; font-size: 1.05rem; margin-bottom: .5rem; }
+    .skill-card__desc { font-size: .88rem; color: var(--clr-muted); }
+
+    /* Timeline */
+    .timeline { margin-top: 4rem; }
+    .timeline__list { margin-top: 2rem; position: relative; padding-left: 2rem; }
+    .timeline__list::before {
+      content: ''; position: absolute; left: 5px; top: 0; bottom: 0;
+      width: 2px; background: var(--clr-border);
+    }
+    .timeline__item {
+      position: relative; margin-bottom: 2rem; padding-left: 1.5rem;
+    }
+    .timeline__item::before {
+      content: ''; position: absolute; left: -2rem; top: 6px;
+      width: 12px; height: 12px; border-radius: 50%;
+      background: var(--clr-accent); border: 3px solid var(--clr-bg);
+    }
+    .timeline__item h4 { font-weight: 700; }
+    .timeline__item .date { font-size: .8rem; color: var(--clr-accent); margin-bottom: .25rem; }
+    .timeline__item p { color: var(--clr-muted); font-size: .92rem; margin-top: .25rem; }
+
+    @media (max-width: 768px) {
+      .bio-grid { grid-template-columns: 1fr; }
+      .bio-photo { max-width: 260px; margin: 0 auto; }
+      .skills-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="index.html" class="nav__logo">patrick<span>.</span></a>
+  <ul class="nav__links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html" class="active">About</a></li>
+    <li><a href="projects.html">Projects</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <button class="nav__burger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- About Hero -->
+<section class="about-hero">
+  <div class="container">
+    <span class="section-label">About Me</span>
+    <h1 class="section-title">Designer, developer, and<br/>relentless problem solver.</h1>
+    <p class="section-subtitle">Based in Brooklyn, NY — working at the intersection of design and engineering since 2018.</p>
+
+    <!-- Bio -->
+    <div class="bio-grid">
+      <div class="bio-photo">PR</div>
+      <div class="bio-text">
+        <p>I'm <strong>Patrick Reyes</strong>, a full-stack product designer who believes great software starts with deep empathy. I've spent the last eight years collaborating with startups, agencies, and Fortune 500 teams to ship products people genuinely love using.</p>
+        <p>My journey started with a psychology degree and a curiosity about why people abandon forms. That led me into UX research, then UI design, and eventually front-end engineering — because I kept wanting to be closer to the final product.</p>
+        <p>Today I lead design-to-code workflows end-to-end: from discovery interviews and wireframes through to production React components and design-system tokens. I believe <strong>the best designers write code</strong>, and the best engineers understand people.</p>
+        <p>When I'm not pushing pixels, you'll find me teaching a weekend UX workshop at the local library, tinkering with generative art, or hunting for the best cold brew in New York.</p>
+      </div>
+    </div>
+
+    <!-- Skills -->
+    <div class="skills">
+      <span class="section-label">What I Do</span>
+      <h2 class="section-title">Core competencies</h2>
+      <div class="skills-grid">
+        <div class="card skill-card">
+          <div class="skill-card__icon">🎨</div>
+          <div class="skill-card__title">Product Design</div>
+          <div class="skill-card__desc">End-to-end UX/UI — research, wireframes, high-fidelity prototypes, usability testing, and handoff.</div>
+        </div>
+        <div class="card skill-card">
+          <div class="skill-card__icon">⚛️</div>
+          <div class="skill-card__title">Front-End Engineering</div>
+          <div class="skill-card__desc">React, TypeScript, Next.js. Accessible, performant, and pixel-perfect component libraries.</div>
+        </div>
+        <div class="card skill-card">
+          <div class="skill-card__icon">🧱</div>
+          <div class="skill-card__title">Design Systems</div>
+          <div class="skill-card__desc">Scalable token-based systems in Figma + code that keep teams consistent from 5 to 500 designers.</div>
+        </div>
+        <div class="card skill-card">
+          <div class="skill-card__icon">📊</div>
+          <div class="skill-card__title">UX Research</div>
+          <div class="skill-card__desc">Interviews, diary studies, card sorting, heuristic reviews — turning signal into strategy.</div>
+        </div>
+        <div class="card skill-card">
+          <div class="skill-card__icon">🚀</div>
+          <div class="skill-card__title">Growth & Experimentation</div>
+          <div class="skill-card__desc">A/B testing, funnel analytics, and rapid prototypes to validate ideas before full builds.</div>
+        </div>
+        <div class="card skill-card">
+          <div class="skill-card__icon">🤝</div>
+          <div class="skill-card__title">Workshop Facilitation</div>
+          <div class="skill-card__desc">Design sprints, stakeholder alignment sessions, and roadmap workshops for cross-functional teams.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Timeline -->
+    <div class="timeline">
+      <span class="section-label">Career</span>
+      <h2 class="section-title">Experience</h2>
+      <div class="timeline__list">
+        <div class="timeline__item">
+          <div class="date">2023 – Present</div>
+          <h4>Staff Product Designer — <strong>Stripe</strong></h4>
+          <p>Leading the Payments Dashboard redesign. Shipped a token-based design system adopted by 14 teams.</p>
+        </div>
+        <div class="timeline__item">
+          <div class="date">2020 – 2023</div>
+          <h4>Senior Designer — <strong>Notion</strong></h4>
+          <p>Owned the collaboration suite. Drove a 34% increase in daily active editors through iterative prototyping.</p>
+        </div>
+        <div class="timeline__item">
+          <div class="date">2018 – 2020</div>
+          <h4>UX Designer — <strong>IDEO</strong></h4>
+          <p>Consulted on healthcare and education clients. Ran 60+ user interviews and 12 design sprints.</p>
+        </div>
+        <div class="timeline__item">
+          <div class="date">2016 – 2018</div>
+          <h4>Junior Designer — <strong>Freelance</strong></h4>
+          <p>Built branding and web experiences for early-stage startups. Learned that shipping beats perfection.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <p>© 2026 Patrick Reyes. Designed & built with care.</p>
+</footer>
+
+</body>
+</html>

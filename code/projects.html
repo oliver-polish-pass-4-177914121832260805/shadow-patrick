@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Projects — Patrick Reyes</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .projects-hero { padding-top: calc(var(--nav-h) + 3rem); }
+
+    .projects-grid {
+      display: grid; grid-template-columns: repeat(2, 1fr);
+      gap: 1.75rem; margin-top: 2.5rem;
+    }
+
+    .project-card {
+      display: flex; flex-direction: column; overflow: hidden; padding: 0;
+    }
+    .project-card__thumb {
+      height: 200px; display: flex; align-items: center; justify-content: center;
+      font-size: 3.5rem; position: relative; overflow: hidden;
+    }
+    .project-card__thumb::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(to bottom, transparent 60%, var(--clr-surface));
+    }
+    .project-card__body { padding: 1.5rem 1.75rem 1.75rem; flex: 1; display: flex; flex-direction: column; }
+
+    .project-card__tags { display: flex; gap: .5rem; flex-wrap: wrap; margin-bottom: .75rem; }
+    .project-card__tag {
+      font-size: .7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;
+      padding: .25rem .65rem; border-radius: 50px;
+      background: var(--clr-accent-glow); color: var(--clr-accent);
+    }
+    .project-card__title { font-size: 1.3rem; font-weight: 700; margin-bottom: .5rem; }
+    .project-card__desc { color: var(--clr-muted); font-size: .92rem; flex: 1; margin-bottom: 1.25rem; }
+    .project-card__meta { display: flex; gap: 1.5rem; font-size: .8rem; color: var(--clr-muted); }
+    .project-card__meta span { display: flex; align-items: center; gap: .35rem; }
+
+    .project-card__link {
+      display: inline-flex; align-items: center; gap: .4rem;
+      font-weight: 600; font-size: .9rem; margin-top: 1rem;
+    }
+
+    /* Filter bar */
+    .filter-bar { display: flex; gap: .75rem; flex-wrap: wrap; margin-top: 1.5rem; }
+    .filter-btn {
+      padding: .4rem 1rem; border-radius: 50px; font-size: .82rem; font-weight: 500;
+      background: var(--clr-surface); border: 1px solid var(--clr-border);
+      color: var(--clr-muted); cursor: pointer; transition: .25s;
+    }
+    .filter-btn:hover, .filter-btn.active {
+      background: var(--clr-accent); color: #fff; border-color: var(--clr-accent);
+    }
+
+    /* CTA */
+    .projects-cta {
+      text-align: center; margin-top: 4rem; padding: 3rem;
+      background: var(--clr-surface); border: 1px solid var(--clr-border);
+      border-radius: var(--radius);
+    }
+    .projects-cta h3 { font-size: 1.5rem; font-weight: 700; margin-bottom: .75rem; }
+    .projects-cta p { color: var(--clr-muted); margin-bottom: 1.5rem; }
+
+    @media (max-width: 768px) {
+      .projects-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="index.html" class="nav__logo">patrick<span>.</span></a>
+  <ul class="nav__links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="projects.html" class="active">Projects</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <button class="nav__burger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- Projects -->
+<section class="projects-hero">
+  <div class="container">
+    <span class="section-label">Portfolio</span>
+    <h1 class="section-title">Selected work</h1>
+    <p class="section-subtitle">A curated set of projects spanning fintech, healthcare, and enterprise SaaS — each one a story of turning ambiguity into shipped product.</p>
+
+    <div class="filter-bar">
+      <button class="filter-btn active">All</button>
+      <button class="filter-btn">Fintech</button>
+      <button class="filter-btn">Healthcare</button>
+      <button class="filter-btn">SaaS</button>
+      <button class="filter-btn">Design System</button>
+    </div>
+
+    <div class="projects-grid">
+
+      <!-- Project 1 -->
+      <div class="card project-card">
+        <div class="project-card__thumb" style="background: linear-gradient(135deg, #6c63ff 0%, #4338ca 100%);">💳</div>
+        <div class="project-card__body">
+          <div class="project-card__tags">
+            <span class="project-card__tag">Fintech</span>
+            <span class="project-card__tag">React</span>
+          </div>
+          <h3 class="project-card__title">Meridian Payments Dashboard</h3>
+          <p class="project-card__desc">Redesigned the merchant analytics platform for a Series C payments startup. Introduced real-time revenue forecasting and anomaly alerts, reducing fraud report turnaround from 3 days to 14 minutes.</p>
+          <div class="project-card__meta">
+            <span>📅 2025</span>
+            <span>👥 Team of 6</span>
+            <span>⏱ 4 months</span>
+          </div>
+          <a href="#" class="project-card__link">Case Study →</a>
+        </div>
+      </div>
+
+      <!-- Project 2 -->
+      <div class="card project-card">
+        <div class="project-card__thumb" style="background: linear-gradient(135deg, #34d399 0%, #059669 100%);">🏥</div>
+        <div class="project-card__body">
+          <div class="project-card__tags">
+            <span class="project-card__tag">Healthcare</span>
+            <span class="project-card__tag">UX Research</span>
+          </div>
+          <h3 class="project-card__title">CareLink Patient Portal</h3>
+          <p class="project-card__desc">Led the patient-facing redesign for a regional hospital network's MyChart competitor. Conducted 40 patient interviews and improved appointment-scheduling completion rate from 38% to 81%.</p>
+          <div class="project-card__meta">
+            <span>📅 2024</span>
+            <span>👥 Solo lead</span>
+            <span>⏱ 6 months</span>
+          </div>
+          <a href="#" class="project-card__link">Case Study →</a>
+        </div>
+      </div>
+
+      <!-- Project 3 -->
+      <div class="card project-card">
+        <div class="project-card__thumb" style="background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);">🧱</div>
+        <div class="project-card__body">
+          <div class="project-card__tags">
+            <span class="project-card__tag">Design System</span>
+            <span class="project-card__tag">Figma</span>
+          </div>
+          <h3 class="project-card__title">Foundation DS</h3>
+          <p class="project-card__desc">Built a zero-dependency design system from scratch for a 200-engineer SaaS org. 180 components, Figma-to-code token sync, and WCAG AA compliance — adopted by 14 product teams in the first quarter.</p>
+          <div class="project-card__meta">
+            <span>📅 2024</span>
+            <span>👥 Team of 3</span>
+            <span>⏱ Ongoing</span>
+          </div>
+          <a href="#" class="project-card__link">Case Study →</a>
+        </div>
+      </div>
+
+      <!-- Project 4 -->
+      <div class="card project-card">
+        <div class="project-card__thumb" style="background: linear-gradient(135deg, #ec4899 0%, #be185d 100%);">📦</div>
+        <div class="project-card__body">
+          <div class="project-card__tags">
+            <span class="project-card__tag">SaaS</span>
+            <span class="project-card__tag">Next.js</span>
+          </div>
+          <h3 class="project-card__title">Shipyard — DevOps Console</h3>
+          <p class="project-card__desc">Designed and front-end engineered a deployment pipeline dashboard that visualizes CI/CD workflows. Reduced average deployment review time from 45 minutes to 8 through visual diff and rollback previews.</p>
+          <div class="project-card__meta">
+            <span>📅 2025</span>
+            <span>👥 Team of 4</span>
+            <span>⏱ 5 months</span>
+          </div>
+          <a href="#" class="project-card__link">Case Study →</a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- CTA -->
+    <div class="projects-cta">
+      <h3>Have a project in mind?</h3>
+      <p>I'm currently accepting new engagements for Q3 2026. Let's talk about what we can build together.</p>
+      <a href="contact.html" class="btn btn--primary">Start a Conversation →</a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer" style="margin-top: 4rem;">
+  <p>© 2026 Patrick Reyes. Designed & built with care.</p>
+</footer>
+
+</body>
+</html>
