@@ -1,64 +1,124 @@
+import React, { useState } from 'react';
 import './Contact.css';
 
-function Contact() {
+const contactDetails = [
+  { icon: '✉️', label: 'Email', value: 'hello@example.com' },
+  { icon: '📍', label: 'Location', value: 'San Francisco, CA' },
+  { icon: '🐦', label: 'Twitter', value: '@example' },
+  { icon: '💼', label: 'LinkedIn', value: 'linkedin.com/in/example' },
+];
+
+export default function Contact() {
+  const [form, setForm] = useState({ name: '', email: '', subject: '', message: '' });
+  const [submitted, setSubmitted] = useState(false);
+
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setSubmitted(true);
+    setForm({ name: '', email: '', subject: '', message: '' });
+    setTimeout(() => setSubmitted(false), 4000);
+  };
+
   return (
-    <>
+    <div className="contact-page">
       {/* Hero */}
-      <section className="hero contact-hero">
-        <h1>Get In Touch</h1>
-        <p>
-          Have a project in mind, a question, or just want to say hello?
-          I'd love to hear from you — let's start a conversation.
-        </p>
+      <section className="contact-hero">
+        <h1>Let's talk.</h1>
       </section>
 
-      {/* Two-column layout */}
-      <div className="contact-layout">
-        {/* Left — Contact Form */}
-        <div className="contact-form-container">
-          <h2>Send a Message</h2>
-          <form className="contact-form" onSubmit={(e) => e.preventDefault()}>
-            <div className="form-group">
-              <label htmlFor="name">Name</label>
-              <input type="text" id="name" placeholder="Your full name" />
-            </div>
-            <div className="form-group">
-              <label htmlFor="email">Email</label>
-              <input type="email" id="email" placeholder="you@example.com" />
-            </div>
-            <div className="form-group">
-              <label htmlFor="subject">Subject</label>
-              <input type="text" id="subject" placeholder="What's this about?" />
-            </div>
-            <div className="form-group">
-              <label htmlFor="message">Message</label>
-              <textarea id="message" rows="5" placeholder="Tell me more…"></textarea>
-            </div>
-            <button type="submit" className="btn-primary">Send Message</button>
-          </form>
+      {/* Body */}
+      <section className="contact-body">
+        {/* Left - Info */}
+        <div className="contact-info">
+          <p className="contact-intro">
+            I'm open to freelance, collaborations, and full-time conversations.
+            Best way to reach me is email or the form.
+          </p>
+
+          <ul className="contact-list">
+            {contactDetails.map((item) => (
+              <li key={item.label} className="contact-list-item">
+                <span className="contact-icon">{item.icon}</span>
+                <div>
+                  <span className="contact-label">{item.label}</span>
+                  <span className="contact-value">{item.value}</span>
+                </div>
+              </li>
+            ))}
+          </ul>
         </div>
 
-        {/* Right — Info Cards */}
-        <div className="contact-info">
-          <div className="card">
-            <span className="icon">✉️</span>
-            <h3>Email</h3>
-            <p>hello@yourdomain.com</p>
-          </div>
-          <div className="card">
-            <span className="icon">📍</span>
-            <h3>Location</h3>
-            <p>San Francisco, CA</p>
-          </div>
-          <div className="card">
-            <span className="icon">🌐</span>
-            <h3>Socials</h3>
-            <p>GitHub · LinkedIn · Twitter</p>
-          </div>
+        {/* Right - Form */}
+        <div className="contact-form-wrapper">
+          {submitted ? (
+            <div className="contact-success">
+              <p>✅ Thanks — I'll be in touch.</p>
+            </div>
+          ) : (
+            <form className="contact-form" onSubmit={handleSubmit}>
+              <div className="form-group">
+                <label htmlFor="name">Name</label>
+                <input
+                  id="name"
+                  name="name"
+                  type="text"
+                  value={form.name}
+                  onChange={handleChange}
+                  required
+                  placeholder="Your name"
+                />
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="email">Email</label>
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  value={form.email}
+                  onChange={handleChange}
+                  required
+                  placeholder="you@company.com"
+                />
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="subject">Subject</label>
+                <input
+                  id="subject"
+                  name="subject"
+                  type="text"
+                  value={form.subject}
+                  onChange={handleChange}
+                  required
+                  placeholder="What's this about?"
+                />
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="message">Message</label>
+                <textarea
+                  id="message"
+                  name="message"
+                  value={form.message}
+                  onChange={handleChange}
+                  required
+                  placeholder="Tell me about your project…"
+                  rows={6}
+                />
+              </div>
+
+              <button type="submit" className="submit-btn">
+                Send Message
+              </button>
+            </form>
+          )}
         </div>
-      </div>
-    </>
+      </section>
+    </div>
   );
 }
-
-export default Contact;
