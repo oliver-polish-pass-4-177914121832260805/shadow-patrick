@@ -11,15 +11,18 @@
   --color-primary: #0F172A;
   --color-accent: #6366F1;
   --color-accent-dark: #4F46E5;
+  --color-accent-light: rgba(99,102,241,0.08);
   --color-text: #0F172A;
   --color-muted: #64748B;
   --color-bg: #FFFFFF;
   --color-soft: #F8FAFC;
   --color-border: #E2E8F0;
   --radius: 12px;
+  --radius-lg: 20px;
   --shadow: 0 1px 3px rgba(15,23,42,0.06), 0 4px 12px rgba(15,23,42,0.04);
   --shadow-hover: 0 4px 12px rgba(15,23,42,0.1), 0 8px 24px rgba(15,23,42,0.08);
-  --font: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-heading: 'Space Grotesk', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 html {
@@ -27,12 +30,16 @@ html {
 }
 
 body {
-  font-family: var(--font);
+  font-family: var(--font-body);
   color: var(--color-text);
   background: var(--color-bg);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
 }
 
 a {
@@ -66,9 +73,9 @@ button {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(255,255,255,0.88);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   border-bottom: 1px solid var(--color-border);
 }
 
@@ -82,15 +89,63 @@ button {
 }
 
 .site-logo {
+  font-family: var(--font-heading);
   font-size: 1.25rem;
   font-weight: 700;
   letter-spacing: -0.02em;
   color: var(--color-primary);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.logo-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: var(--color-accent);
+  color: #fff;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 800;
+}
+
+/* Hamburger toggle */
+.site-menu-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  padding: 4px;
+  cursor: pointer;
+  z-index: 110;
+}
+
+.site-menu-toggle span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--color-primary);
+  border-radius: 2px;
+  transition: all 0.25s ease;
+}
+
+.site-menu-toggle.open span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+.site-menu-toggle.open span:nth-child(2) {
+  opacity: 0;
+}
+.site-menu-toggle.open span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
 }
 
 .site-nav {
   display: flex;
-  gap: 8px;
+  gap: 4px;
 }
 
 .site-nav a {
@@ -109,20 +164,34 @@ button {
 
 .site-nav a.active {
   color: var(--color-accent);
-  background: rgba(99,102,241,0.08);
+  background: var(--color-accent-light);
 }
 
 /* === Footer === */
 .site-footer {
   border-top: 1px solid var(--color-border);
   background: var(--color-soft);
-  padding: 32px 24px;
+  padding: 40px 24px;
   text-align: center;
 }
 
 .site-footer__inner {
   max-width: 1200px;
   margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.footer-brand {
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .site-footer p {
@@ -130,31 +199,40 @@ button {
   color: var(--color-muted);
 }
 
-/* === Shared Section Styles === */
-.section-heading {
-  font-size: 2rem;
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  margin-bottom: 1rem;
-  color: var(--color-primary);
-}
-
-.section-subheading {
-  color: var(--color-muted);
-  font-size: 1.1rem;
-  max-width: 600px;
-  margin-bottom: 2.5rem;
-}
-
 /* === Responsive === */
-@media (max-width: 640px) {
-  .site-header__inner {
-    padding: 12px 16px;
+@media (max-width: 768px) {
+  .site-menu-toggle {
+    display: flex;
+  }
+
+  .site-nav {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 280px;
+    height: 100vh;
+    flex-direction: column;
+    background: #fff;
+    padding: 80px 24px 24px;
+    gap: 4px;
+    box-shadow: -4px 0 24px rgba(0,0,0,0.08);
+    transition: right 0.3s ease;
+    z-index: 105;
+  }
+
+  .site-nav--open {
+    right: 0;
   }
 
   .site-nav a {
-    padding: 6px 10px;
-    font-size: 0.8rem;
+    padding: 12px 16px;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .site-header__inner {
+    padding: 12px 16px;
   }
 
   .site-logo {
