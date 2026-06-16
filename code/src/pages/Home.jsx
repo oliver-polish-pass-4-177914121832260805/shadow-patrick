@@ -1,65 +1,48 @@
-import React from 'react';
+import { Link } from 'react-router-dom';
 import './Home.css';
 
-const featuredProjects = [
+const projects = [
   {
-    title: 'Pulse Analytics',
+    name: 'Lumina Dashboard',
     description:
-      'A real-time business intelligence dashboard that turns raw event streams into actionable insights with live visualizations.',
-    tags: ['React', 'D3.js', 'WebSocket', 'Node.js'],
+      'A real-time analytics dashboard built for SaaS teams to monitor KPIs and user engagement.',
+    tags: ['React', 'D3.js', 'Node'],
   },
   {
-    title: 'Voyager CMS',
+    name: 'Verdant E-Commerce',
     description:
-      'A headless content platform with a drag-and-drop page builder, role-based workflows, and a blazing-fast GraphQL API.',
-    tags: ['Next.js', 'GraphQL', 'PostgreSQL', 'Docker'],
+      'Full-stack storefront with cart, checkout, and Stripe integration for a sustainable goods brand.',
+    tags: ['Next.js', 'Stripe', 'PostgreSQL'],
   },
   {
-    title: 'Nimbus Deploy',
+    name: 'Aether Design System',
     description:
-      'An opinionated CI/CD toolkit that takes apps from commit to production in minutes with zero-config cloud deployments.',
-    tags: ['Go', 'Terraform', 'AWS', 'GitHub Actions'],
+      'A component library and design token system adopted across three product teams.',
+    tags: ['Figma', 'Storybook', 'CSS'],
   },
 ];
 
 export default function Home() {
   return (
     <>
-      {/* ── Hero ── */}
-      <section className="hero">
-        <div className="hero-content">
-          <span className="hero-eyebrow">Portfolio</span>
-          <h1 className="hero-title">
-            Hi, I'm <span className="gradient-text">Alex</span>
-          </h1>
-          <p className="hero-tagline">
-            I design and build thoughtful digital experiences — blending clean
-            code with bold ideas to ship products people love.
-          </p>
-          <div className="hero-actions">
-            <a href="/projects" className="btn btn-primary">
-              View My Work
-            </a>
-            <a href="/contact" className="btn btn-outline">
-              Get in Touch
-            </a>
-          </div>
-        </div>
+      {/* Hero */}
+      <section className="hero home-hero">
+        <h1>Hi, I'm Patrick</h1>
+        <p>
+          Designer &amp; developer crafting thoughtful digital experiences —
+          from pixel-perfect interfaces to the systems that power them.
+        </p>
       </section>
 
-      {/* ── Featured Work ── */}
-      <section className="featured-section section">
-        <h2 className="featured-heading">Featured Work</h2>
-        <p className="featured-sub">
-          A selection of projects I've designed and shipped recently.
-        </p>
-
+      {/* Featured Work */}
+      <section className="section">
+        <h2>Featured Work</h2>
         <div className="card-grid">
-          {featuredProjects.map((project) => (
-            <article className="card featured-card" key={project.title}>
-              <h3 className="card-title">{project.title}</h3>
-              <p className="card-desc">{project.description}</p>
-              <div className="card-tags">
+          {projects.map((project) => (
+            <article className="card" key={project.name}>
+              <h3>{project.name}</h3>
+              <p>{project.description}</p>
+              <div className="tags">
                 {project.tags.map((tag) => (
                   <span className="tag" key={tag}>
                     {tag}
@@ -68,6 +51,23 @@ export default function Home() {
               </div>
             </article>
           ))}
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="section home-cta">
+        <h2>Let's Work Together</h2>
+        <p>
+          Have a project in mind or just want to say hello? I'd love to hear
+          from you.
+        </p>
+        <div className="btn-group">
+          <Link to="/projects" className="btn btn-primary">
+            View All Projects
+          </Link>
+          <Link to="/contact" className="btn btn-outline">
+            Get in Touch
+          </Link>
         </div>
       </section>
     </>
