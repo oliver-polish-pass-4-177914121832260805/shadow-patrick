@@ -2,7 +2,7 @@
   "version": "1.1",
   "projectId": "999319d3-5993-40ad-84a1-ccce30abc072",
   "createdAt": "2026-06-11T15:02:56.695Z",
-  "updatedAt": "2026-06-16T22:36:28.565Z",
+  "updatedAt": "2026-06-16T22:36:50.832Z",
   "files": [
     {
       "id": "44581b2b-5e12-49e4-8481-b7d1e2b54f6a",
@@ -1080,6 +1080,20 @@
       "updatedAt": "2026-06-16T22:36:28.565Z",
       "tags": [],
       "actor": "plugin"
+    },
+    {
+      "id": "2e4dd9e0-99b5-46a3-814e-bdd25cf7f7f4",
+      "name": "status-checklist.md",
+      "path": "repository/patrick-workflow-setup/status-checklist.md",
+      "folder": "patrick-workflow-setup",
+      "mimeType": "text/markdown",
+      "size": 961,
+      "contentHash": "abb80a815dec0703f625b4aac7353dd48ff451ca7edc020a2e7bd54cb6c4df3f",
+      "sha": "",
+      "createdAt": "2026-06-16T22:36:50.832Z",
+      "updatedAt": "2026-06-16T22:36:50.832Z",
+      "tags": [],
+      "actor": "plugin"
     }
   ],
   "externalLinks": [
@@ -1093,7 +1107,7 @@
       "updatedAt": "2026-06-15T20:01:03.083Z"
     }
   ],
-  "storageUsed": 1491337,
+  "storageUsed": 1492298,
   "folders": [
     {
       "name": "previous-briefs",
