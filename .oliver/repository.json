@@ -2,7 +2,7 @@
   "version": "1.1",
   "projectId": "999319d3-5993-40ad-84a1-ccce30abc072",
   "createdAt": "2026-06-11T15:02:56.695Z",
-  "updatedAt": "2026-06-16T22:36:53.948Z",
+  "updatedAt": "2026-06-16T22:37:01.902Z",
   "files": [
     {
       "id": "44581b2b-5e12-49e4-8481-b7d1e2b54f6a",
@@ -1101,13 +1101,14 @@
       "path": "repository/patrick-workflow-setup/quick-reference.md",
       "folder": "patrick-workflow-setup",
       "mimeType": "text/markdown",
-      "size": 791,
-      "contentHash": "2a41a8cc4065e81d0598d577131886922b22ede8dc3918d76a96d90cd9e67e1b",
+      "size": 1124,
+      "contentHash": "37884814a6a9e93ae1013cf20e8f6faca6e8dedd6747c7dd80c2a3ffdfc8cbef",
       "sha": "",
       "createdAt": "2026-06-16T22:36:53.948Z",
-      "updatedAt": "2026-06-16T22:36:53.948Z",
+      "updatedAt": "2026-06-16T22:37:01.902Z",
       "tags": [],
-      "actor": "plugin"
+      "actor": "plugin",
+      "deleted": false
     }
   ],
   "externalLinks": [
@@ -1121,7 +1122,7 @@
       "updatedAt": "2026-06-15T20:01:03.083Z"
     }
   ],
-  "storageUsed": 1493089,
+  "storageUsed": 1493422,
   "folders": [
     {
       "name": "previous-briefs",
