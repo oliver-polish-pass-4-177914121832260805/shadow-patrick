@@ -2,7 +2,7 @@
   "version": "1.1",
   "projectId": "999319d3-5993-40ad-84a1-ccce30abc072",
   "createdAt": "2026-06-11T15:02:56.695Z",
-  "updatedAt": "2026-06-16T18:27:31.001Z",
+  "updatedAt": "2026-06-16T18:27:34.227Z",
   "files": [
     {
       "id": "44581b2b-5e12-49e4-8481-b7d1e2b54f6a",
@@ -1001,10 +1001,10 @@
       "path": "code/src/pages/About.css",
       "folder": "code",
       "mimeType": "text/css",
-      "size": 3876,
+      "size": 2360,
       "sha": "",
       "createdAt": "2026-06-16T16:10:29.233Z",
-      "updatedAt": "2026-06-16T17:54:17.683Z",
+      "updatedAt": "2026-06-16T18:27:34.227Z",
       "tags": [],
       "actor": "plugin",
       "deleted": false
@@ -1035,7 +1035,7 @@
       "updatedAt": "2026-06-15T20:01:03.083Z"
     }
   ],
-  "storageUsed": 1474589,
+  "storageUsed": 1473073,
   "folders": [
     {
       "name": "previous-briefs",
