@@ -1,109 +1,84 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import './Projects.css';
-
-const categories = ['All', 'Product', 'Engineering', 'Creative'];
 
 const projects = [
   {
-    id: 1,
-    title: 'Nexus Dashboard',
-    category: 'Product',
-    description: 'A real-time analytics platform redesigned for clarity, speed, and executive-level decision making.',
+    title: 'FinTrack Dashboard',
+    description: 'A real-time financial analytics dashboard for portfolio managers with interactive charts, risk modeling, and automated reporting.',
     gradient: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+    tags: ['React', 'D3.js', 'Node.js', 'PostgreSQL'],
   },
   {
-    id: 2,
-    title: 'Verdant Commerce',
-    category: 'Engineering',
-    description: 'Headless e-commerce engine built on event-driven architecture handling 50k concurrent users.',
-    gradient: 'linear-gradient(135deg, #11998e 0%, #38ef7d 100%)',
+    title: 'MediConnect',
+    description: 'Telehealth platform connecting patients with specialists — featuring video consultations, secure records, and appointment scheduling.',
+    gradient: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
+    tags: ['React Native', 'WebRTC', 'AWS', 'HIPAA'],
   },
   {
-    id: 3,
-    title: 'Luminary Brand System',
-    category: 'Creative',
-    description: 'Full visual identity and design system for a climate-tech startup, from logo to component library.',
-    gradient: 'linear-gradient(135deg, #F97316 0%, #FACC15 100%)',
+    title: 'EcoRoute',
+    description: 'Sustainable logistics planner that optimizes delivery routes for minimal carbon footprint while maintaining cost efficiency.',
+    gradient: 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
+    tags: ['Vue.js', 'Python', 'Mapbox', 'ML'],
   },
   {
-    id: 4,
-    title: 'Pulse Health API',
-    category: 'Engineering',
-    description: 'HIPAA-compliant REST API powering wearable health data ingestion for 200k+ daily active users.',
-    gradient: 'linear-gradient(135deg, #2563EB 0%, #06B6D4 100%)',
+    title: 'Artisan Marketplace',
+    description: 'E-commerce platform for independent artisans — curated storefronts, secure payments, and a built-in audience discovery engine.',
+    gradient: 'linear-gradient(135deg, #fa709a 0%, #fee140 100%)',
+    tags: ['Next.js', 'Stripe', 'Tailwind', 'Sanity'],
   },
   {
-    id: 5,
-    title: 'Arc Social Redesign',
-    category: 'Product',
-    description: 'Led the product strategy and UX overhaul that lifted daily engagement by 38% in three months.',
-    gradient: 'linear-gradient(135deg, #EC4899 0%, #8B5CF6 100%)',
+    title: 'CodeMentor AI',
+    description: 'AI-powered code review tool that provides contextual suggestions, detects anti-patterns, and generates documentation automatically.',
+    gradient: 'linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%)',
+    tags: ['TypeScript', 'OpenAI', 'VS Code', 'Rust'],
   },
   {
-    id: 6,
-    title: 'Kinetic Motion Reel',
-    category: 'Creative',
-    description: 'Animated brand film combining 3D renders and motion typography for a fintech product launch.',
-    gradient: 'linear-gradient(135deg, #0F172A 0%, #6366F1 100%)',
+    title: 'UrbanPulse',
+    description: 'City experience app that surfaces hidden gems, local events, and community-curated guides for urban explorers.',
+    gradient: 'linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%)',
+    tags: ['Flutter', 'Firebase', 'GraphQL', 'Maps'],
   },
 ];
 
 export default function Projects() {
-  const [active, setActive] = useState('All');
-
-  const filtered = active === 'All'
-    ? projects
-    : projects.filter((p) => p.category === active);
-
   return (
     <div className="projects-page">
       {/* Hero */}
       <section className="projects-hero">
-        <h1>Projects</h1>
-        <p>A selection of recent work across product, code, and creative direction.</p>
+        <h1 className="projects-hero__title">Projects</h1>
+        <p className="projects-hero__subtitle">
+          A selection of work spanning web apps, mobile experiences, and design systems — each built to solve real problems.
+        </p>
       </section>
 
       {/* Filter Bar */}
-      <div className="projects-filter">
-        {categories.map((cat) => (
-          <button
-            key={cat}
-            className={`filter-chip ${active === cat ? 'active' : ''}`}
-            onClick={() => setActive(cat)}
-          >
-            {cat}
-          </button>
-        ))}
+      <div className="projects-filter-bar">
+        <button className="projects-filter-btn projects-filter-btn--active">All</button>
+        <button className="projects-filter-btn">Web</button>
+        <button className="projects-filter-btn">Mobile</button>
+        <button className="projects-filter-btn">Design</button>
       </div>
 
       {/* Project Grid */}
       <div className="projects-grid">
-        {filtered.map((project) => (
-          <div key={project.id} className="project-card">
+        {projects.map((project) => (
+          <article className="project-card" key={project.title}>
             <div
-              className="project-card-image"
+              className="project-card__image"
               style={{ background: project.gradient }}
             />
-            <div className="project-card-body">
-              <span className="project-card-tag">{project.category}</span>
-              <h3 className="project-card-title">{project.title}</h3>
-              <p className="project-card-desc">{project.description}</p>
-              <a href="#" className="project-card-link">
-                View case study →
-              </a>
+            <div className="project-card__body">
+              <h3 className="project-card__title">{project.title}</h3>
+              <p className="project-card__desc">{project.description}</p>
+              <div className="project-card__tags">
+                {project.tags.map((tag) => (
+                  <span className="project-card__tag" key={tag}>{tag}</span>
+                ))}
+              </div>
+              <a href="#" className="project-card__link">View Case Study →</a>
             </div>
-          </div>
+          </article>
         ))}
       </div>
-
-      {/* CTA Strip */}
-      <section className="projects-cta">
-        <p>Have a project in mind?</p>
-        <Link to="/contact" className="cta-link">
-          Get in touch
-        </Link>
-      </section>
     </div>
   );
 }
