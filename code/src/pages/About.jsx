@@ -1,121 +1,112 @@
-import './About.css'
+import React from 'react';
+import './About.css';
 
 const skills = [
-  {
-    title: 'Frontend',
-    desc: 'Building responsive, accessible interfaces with modern frameworks and clean component architecture.',
-    tags: ['React', 'TypeScript', 'Tailwind'],
-  },
-  {
-    title: 'Backend',
-    desc: 'Designing RESTful APIs and event-driven services with a focus on performance and reliability.',
-    tags: ['Node.js', 'Python', 'PostgreSQL'],
-  },
-  {
-    title: 'Design',
-    desc: 'Translating ideas into intuitive user experiences through wireframes, prototypes, and visual systems.',
-    tags: ['Figma', 'Design Systems', 'Motion'],
-  },
-  {
-    title: 'DevOps',
-    desc: 'Automating builds, deployments, and infrastructure to ship fast and keep environments stable.',
-    tags: ['Docker', 'CI/CD', 'AWS'],
-  },
-]
+  'React',
+  'TypeScript',
+  'Figma',
+  'Node.js',
+  'Design Systems',
+  'CSS / Tailwind',
+  'Next.js',
+  'Prototyping',
+  'User Research',
+  'Creative Coding',
+];
 
 const timeline = [
   {
-    year: '2018',
-    title: 'Started Freelancing',
-    desc: 'Launched my independent practice, building websites and branding for small businesses and startups.',
+    year: '2016',
+    title: 'Started in Product Design',
+    description: 'Joined a small studio in Brooklyn, designing interfaces for early-stage startups.',
   },
   {
-    year: '2019',
-    title: 'First Full-Time Role',
-    desc: 'Joined a fintech startup as a frontend engineer, shipping the customer dashboard from zero to launch.',
+    year: '2018',
+    title: 'Moved into Frontend Engineering',
+    description: 'Began writing production code alongside designers, bridging the gap between mock-up and markup.',
   },
   {
     year: '2021',
-    title: 'Led a Platform Rewrite',
-    desc: 'Spearheaded the migration of a legacy monolith to a modern React + Node microservices architecture.',
+    title: 'Led a Design System at Scale',
+    description: 'Built and maintained a component library adopted by four product teams across the organization.',
   },
   {
-    year: '2023',
-    title: 'Senior Engineer',
-    desc: 'Promoted to senior engineer, mentoring a team of four and driving adoption of design-system tooling.',
+    year: '2024',
+    title: 'Went Independent',
+    description: 'Launched a freelance practice focused on design-engineering partnerships and creative technology.',
   },
-  {
-    year: '2025',
-    title: 'Open-Source & AI',
-    desc: 'Began contributing to open-source AI tooling and integrating LLMs into production workflows.',
-  },
-]
+];
 
-function About() {
+export default function About() {
   return (
-    <>
-      <section className="hero about-hero">
-        <h1>About Me</h1>
-        <p>A developer who loves turning complex problems into simple, beautiful solutions.</p>
-      </section>
-
-      {/* ── Story ── */}
-      <section className="section">
-        <h2>My Story</h2>
-        <div className="about-story">
-          <div className="about-avatar" aria-label="Avatar placeholder">P</div>
-          <div className="about-story-text">
-            <p>
-              I'm Patrick — a full-stack developer based in the Pacific Northwest. I've spent the
-              last seven years building products that live at the intersection of design and
-              engineering, from fintech dashboards to real-time collaboration tools.
-            </p>
-            <p>
-              I care deeply about the craft: clean code, thoughtful UX, and systems that scale
-              gracefully. When I'm not writing code, you'll find me hiking, sketching UI concepts in
-              a notebook, or tinkering with mechanical keyboards.
-            </p>
-            <p>
-              I believe the best software is built by small, empowered teams that ship early, listen
-              to users, and iterate relentlessly. That philosophy guides every project I take on.
-            </p>
-          </div>
+    <div className="about">
+      {/* Hero */}
+      <section className="about-hero">
+        <div className="about-hero__content">
+          <h1 className="about-hero__heading">About Me</h1>
         </div>
       </section>
 
-      {/* ── Skills ── */}
-      <section className="section about-skills">
-        <h2>Skills</h2>
-        <div className="card-grid">
-          {skills.map((s) => (
-            <div className="card" key={s.title}>
-              <h3>{s.title}</h3>
-              <p>{s.desc}</p>
-              <div className="tags">
-                {s.tags.map((t) => (
-                  <span className="tag" key={t}>{t}</span>
-                ))}
+      {/* Bio */}
+      <section className="about-bio">
+        <div className="about-bio__avatar">
+          <div className="about-bio__circle" aria-label="Alex Morgan initials">
+            AM
+          </div>
+        </div>
+        <div className="about-bio__text">
+          <p>
+            I'm a designer and frontend engineer based in Brooklyn, New York.
+            For the past eight years I've been working at the intersection of
+            visual design and code, helping teams build products that are both
+            beautiful and technically sound.
+          </p>
+          <p>
+            My background spans product design, creative prototyping, and
+            frontend architecture. I believe the best digital experiences emerge
+            when the people shaping pixels also understand the systems that
+            render them.
+          </p>
+          <p>
+            I'm drawn to craft—the typography, the micro-interactions, the
+            performance budgets. Every detail is an opportunity to show care for
+            the people who use what we build.
+          </p>
+          <p>
+            When I'm not designing or coding, you'll find me experimenting with
+            generative art, exploring record shops, or walking the Brooklyn
+            waterfront with a camera.
+          </p>
+        </div>
+      </section>
+
+      {/* Skills */}
+      <section className="about-skills">
+        <h2 className="section-heading">Skills &amp; Tools</h2>
+        <div className="about-skills__list">
+          {skills.map((skill) => (
+            <span className="about-skills__chip" key={skill}>
+              {skill}
+            </span>
+          ))}
+        </div>
+      </section>
+
+      {/* Timeline */}
+      <section className="about-timeline">
+        <h2 className="section-heading">Journey</h2>
+        <div className="about-timeline__list">
+          {timeline.map((item) => (
+            <div className="about-timeline__item" key={item.year}>
+              <span className="about-timeline__year">{item.year}</span>
+              <div className="about-timeline__content">
+                <h3 className="about-timeline__title">{item.title}</h3>
+                <p className="about-timeline__desc">{item.description}</p>
               </div>
             </div>
           ))}
         </div>
       </section>
-
-      {/* ── Timeline ── */}
-      <section className="section">
-        <h2>Timeline</h2>
-        <div className="about-timeline">
-          {timeline.map((m) => (
-            <div className="about-timeline-entry" key={m.year}>
-              <span className="about-timeline-year">{m.year}</span>
-              <h3 className="about-timeline-title">{m.title}</h3>
-              <p className="about-timeline-desc">{m.desc}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-    </>
-  )
+    </div>
+  );
 }
-
-export default About

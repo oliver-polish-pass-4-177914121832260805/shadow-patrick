@@ -1,120 +1,195 @@
-/* === About Page Hero === */
+/* ===== About.css ===== */
+
+/* ---------- Hero ---------- */
 .about-hero {
-  background: radial-gradient(ellipse at 30% 20%, rgba(245, 166, 35, 0.15) 0%, transparent 50%),
-              radial-gradient(ellipse at 70% 80%, rgba(219, 84, 97, 0.12) 0%, transparent 50%),
-              radial-gradient(ellipse at 50% 50%, rgba(255, 193, 120, 0.08) 0%, transparent 60%),
-              var(--surface);
+  min-height: 50vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 1.5rem;
+  background-image:
+    url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%230F172A' fill-opacity='0.04'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"),
+    linear-gradient(135deg, #FEF3C7 0%, #FDE68A 100%);
 }
 
-/* === Story Section (two-column) === */
-.about-story {
+.about-hero__content {
+  text-align: center;
+}
+
+.about-hero__heading {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 3rem;
+  font-weight: 700;
+  color: #0F172A;
+  margin: 0;
+}
+
+/* ---------- Bio section ---------- */
+.about-bio {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 5rem 1.5rem;
   display: grid;
-  grid-template-columns: auto 1fr;
+  grid-template-columns: 1fr 2fr;
   gap: 3rem;
   align-items: start;
 }
 
-@media (max-width: 768px) {
-  .about-story {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-    justify-items: center;
-    text-align: center;
-  }
+.about-bio__avatar {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  position: sticky;
+  top: 2rem;
 }
 
-/* === Avatar === */
-.about-avatar {
+.about-bio__circle {
   width: 180px;
   height: 180px;
   border-radius: 50%;
-  background: linear-gradient(135deg, var(--accent) 0%, #db5461 100%);
+  background: linear-gradient(135deg, #6366F1 0%, #8B5CF6 100%);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 4rem;
+  color: #ffffff;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 3.5rem;
   font-weight: 700;
-  color: #fff;
   letter-spacing: 0.05em;
-  box-shadow: 0 8px 30px rgba(219, 84, 97, 0.25);
-  flex-shrink: 0;
-  user-select: none;
+  box-shadow: 0 8px 24px rgba(99, 102, 241, 0.25);
 }
 
-.about-story-text {
+.about-bio__text {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 1.25rem;
 }
 
-.about-story-text p {
-  color: var(--text-muted);
+.about-bio__text p {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.05rem;
   line-height: 1.75;
-  font-size: 1rem;
+  color: #0F172A;
+  margin: 0;
 }
 
-/* === Skills Grid overrides === */
-.about-skills .tag {
-  margin-top: 0.75rem;
+/* ---------- Section headings (shared) ---------- */
+.section-heading {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #0F172A;
+  text-align: center;
+  margin: 0 0 2.5rem;
 }
 
-/* === Timeline === */
+/* ---------- Skills ---------- */
+.about-skills {
+  background: #F8FAFC;
+  padding: 5rem 1.5rem;
+}
+
+.about-skills__list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.about-skills__chip {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 500;
+  padding: 0.5rem 1.15rem;
+  border-radius: 9999px;
+  background: rgba(99, 102, 241, 0.1);
+  color: #6366F1;
+  transition: background 0.2s ease;
+}
+
+.about-skills__chip:hover {
+  background: rgba(99, 102, 241, 0.18);
+}
+
+/* ---------- Timeline ---------- */
 .about-timeline {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 5rem 1.5rem;
+}
+
+.about-timeline__list {
   position: relative;
-  padding-left: 2.5rem;
-  margin-top: 1.5rem;
+  border-left: 2px solid #E2E8F0;
+  padding-left: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
 }
 
-.about-timeline::before {
-  content: '';
-  position: absolute;
-  left: 0.5rem;
-  top: 0;
-  bottom: 0;
-  width: 2px;
-  background: var(--border);
+.about-timeline__item {
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
 }
 
-.about-timeline-entry {
-  position: relative;
-  margin-bottom: 2rem;
+.about-timeline__year {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #6366F1;
+  min-width: 3.5rem;
+  padding-top: 0.15rem;
+  flex-shrink: 0;
 }
 
-.about-timeline-entry:last-child {
-  margin-bottom: 0;
+.about-timeline__content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
 }
 
-.about-timeline-entry::before {
-  content: '';
-  position: absolute;
-  left: -2.1rem;
-  top: 0.35rem;
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  background: var(--accent);
-  border: 2px solid var(--surface);
-  box-shadow: 0 0 0 2px var(--accent-light);
-}
-
-.about-timeline-year {
-  font-size: 0.8rem;
-  font-weight: 600;
-  color: var(--accent);
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  margin-bottom: 0.25rem;
-}
-
-.about-timeline-title {
+.about-timeline__title {
+  font-family: 'Space Grotesk', sans-serif;
   font-size: 1.1rem;
   font-weight: 600;
-  color: var(--text);
-  margin-bottom: 0.25rem;
+  color: #0F172A;
+  margin: 0;
 }
 
-.about-timeline-desc {
+.about-timeline__desc {
+  font-family: 'Space Grotesk', sans-serif;
   font-size: 0.9rem;
-  color: var(--text-muted);
+  color: #64748B;
   line-height: 1.6;
+  margin: 0;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 768px) {
+  .about-hero__heading {
+    font-size: 2.25rem;
+  }
+
+  .about-bio {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .about-bio__avatar {
+    position: static;
+  }
+
+  .about-bio__circle {
+    width: 140px;
+    height: 140px;
+    font-size: 2.75rem;
+  }
+
+  .about-timeline__item {
+    flex-direction: column;
+    gap: 0.25rem;
+  }
 }

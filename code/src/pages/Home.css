@@ -1,28 +1,210 @@
-/* Home.css — page-specific styles */
+/* ===== Home.css ===== */
 
+/* ---------- Hero ---------- */
 .home-hero {
-  background: radial-gradient(
-    ellipse at 30% 20%,
-    rgba(139, 92, 246, 0.28) 0%,
-    rgba(79, 70, 229, 0.18) 40%,
-    var(--bg) 80%
-  );
-}
-
-.home-cta {
-  text-align: center;
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #0F172A 0%, #1E293B 50%, #6366F1 100%);
+  color: #ffffff;
   padding: 4rem 1.5rem;
 }
 
-.home-cta p {
-  color: var(--text-muted);
-  margin-bottom: 2rem;
-  font-size: 1.125rem;
+.home-hero__content {
+  max-width: 720px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
 }
 
-.home-cta .btn-group {
+.home-hero__heading {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 3.5rem;
+  font-weight: 700;
+  line-height: 1.1;
+  margin: 0;
+}
+
+.home-hero__subtitle {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 400;
+  opacity: 0.85;
+  margin: 0;
+  max-width: 520px;
+}
+
+.home-hero__ctas {
   display: flex;
   gap: 1rem;
-  justify-content: center;
+  margin-top: 0.5rem;
   flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* Buttons */
+.btn {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 0.75rem 1.75rem;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.btn--solid {
+  background: #6366F1;
+  color: #ffffff;
+  border: 2px solid #6366F1;
+}
+
+.btn--outline {
+  background: transparent;
+  color: #ffffff;
+  border: 2px solid rgba(255, 255, 255, 0.6);
+}
+
+.btn--outline:hover {
+  border-color: #ffffff;
+}
+
+/* ---------- Section headings ---------- */
+.section-heading {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #0F172A;
+  text-align: center;
+  margin: 0 0 2.5rem;
+}
+
+/* ---------- What I Do ---------- */
+.home-intro {
+  background: #F8FAFC;
+  padding: 5rem 1.5rem;
+}
+
+.home-intro__cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  max-width: 1080px;
+  margin: 0 auto;
+}
+
+.home-intro__card {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.home-intro__card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.home-intro__icon {
+  font-size: 2rem;
+}
+
+.home-intro__title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #0F172A;
+  margin: 0;
+}
+
+.home-intro__desc {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.95rem;
+  color: #64748B;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* ---------- Featured Work ---------- */
+.home-featured {
+  padding: 5rem 1.5rem;
+  max-width: 1080px;
+  margin: 0 auto;
+}
+
+.home-featured__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+}
+
+.home-featured__tile {
+  text-decoration: none;
+  color: inherit;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  display: block;
+}
+
+.home-featured__tile:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
+}
+
+.home-featured__image {
+  height: 200px;
+  width: 100%;
+}
+
+.home-featured__info {
+  padding: 1.25rem 1.5rem;
+}
+
+.home-featured__title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: #0F172A;
+  margin: 0 0 0.35rem;
+}
+
+.home-featured__tagline {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.9rem;
+  color: #64748B;
+  margin: 0;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 768px) {
+  .home-hero__heading {
+    font-size: 2.25rem;
+  }
+
+  .home-hero__subtitle {
+    font-size: 1.05rem;
+  }
+
+  .home-intro__cards {
+    grid-template-columns: 1fr;
+  }
+
+  .home-featured__grid {
+    grid-template-columns: 1fr;
+  }
 }
