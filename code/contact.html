@@ -1,233 +1,163 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Get in touch with Patrick Reyes — Let's build something great together">
+  <meta name="theme-color" content="#0a0a0f">
   <title>Contact — Patrick Reyes</title>
-  <link rel="stylesheet" href="styles.css" />
-  <style>
-    .contact-hero { padding-top: calc(var(--nav-h) + 3rem); }
-
-    .contact-grid {
-      display: grid; grid-template-columns: 1fr 1.2fr;
-      gap: 3rem; margin-top: 2.5rem; align-items: start;
-    }
-
-    /* Info side */
-    .contact-info h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 1.25rem; }
-    .contact-info__item {
-      display: flex; gap: 1rem; align-items: flex-start;
-      margin-bottom: 1.5rem;
-    }
-    .contact-info__icon {
-      width: 44px; height: 44px; border-radius: 10px;
-      background: var(--clr-accent-glow); display: flex;
-      align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0;
-    }
-    .contact-info__label { font-size: .78rem; color: var(--clr-muted); text-transform: uppercase; letter-spacing: 1px; }
-    .contact-info__value { font-weight: 600; margin-top: .15rem; }
-
-    .contact-socials { margin-top: 2rem; }
-    .contact-socials h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 1rem; }
-    .social-grid { display: flex; gap: .75rem; flex-wrap: wrap; }
-    .social-link {
-      display: flex; align-items: center; gap: .5rem;
-      padding: .6rem 1.1rem; border-radius: 10px;
-      background: var(--clr-surface); border: 1px solid var(--clr-border);
-      font-size: .88rem; font-weight: 500; color: var(--clr-text);
-      transition: .25s;
-    }
-    .social-link:hover {
-      background: var(--clr-accent-glow); color: var(--clr-accent);
-      border-color: var(--clr-accent); transform: translateY(-2px);
-    }
-
-    /* Form side */
-    .contact-form-wrap {
-      background: var(--clr-surface); border: 1px solid var(--clr-border);
-      border-radius: var(--radius); padding: 2.25rem;
-    }
-    .contact-form-wrap h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: .5rem; }
-    .contact-form-wrap p { color: var(--clr-muted); font-size: .9rem; margin-bottom: 1.75rem; }
-
-    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
-    .form-group { margin-bottom: 1rem; }
-    .form-group label {
-      display: block; font-size: .82rem; font-weight: 600;
-      margin-bottom: .4rem; color: var(--clr-muted);
-    }
-    .form-group input,
-    .form-group select,
-    .form-group textarea {
-      width: 100%; padding: .7rem 1rem; border-radius: 8px;
-      background: var(--clr-bg); border: 1px solid var(--clr-border);
-      color: var(--clr-text); font-family: var(--font); font-size: .95rem;
-      outline: none; transition: border-color .2s;
-    }
-    .form-group input:focus,
-    .form-group select:focus,
-    .form-group textarea:focus { border-color: var(--clr-accent); }
-    .form-group textarea { resize: vertical; min-height: 120px; }
-
-    .form-submit {
-      display: flex; align-items: center; justify-content: space-between; margin-top: .5rem;
-    }
-    .form-submit .note { font-size: .78rem; color: var(--clr-muted); }
-    .form-success {
-      display: none; text-align: center; padding: 3rem 1rem;
-    }
-    .form-success .check {
-      width: 64px; height: 64px; border-radius: 50%;
-      background: var(--clr-success); margin: 0 auto 1rem;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.8rem; color: #fff;
-    }
-    .form-success h3 { font-size: 1.3rem; margin-bottom: .5rem; }
-    .form-success p { color: var(--clr-muted); }
-
-    @media (max-width: 768px) {
-      .contact-grid { grid-template-columns: 1fr; }
-      .form-row { grid-template-columns: 1fr; }
-    }
-  </style>
+  <link rel="icon" href="public/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-<nav class="nav">
-  <a href="index.html" class="nav__logo">patrick<span>.</span></a>
-  <ul class="nav__links">
-    <li><a href="index.html">Home</a></li>
-    <li><a href="about.html">About</a></li>
-    <li><a href="projects.html">Projects</a></li>
-    <li><a href="contact.html" class="active">Contact</a></li>
-  </ul>
-  <button class="nav__burger" aria-label="Menu">
-    <span></span><span></span><span></span>
-  </button>
-</nav>
-
-<!-- Contact -->
-<section class="contact-hero">
-  <div class="container">
-    <span class="section-label">Get in Touch</span>
-    <h1 class="section-title">Let's build something great.</h1>
-    <p class="section-subtitle">Whether you have a project brief, a design challenge, or just want to say hi — I'd love to hear from you.</p>
-
-    <div class="contact-grid">
-
-      <!-- Info -->
-      <div class="contact-info">
-        <h3>Contact Details</h3>
-        <div class="contact-info__item">
-          <div class="contact-info__icon">📧</div>
-          <div>
-            <div class="contact-info__label">Email</div>
-            <div class="contact-info__value">patrick@reyesdesign.co</div>
-          </div>
-        </div>
-        <div class="contact-info__item">
-          <div class="contact-info__icon">📍</div>
-          <div>
-            <div class="contact-info__label">Location</div>
-            <div class="contact-info__value">Brooklyn, NY — open to remote</div>
-          </div>
-        </div>
-        <div class="contact-info__item">
-          <div class="contact-info__icon">📅</div>
-          <div>
-            <div class="contact-info__label">Availability</div>
-            <div class="contact-info__value">Accepting projects for Q3 2026</div>
-          </div>
-        </div>
-        <div class="contact-info__item">
-          <div class="contact-info__icon">⏰</div>
-          <div>
-            <div class="contact-info__label">Response Time</div>
-            <div class="contact-info__value">Within 24 hours</div>
-          </div>
-        </div>
-
-        <div class="contact-socials">
-          <h3>Find me online</h3>
-          <div class="social-grid">
-            <a href="#" class="social-link">🐦 Twitter</a>
-            <a href="#" class="social-link">💼 LinkedIn</a>
-            <a href="#" class="social-link">🎨 Dribbble</a>
-            <a href="#" class="social-link">🐙 GitHub</a>
-          </div>
-        </div>
+  <!-- NAVIGATION -->
+  <nav class="nav" id="nav">
+    <div class="nav__inner">
+      <a href="index.html" class="nav__logo">patrick<span>.</span></a>
+      <button class="nav__toggle" id="navToggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="nav__links" id="navLinks">
+        <a href="index.html" class="nav__link">Home</a>
+        <a href="about.html" class="nav__link">About</a>
+        <a href="projects.html" class="nav__link">Projects</a>
+        <a href="contact.html" class="nav__link active">Contact</a>
+        <a href="contact.html" class="nav__cta">Let's Talk</a>
       </div>
-
-      <!-- Form -->
-      <div class="contact-form-wrap">
-        <h3>Send a message</h3>
-        <p>Fill out the form and I'll get back to you within one business day.</p>
-        <form id="contactForm">
-          <div class="form-row">
-            <div class="form-group">
-              <label for="name">Full Name</label>
-              <input type="text" id="name" placeholder="Jane Doe" required />
-            </div>
-            <div class="form-group">
-              <label for="email">Email Address</label>
-              <input type="email" id="email" placeholder="jane@company.com" required />
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="type">Project Type</label>
-            <select id="type">
-              <option value="">Select a category…</option>
-              <option>Product Design</option>
-              <option>Design System</option>
-              <option>Front-End Development</option>
-              <option>UX Audit / Research</option>
-              <option>Workshop Facilitation</option>
-              <option>Other</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="budget">Estimated Budget</label>
-            <select id="budget">
-              <option value="">Select a range…</option>
-              <option>Under $10k</option>
-              <option>$10k – $25k</option>
-              <option>$25k – $50k</option>
-              <option>$50k+</option>
-              <option>Not sure yet</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="message">Tell me about your project</label>
-            <textarea id="message" placeholder="What are you building? What's the timeline? Any constraints I should know about?" required></textarea>
-          </div>
-          <div class="form-submit">
-            <span class="note">🔒 Your info stays private — no spam, ever.</span>
-            <button type="submit" class="btn btn--primary">Send Message →</button>
-          </div>
-        </form>
-
-        <div class="form-success" id="formSuccess">
-          <div class="check">✓</div>
-          <h3>Message sent!</h3>
-          <p>Thanks for reaching out. I'll be in touch within 24 hours.</p>
-        </div>
-      </div>
-
     </div>
-  </div>
-</section>
+  </nav>
 
-<footer class="footer" style="margin-top: 4rem;">
-  <p>© 2026 Patrick Reyes. Designed & built with care.</p>
-</footer>
+  <!-- HERO -->
+  <section class="hero" style="min-height: 40vh;">
+    <div class="hero__inner" style="padding-bottom: 0;">
+      <div class="float-badge anim-fade-in-up">
+        <span class="float-badge__dot"></span>
+        Usually responds within 24h
+      </div>
+      <h1 class="anim-fade-in-up anim-delay-1" style="font-size: clamp(2.75rem, 6vw, 5rem); letter-spacing: -0.03em; max-width: 700px;">
+        Let's <span class="gradient-text">talk</span>
+      </h1>
+      <p class="anim-fade-in-up anim-delay-2 mt-5" style="font-size: 1.125rem; max-width: 540px; line-height: 1.75; color: var(--text-muted);">
+        Whether you have a project in mind, a question about my work, or just want to say hi — my inbox is open.
+      </p>
+    </div>
+  </section>
 
-<script>
-  document.getElementById('contactForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    this.style.display = 'none';
-    document.getElementById('formSuccess').style.display = 'block';
-  });
-</script>
+  <!-- CONTACT SECTION -->
+  <section class="section">
+    <div class="section__container">
+      <div class="split-layout">
+        <!-- LEFT: Contact Info -->
+        <div>
+          <span class="section__eyebrow">Get in Touch</span>
+          <h2 class="section__heading mb-6">Contact Details</h2>
+          <div class="contact-info-grid">
+            <div class="contact-item">
+              <div class="contact-item__icon">✉️</div>
+              <div>
+                <div class="contact-item__label">Email</div>
+                <div class="contact-item__value">hello@patrickreyes.dev</div>
+              </div>
+            </div>
 
+[... 1774 chars truncated ...]
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ MINI -->
+  <section class="section" style="background: var(--bg-mid); border-top: 1px solid var(--border-glass);">
+    <div class="section__container container-sm text-center">
+      <span class="section__eyebrow">Quick FAQ</span>
+      <h2 class="section__heading">Common questions</h2>
+      <p class="section__sub" style="margin-left: auto; margin-right: auto;">A few things people often ask before reaching out.</p>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: var(--sp-4); text-align: left;">
+        <div class="card">
+          <h4 style="font-size: 1rem; margin-bottom: var(--sp-2); color: var(--text-primary);">How do you price projects?</h4>
+          <p style="font-size: 0.875rem; line-height: 1.7;">I scope every project individually. After an initial conversation, I provide a detailed estimate based on complexity, timeline, and deliverables.</p>
+        </div>
+        <div class="card">
+          <h4 style="font-size: 1rem; margin-bottom: var(--sp-2); color: var(--text-primary);">Do you work with startups?</h4>
+          <p style="font-size: 0.875rem; line-height: 1.7;">Absolutely. I've worked with companies from pre-seed to Series C. I'm flexible with engagement models for early-stage teams.</p>
+        </div>
+        <div class="card">
+          <h4 style="font-size: 1rem; margin-bottom: var(--sp-2); color: var(--text-primary);">What's your typical timeline?</h4>
+          <p style="font-size: 0.875rem; line-height: 1.7;">Most projects take 4–12 weeks depending on scope. I'll share a realistic timeline during our first call.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer__inner">
+      <p class="footer__copy">© 2026 Patrick Reyes. Crafted with care.</p>
+      <div class="footer__links">
+        <a href="index.html" class="footer__link">Home</a>
+        <a href="about.html" class="footer__link">About</a>
+        <a href="projects.html" class="footer__link">Projects</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const nav = document.getElementById('nav');
+    const toggle = document.getElementById('navToggle');
+    const links = document.getElementById('navLinks');
+
+    toggle.addEventListener('click', () => {
+      nav.classList.toggle('open');
+      links.classList.toggle('open');
+    });
+
+    links.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        nav.classList.remove('open');
+        links.classList.remove('open');
+      });
+    });
+
+    const form = document.getElementById('contactForm');
+    const feedback = document.getElementById('formFeedback');
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const message = document.getElementById('message').value.trim();
+
+      if (!name || !email || !message) {
+        feedback.className = 'form-feedback form-feedback--error';
+        feedback.textContent = 'Please fill in all required fields.';
+        feedback.style.display = 'block';
+        return;
+      }
+
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        feedback.className = 'form-feedback form-feedback--error';
+        feedback.textContent = 'Please enter a valid email address.';
+        feedback.style.display = 'block';
+        return;
+      }
+
+      const submitBtn = form.querySelector('button[type="submit"]');
+      submitBtn.textContent = 'Sending...';
+      submitBtn.disabled = true;
+
+      setTimeout(() => {
+        feedback.className = 'form-feedback form-feedback--success';
+        feedback.textContent = 'Message sent successfully! I\'ll get back to you within 24 hours.';
+        feedback.style.display = 'block';
+        form.reset();
+        submitBtn.innerHTML = 'Send Message <span class="btn__arrow">→</span>';
+        submitBtn.disabled = false;
+      }, 1200);
+    });
+  </script>
 </body>
 </html>

@@ -2,7 +2,7 @@
   "version": "1.1",
   "projectId": "999319d3-5993-40ad-84a1-ccce30abc072",
   "createdAt": "2026-06-11T15:02:56.695Z",
-  "updatedAt": "2026-06-16T14:16:08.715Z",
+  "updatedAt": "2026-06-16T14:18:50.868Z",
   "files": [
     {
       "id": "44581b2b-5e12-49e4-8481-b7d1e2b54f6a",
@@ -654,10 +654,10 @@
       "path": "code/index.html",
       "folder": "code",
       "mimeType": "text/html",
-      "size": 5467,
+      "size": 933,
       "sha": "",
       "createdAt": "2026-06-13T00:57:54.338Z",
-      "updatedAt": "2026-06-16T00:13:22.769Z",
+      "updatedAt": "2026-06-16T14:18:50.868Z",
       "tags": [],
       "actor": "plugin",
       "deleted": false
@@ -803,12 +803,13 @@
       "path": "code/about.html",
       "folder": "code",
       "mimeType": "text/html",
-      "size": 7840,
+      "size": 11986,
       "sha": "",
       "createdAt": "2026-06-16T00:13:22.769Z",
-      "updatedAt": "2026-06-16T00:13:22.769Z",
+      "updatedAt": "2026-06-16T14:18:50.868Z",
       "tags": [],
-      "actor": "plugin"
+      "actor": "plugin",
+      "deleted": false
     },
     {
       "id": "eb097e22-6e00-4253-a035-01b13445b677",
@@ -816,12 +817,13 @@
       "path": "code/projects.html",
       "folder": "code",
       "mimeType": "text/html",
-      "size": 8361,
+      "size": 10649,
       "sha": "",
       "createdAt": "2026-06-16T00:13:22.769Z",
-      "updatedAt": "2026-06-16T00:13:22.769Z",
+      "updatedAt": "2026-06-16T14:18:50.868Z",
       "tags": [],
-      "actor": "plugin"
+      "actor": "plugin",
+      "deleted": false
     },
     {
       "id": "6558e322-c4e2-4064-885a-29c2d1e4d93a",
@@ -829,12 +831,13 @@
       "path": "code/contact.html",
       "folder": "code",
       "mimeType": "text/html",
-      "size": 8849,
+      "size": 6711,
       "sha": "",
       "createdAt": "2026-06-16T00:13:22.769Z",
-      "updatedAt": "2026-06-16T00:13:22.769Z",
+      "updatedAt": "2026-06-16T14:18:50.868Z",
       "tags": [],
-      "actor": "plugin"
+      "actor": "plugin",
+      "deleted": false
     }
   ],
   "externalLinks": [
@@ -848,7 +851,7 @@
       "updatedAt": "2026-06-15T20:01:03.083Z"
     }
   ],
-  "storageUsed": 1412119,
+  "storageUsed": 1411881,
   "folders": [
     {
       "name": "previous-briefs",
