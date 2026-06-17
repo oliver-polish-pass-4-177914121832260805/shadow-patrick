@@ -2,7 +2,7 @@
   "version": "1.1",
   "projectId": "999319d3-5993-40ad-84a1-ccce30abc072",
   "createdAt": "2026-06-11T15:02:56.695Z",
-  "updatedAt": "2026-06-17T21:30:59.815Z",
+  "updatedAt": "2026-06-17T21:49:10.209Z",
   "files": [
     {
       "id": "44581b2b-5e12-49e4-8481-b7d1e2b54f6a",
@@ -1122,13 +1122,17 @@
       "contentHash": "0855774dea0e6335108706d82070f6a1470b3e4c5fa554e7713e085d5523d019",
       "sha": "",
       "createdAt": "2026-06-17T21:30:59.815Z",
-      "updatedAt": "2026-06-17T21:30:59.815Z",
+      "updatedAt": "2026-06-17T21:49:10.209Z",
       "tags": [
         "haiku",
         "spring",
         "poetry"
       ],
-      "actor": "agent"
+      "actor": "frontend",
+      "deleted": true,
+      "deletedAt": "2026-06-17T21:49:10.209Z",
+      "archivedReason": "folder haikus removed",
+      "originalPath": "repository/haikus/haikus/spring.txt"
     },
     {
       "id": "e1c89486-fbd7-4dad-a71b-129aa49e5870",
@@ -1140,13 +1144,17 @@
       "contentHash": "be4fbeff50aaf5bc08d58b68293ca8961657c1f48a027da7bc6512b48f99b452",
       "sha": "",
       "createdAt": "2026-06-17T21:30:59.815Z",
-      "updatedAt": "2026-06-17T21:30:59.815Z",
+      "updatedAt": "2026-06-17T21:49:10.209Z",
       "tags": [
         "haiku",
         "autumn",
         "poetry"
       ],
-      "actor": "agent"
+      "actor": "frontend",
+      "deleted": true,
+      "deletedAt": "2026-06-17T21:49:10.209Z",
+      "archivedReason": "folder haikus removed",
+      "originalPath": "repository/haikus/haikus/autumn.txt"
     }
   ],
   "externalLinks": [
@@ -1160,7 +1168,7 @@
       "updatedAt": "2026-06-15T20:01:03.083Z"
     }
   ],
-  "storageUsed": 1493610,
+  "storageUsed": 1493433,
   "folders": [
     {
       "name": "previous-briefs",
@@ -1185,12 +1193,6 @@
       "displayName": "weekly-briefs",
       "type": "files",
       "createdAt": "2026-06-11T22:26:48.475Z"
-    },
-    {
-      "name": "haikus",
-      "displayName": "Haikus",
-      "type": "files",
-      "createdAt": "2026-06-17T21:30:32.814Z"
     }
   ]
 }
