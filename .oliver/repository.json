@@ -2,7 +2,7 @@
   "version": "1.1",
   "projectId": "999319d3-5993-40ad-84a1-ccce30abc072",
   "createdAt": "2026-06-11T15:02:56.695Z",
-  "updatedAt": "2026-06-17T22:24:25.728Z",
+  "updatedAt": "2026-06-17T22:24:49.149Z",
   "files": [
     {
       "id": "44581b2b-5e12-49e4-8481-b7d1e2b54f6a",
@@ -1155,6 +1155,34 @@
       "deletedAt": "2026-06-17T21:49:10.209Z",
       "archivedReason": "folder haikus removed",
       "originalPath": "repository/haikus/haikus/autumn.txt"
+    },
+    {
+      "id": "9bedc7e9-f293-4102-b2a4-d6ef7a6a34d0",
+      "name": "haiku-spring.txt",
+      "path": "repository/haikus/haiku-spring.txt",
+      "folder": "haikus",
+      "mimeType": "text/plain",
+      "size": 87,
+      "contentHash": "3bfc8e0a89608c0942eb2d5d836b74032aa176ef5c897087e25a8f9427f848e9",
+      "sha": "",
+      "createdAt": "2026-06-17T22:24:49.149Z",
+      "updatedAt": "2026-06-17T22:24:49.149Z",
+      "tags": [],
+      "actor": "plugin"
+    },
+    {
+      "id": "92bb64cd-4873-445f-ab2c-147aa0c2d527",
+      "name": "haiku-autumn.txt",
+      "path": "repository/haikus/haiku-autumn.txt",
+      "folder": "haikus",
+      "mimeType": "text/plain",
+      "size": 94,
+      "contentHash": "319f445b5a42b86261fd16e4fd0be48f1346fdfd51fcf9fef0ccb866e169e7d4",
+      "sha": "",
+      "createdAt": "2026-06-17T22:24:49.149Z",
+      "updatedAt": "2026-06-17T22:24:49.149Z",
+      "tags": [],
+      "actor": "plugin"
     }
   ],
   "externalLinks": [
@@ -1168,7 +1196,7 @@
       "updatedAt": "2026-06-15T20:01:03.083Z"
     }
   ],
-  "storageUsed": 1493433,
+  "storageUsed": 1493614,
   "folders": [
     {
       "name": "previous-briefs",
