@@ -2,7 +2,7 @@
   "version": "1.1",
   "projectId": "999319d3-5993-40ad-84a1-ccce30abc072",
   "createdAt": "2026-06-11T15:02:56.695Z",
-  "updatedAt": "2026-06-17T22:36:41.913Z",
+  "updatedAt": "2026-06-17T22:38:16.996Z",
   "files": [
     {
       "id": "44581b2b-5e12-49e4-8481-b7d1e2b54f6a",
@@ -1229,6 +1229,12 @@
       "displayName": "weekly-briefs",
       "type": "files",
       "createdAt": "2026-06-11T22:26:48.475Z"
+    },
+    {
+      "name": "haikus",
+      "displayName": "Haikus",
+      "type": "files",
+      "createdAt": "2026-06-17T22:38:16.996Z"
     }
   ]
 }
