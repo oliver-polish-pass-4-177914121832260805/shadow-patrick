@@ -275,3 +275,6 @@
 {"ts":"2026-06-17T22:38:16.996Z","actor":"agent","action":"folder_added","folder":"haikus","hint":null}
 {"ts":"2026-06-17T22:38:25.769Z","actor":"plugin","action":"file_added","fileId":"5702316d-11c1-4fcb-af8d-dddfb99b14cd","path":"repository/haikus/spring.txt","shaBefore":"1b587b59003ac6a031fc9c7f0549d19c8f80f6ed"}
 {"ts":"2026-06-17T22:38:25.769Z","actor":"plugin","action":"file_added","fileId":"57a3772c-3d93-43cd-961f-e51cd010bc87","path":"repository/haikus/autumn.txt","shaBefore":"1b587b59003ac6a031fc9c7f0549d19c8f80f6ed"}
+{"ts":"2026-06-17T22:42:40.480Z","actor":"frontend","action":"folder_removed","folder":"haikus","force":true,"filesArchived":2,"linksRemoved":0}
+{"ts":"2026-06-17T22:42:40.480Z","actor":"frontend","action":"file_archived","fileId":"5702316d-11c1-4fcb-af8d-dddfb99b14cd","path":"repository/haikus/spring.txt","cause":"folder_removed"}
+{"ts":"2026-06-17T22:42:40.480Z","actor":"frontend","action":"file_archived","fileId":"57a3772c-3d93-43cd-961f-e51cd010bc87","path":"repository/haikus/autumn.txt","cause":"folder_removed"}
